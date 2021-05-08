@@ -30,7 +30,7 @@
 
     <!-- Header START -->
     <nav class="navbar navbar-dark" style="background-color: #646464 ;">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Author Wannabe System
         </a>
@@ -60,12 +60,25 @@
                     <label class="form-check-label"><input type="radio" name="account_type" id="admin">
                         Admin</label><br>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button onclick="nextPage()" type="button" class="btn btn-primary" id="login">Login</button>
             </form>
             <br>
         </div>
     </div>
     <!-- Login Form END -->
+
+    <script>
+        function nextPage() {
+            if (document.getElementById('student').checked)
+                window.location.href = "register-student.html";
+            else if (document.getElementById('lecturer').checked)
+                window.location.href = "register-lecturer.html";
+            else if (document.getElementById('admin').checked)
+                window.location.href = "register-admin.html";
+            else
+                alert('Please select a user type');
+        }
+    </script>
 
 </body>
 
