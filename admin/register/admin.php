@@ -14,8 +14,8 @@
                     <tr>
                         <th style="width: 10%;">Admin ID</th>
                         <th style="width: auto;">Admin Name</th>
-                        <th style="width: 18%;">Update</th>
-                        <th style="width: 12%;">Delete</th>
+                        <th style="width: 11%;">Update</th>
+                        <th style="width: 8%;">Delete</th>
                     </tr>
                 </thead>
                 <tbody id="table">
@@ -37,11 +37,19 @@
                                 <td id="id<?php echo $num ?>"><b><?php echo $row["id"] ?><b></th>
                                 <td contentEditable=" false" id="name<?php echo $num ?>" style="text-transform: uppercase;"><?php echo $row["name"] ?></td>
                                 <td>
-                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm btn-primary btn-block">Update</button>
-                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class=" btn btn-sm btn-primary">Save</button>
-                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm btn-secondary ">Cancel</button>
+                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm">
+                                        <i class="bi bi-pencil-square" style="font-size: 24px; color: blue;"></i>
+                                    </button>
+                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class=" btn btn-sm">
+                                        <i class="bi bi-save2" style="font-size: 24px; color: blue;"></i>
+                                    </button>
+                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm">
+                                        <i class="bi bi-x-square" style="font-size: 24px; color: gray;"></i>
+                                    </button>
                                 </td>
-                                <td><a id="delete<?php echo $num ?>" class="btn btn-sm btn-danger" onclick='javascript:confirmationDelete($(this));return false;' href="../delete.php?table=admin&id=<?php echo $row['id']; ?>">Delete</a>
+                                <td><a id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
+                                        <i class="bi bi-trash" style="font-size: 24px; color: red;"></i>
+                                    </a>
                                 </td>
                             </tr>
 
@@ -58,7 +66,11 @@
                             <td><input style="width: 60px;" name="id" value="" type="text" minlength="4" maxlength="4" pattern="\d*" required></td>
                             <td><input style="width: 360px;" name="name" value="" type="text" required></td>
                             <td></td>
-                            <td><button name="add" class="btn btn-sm btn-success" href="#?">Add New</button></td>
+                            <td>
+                                <button name="add" class="btn btn-sm" href="#?">
+                                    <i class="bi bi-plus-square" style="font-size: 24px; color: green;"></i>
+                                </button>
+                            </td>
                         </form>
                     </tr>
 
@@ -92,7 +104,6 @@
 
 <script>
     window.onload = function() {
-
         var table = document.getElementById("table");
         var rows = table.getElementsByTagName("tr");
         for (var x = 1; x <= rows.length; x++) {
@@ -102,7 +113,8 @@
 
     };
 
-    function confirmationDelete(anchor) {
+    function confirmationDelete(anchor, n) {
+
         var msg = "Are you sure want to delete this record?";
         var conf = confirm(msg);
         if (conf)
@@ -115,7 +127,11 @@
         document.getElementById("update" + n).hidden = true;
         document.getElementById("save" + n).hidden = false;
         document.getElementById("cancel" + n).hidden = false;
-        document.getElementById("name" + n).style.border = "thick solid #007BFF";
+        // document.getElementById("name" + n).style.border = "thick solid #007BFF";
+        document.getElementById("name" + n).style.outlineStyle = "solid";
+        document.getElementById("name" + n).style.outlineOffset = "-10px";
+        // document.getElementById("name" + n).style.paddingLeft = "25px";
+
 
 
     }
@@ -134,6 +150,18 @@
         var name = document.getElementById("name" + n).innerText;
         var url = ("../update.php?table=admin&id=" + id + "&name=" + name);
         var msg = "Are you sure want to update this record?";
+        var conf = confirm(msg);
+        if (conf)
+            window.location = "" + url;
+    }
+
+    function remove(n) {
+        // document.getElementById("name" + n).style.outlineStyle = "solid";
+        // document.getElementById("name" + n).style.outlineOffset = "-10px";
+        var id = document.getElementById("id" + n).innerText;
+        var name = document.getElementById("name" + n).innerText;
+        var url = ("../delete.php?table=admin&id=" + id);
+        var msg = "Are you sure want to delete this record?";
         var conf = confirm(msg);
         if (conf)
             window.location = "" + url;
