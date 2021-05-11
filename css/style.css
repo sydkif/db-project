@@ -18,11 +18,6 @@ body {
 }
 
 
-button {
-    width: 400px;
-}
-
-
 tr #id {
     white-space: nowrap;
     width      : 10%;
