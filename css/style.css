@@ -3,3 +3,40 @@
 body {
     font-family: 'Roboto', sans-serif !important;
 }
+
+.navbar img {
+    border-radius        : 16%;
+    object-fit           : cover;
+    -webkit-border-radius: 16%;
+    -moz-border-radius   : 16%;
+    -ms-border-radius    : 16%;
+    -o-border-radius     : 16%;
+}
+
+body {
+    background-color: rgb(236, 236, 236);
+}
+
+
+button {
+    width: 400px;
+}
+
+
+tr #id {
+    white-space: nowrap;
+    width      : 10%;
+}
+
+tr #btn {
+    white-space: nowrap;
+    width      : 20%;
+}
+
+.table tbody tr td {
+    vertical-align: middle;
+}
+
+.table tbody tr th {
+    vertical-align: middle;
+}
