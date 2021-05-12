@@ -43,7 +43,7 @@
                                     <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class=" btn btn-sm">
                                         <i class="bi bi-save2" style="font-size: 24px; color: blue;"></i>
                                     </button>
-                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm">
+                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
                                         <i class="bi bi-x-square" style="font-size: 24px; color: gray;"></i>
                                     </button>
                                 </td>
@@ -103,6 +103,8 @@
 </div>
 
 <script>
+    var defaultText;
+
     window.onload = function() {
         var table = document.getElementById("table");
         var rows = table.getElementsByTagName("tr");
@@ -122,6 +124,7 @@
     }
 
     function edit(n) {
+        defaultText = document.getElementById("name" + n).innerText;
         // document.getElementById("id" + n).contentEditable = true;
         document.getElementById("name" + n).contentEditable = true;
         document.getElementById("update" + n).hidden = true;
@@ -133,20 +136,26 @@
         // document.getElementById("name" + n).style.paddingLeft = "25px"
     }
 
-    
-    $('.updateBtn').click(function(){
+
+    $('.updateBtn').click(function() {
         $('.updateBtn').not(this).prop('disabled', true);
     })
 
-    
+    $('.cancelBtn').click(function() {
+        $('.updateBtn').not(this).prop('disabled', false);
+    })
+
 
     function cancel(n) {
         // document.getElementById("id" + n).contentEditable = false;
         document.getElementById("name" + n).contentEditable = false;
-        document.getElementById("update" + n).hidden = "false";
+        document.getElementById("update" + n).hidden = false;
         document.getElementById("save" + n).hidden = true;
         document.getElementById("cancel" + n).hidden = true;
-        location.reload();
+        document.getElementById("name" + n).style.outlineStyle = "";
+        document.getElementById("name" + n).style.outlineOffset = "";
+        document.getElementById("name" + n).innerText = defaultText;
+        // location.reload();
     }
 
     function update(n) {
