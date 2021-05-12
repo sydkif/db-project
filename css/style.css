@@ -17,12 +17,6 @@ body {
     background-color: rgb(236, 236, 236);
 }
 
-
-button {
-    width: 400px;
-}
-
-
 tr #id {
     white-space: nowrap;
     width      : 10%;

@@ -37,7 +37,7 @@
                                 <td id="id<?php echo $num ?>"><b><?php echo $row["id"] ?><b></th>
                                 <td contentEditable=" false" id="name<?php echo $num ?>" style="text-transform: uppercase;"><?php echo $row["name"] ?></td>
                                 <td>
-                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm">
+                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="font-size: 24px; color: blue;"></i>
                                     </button>
                                     <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class=" btn btn-sm">
@@ -130,11 +130,15 @@
         // document.getElementById("name" + n).style.border = "thick solid #007BFF";
         document.getElementById("name" + n).style.outlineStyle = "solid";
         document.getElementById("name" + n).style.outlineOffset = "-10px";
-        // document.getElementById("name" + n).style.paddingLeft = "25px";
-
-
-
+        // document.getElementById("name" + n).style.paddingLeft = "25px"
     }
+
+    
+    $('.updateBtn').click(function(){
+        $('.updateBtn').not(this).prop('disabled', true);
+    })
+
+    
 
     function cancel(n) {
         // document.getElementById("id" + n).contentEditable = false;
