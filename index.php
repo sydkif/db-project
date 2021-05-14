@@ -2,7 +2,7 @@
 
 <!-- Login Form START -->
 <div class="container p-5">
-    <h2 style="text-align: center;"><del>Author</del></h2>
+    <h2 style="text-align: center;">Author Wannabe</h2>
     <h2 style="text-align: center;">Login Page</h2>
     <hr class="col-6">
     <div class="col-6 offset-3 form-box border rounded mt-6" style="background-color:rgb(246, 246, 246) ;">
