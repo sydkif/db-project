@@ -169,12 +169,10 @@
     }
 
     function remove(n) {
-        // document.getElementById("name" + n).style.outlineStyle = "solid";
-        // document.getElementById("name" + n).style.outlineOffset = "-10px";
         var id = document.getElementById("id" + n).innerText;
         var name = document.getElementById("name" + n).innerText;
         var url = ("../delete.php?table=admin&id=" + id);
-        var msg = "Are you sure want to delete this record?";
+        var msg = "Are you sure want to delete this record?\n\nAdmin ID :\n" + id + "\n\nNAME :\n" + name;
         var conf = confirm(msg);
         if (conf)
             window.location = "" + url;
