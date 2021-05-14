@@ -20,7 +20,6 @@
                 </thead>
                 <tbody id="table">
 
-
                     <?php
                     include "../../DB.php";
 
@@ -40,14 +39,15 @@
                                     <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="font-size: 24px; color: blue;"></i>
                                     </button>
-                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class=" btn btn-sm">
+                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-save2" style="font-size: 24px; color: blue;"></i>
                                     </button>
                                     <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
                                         <i class="bi bi-x-square" style="font-size: 24px; color: gray;"></i>
                                     </button>
                                 </td>
-                                <td><a id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
+                                <td>
+                                    <a id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
                                         <i class="bi bi-trash" style="font-size: 24px; color: red;"></i>
                                     </a>
                                 </td>
@@ -95,7 +95,6 @@
                     $conn->close();
                     ?>
 
-
                 </tbody>
             </table>
         </div>
@@ -115,14 +114,6 @@
 
     };
 
-    function confirmationDelete(anchor, n) {
-
-        var msg = "Are you sure want to delete this record?";
-        var conf = confirm(msg);
-        if (conf)
-            window.location = anchor.attr("href");
-    }
-
     function edit(n) {
         defaultText = document.getElementById("name" + n).innerText;
         // document.getElementById("id" + n).contentEditable = true;
@@ -135,16 +126,6 @@
         document.getElementById("name" + n).style.outlineOffset = "-10px";
         // document.getElementById("name" + n).style.paddingLeft = "25px"
     }
-
-
-    $('.updateBtn').click(function() {
-        $('.updateBtn').not(this).prop('disabled', true);
-    })
-
-    $('.cancelBtn').click(function() {
-        $('.updateBtn').not(this).prop('disabled', false);
-    })
-
 
     function cancel(n) {
         // document.getElementById("id" + n).contentEditable = false;
@@ -177,6 +158,14 @@
         if (conf)
             window.location = "" + url;
     }
+
+    $('.updateBtn').click(function() {
+        $('.updateBtn').not(this).prop('disabled', true);
+    })
+
+    $('.cancelBtn').click(function() {
+        $('.updateBtn').not(this).prop('disabled', false);
+    })
 </script>
 
 <?php include '../../templates/footer.php' ?>

@@ -37,7 +37,7 @@
         else if (document.getElementById('lecturer').checked)
             window.location.href = "admin/register/lecturer.php";
         else if (document.getElementById('admin').checked)
-            window.location.href = "admin/register/admin.php";
+            window.location.href = "admin/dashboard.php";
         else
             alert('Please select a user type');
     }
