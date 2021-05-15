@@ -9,19 +9,19 @@
 
     <div class="row">
 
-        <a class="card btn btn-outline-dark" href="/admin/register/admin.php">
+        <a class="card btn btn-outline-dark shadow-sm" href="/admin/register/admin.php">
             <i class="bi bi-person-square" style="font-size: 6rem; text-align: center;"></i>
             <h4>Admin</h4>
         </a>
-        <a class="card btn btn-outline-dark" href="/admin/register/lecturer.php">
+        <a class="card btn btn-outline-dark shadow-sm" href="/admin/register/lecturer.php">
             <i class="bi bi-person-square" style="font-size: 6rem; text-align: center;"></i>
             <h4>Lecturer</h4>
         </a>
-        <a class="card btn btn-outline-dark" href="/admin/register/student.php">
+        <a class="card btn btn-outline-dark shadow-sm" href="/admin/register/student.php">
             <i class="bi bi-person-square" style="font-size: 6rem; text-align: center;"></i>
             <h4>Student</h4>
         </a>
-        <a class="card btn btn-outline-dark" href="/admin/register/subject.php">
+        <a class="card btn btn-outline-dark shadow-sm" href="/admin/register/subject.php">
             <i class="bi bi-journal" style="font-size: 6rem; text-align: center;"></i>
             <h4>Subject</h4>
         </a>

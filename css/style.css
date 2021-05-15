@@ -17,7 +17,6 @@ body {
     background-color: rgb(236, 236, 236);
 }
 
-
 tr #id {
     white-space: nowrap;
     width      : 10%;
@@ -28,11 +27,6 @@ tr #btn {
     width      : 20%;
 }
 
-.table {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-}
-
-
 .table tbody tr td {
     vertical-align: middle;
 }
@@ -41,13 +35,11 @@ tr #btn {
     vertical-align: middle;
 }
 
-
 .card {
 
     margin               : auto;
     margin-top           : 20px;
     border-width         : 0px;
-    box-shadow           : 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width                : 16rem;
     border-radius        : 24px;
     -webkit-border-radius: 24px;

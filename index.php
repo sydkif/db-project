@@ -5,7 +5,7 @@
     <h2 style="text-align: center;">Author Wannabe</h2>
     <h2 style="text-align: center;">Login Page</h2>
     <hr>
-    <div class="col-xl-6 col-lg-6 col col-md-10 col-sm-12 form-box border rounded mt-6" style="margin:auto; background-color:rgb(246, 246, 246) ;">
+    <div class="col-xl-6 col-lg-6 col col-md-10 col-sm-12 form-box border rounded mt-6 shadow" style="margin:auto; background-color:rgb(246, 246, 246) ;">
         <form class="mt-3">
             <div class="form-group">
                 <label for="inputId"><b>ID</b></label>

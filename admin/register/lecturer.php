@@ -7,7 +7,7 @@
             <hr>
         </div>
 
-        <div class="col-12 table-responsive">
+        <div class="table-responsive shadow rounded">
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
