@@ -7,7 +7,7 @@
             <hr>
         </div>
 
-        <div class="col-12">
+        <div class="table-responsive shadow rounded">
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -23,7 +23,13 @@
                     <?php
                     include "../DB.php";
 
-                    $sql = "SELECT lecturer_id, subject_id FROM workload";
+                    $sql = "SELECT lecturer_id, subject_id FROM workload ORDER BY lecturer_id";
+                    // $sql = "SELECT lecturer.name, subject.name 
+                    //         FROM lecturer
+                    //         INNER JOIN subject ON lecturer.subject = subject.id";
+
+                    // "SELECT object.name,formulation.formulation_name as formulation FROM object INNER JOIN formulation ON object.formulation_fk = formulation.id" 
+
                     $result = $conn->query($sql);
                     $num = 0;
                     if ($result->num_rows > 0) {
@@ -31,14 +37,21 @@
                         while ($row = $result->fetch_assoc()) {
                             ++$num;
                             // $lecturer_name = $row['lecturer_id'];
-                            $lecturer_name =  $row['lecturer_id'];
+
+                            $sql2 = "SELECT * FROM lecturer WHERE id = " . $row['lecturer_id'];
+                            $result2 = $conn->query($sql2);
+                            $row2 = $result2->fetch_assoc();
+
                             $subject_name = $row['subject_id'];
+                            $sql3 = "SELECT * FROM subject WHERE id = '" . $row['subject_id'] . "'";
+                            $result3 = $conn->query($sql3);
+                            $row3 = $result3->fetch_assoc();
                     ?>
 
                             <tr>
                                 <th><?php echo $num ?></th>
-                                <td><?php echo $lecturer_name ?></td>
-                                <td><?php echo $subject_name ?></td>
+                                <td><?php echo $row2['name'] ?></td>
+                                <td><?php echo $row3['name'] ?></td>
                                 <td><button class="btn btn-sm btn-primary">Update</button></td>
                                 <td><button class="btn btn-sm btn-danger">Delete</button></td>
                             </tr>
@@ -51,27 +64,60 @@
                     $conn->close();
                     ?>
 
+
+
                     <tr>
                         <th></th>
                         <td>
                             <select class="custom-select">
                                 <option selected>Please Choose</option>
-                                <option value="1">CHUAH CHAI WEN</option>
-                                <option value="2">SHAREEM KASIM</option>
-                                <option value="3">NURHANIFAH MURLI</option>
-                                <option value="4">SOFIA NAJWA</option>
-                                <option value="5">MUNIRAH YUSOF</option>
+
+                                <?php
+                                include "../DB.php";
+
+                                $sql = "SELECT name FROM lecturer";
+                                $result = $conn->query($sql);
+                                $num = 0;
+                                if ($result->num_rows > 0) {
+                                    // output data of each row
+                                    while ($row = $result->fetch_assoc()) {
+                                        ++$num;
+                                ?>
+                                        <option value="<?php echo $num ?>"><?php echo $row['name'] ?></option>
+                                <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                                $conn->close();
+                                ?>
+
                             </select>
                         </td>
                         <td>
                             <select class="custom-select">
                                 <option selected>Please Choose</option>
-                                <option value="1">OBJECT ORIENTED PROGRAMMING</option>
-                                <option value="2">CRYPTOGRAPHY</option>
-                                <option value="3">SPECIAL TOPIC INFORMATION SECURITY</option>
-                                <option value="4">ALGEBRA</option>
-                                <option value="5">MATH</option>
-                                <option value="6">DATABASE SYSTEM</option>
+
+                                <?php
+                                include "../DB.php";
+
+                                $sql = "SELECT name FROM subject";
+                                $result = $conn->query($sql);
+                                $num = 0;
+                                if ($result->num_rows > 0) {
+                                    // output data of each row
+                                    while ($row = $result->fetch_assoc()) {
+                                        ++$num;
+                                ?>
+                                        <option value="<?php echo $num ?>"><?php echo $row['name'] ?></option>
+                                <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                                $conn->close();
+                                ?>
+
                             </select>
                         </td>
                         <td></td>
