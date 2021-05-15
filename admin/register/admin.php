@@ -8,7 +8,7 @@
             <hr>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 table-responsive">
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -33,23 +33,23 @@
                     ?>
 
                             <tr>
-                                <td id="id<?php echo $num ?>"><b><?php echo $row["id"] ?><b></th>
+                                <td id="id<?php echo $num ?>"><b><?php echo $row["id"] ?><b></td>
                                 <td contentEditable=" false" id="name<?php echo $num ?>" style="text-transform: uppercase;"><?php echo $row["name"] ?></td>
                                 <td>
                                     <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
-                                        <i class="bi bi-pencil-square" style="font-size: 24px; color: blue;"></i>
+                                        <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
                                     <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class="btn btn-sm">
-                                        <i class="bi bi-save2" style="font-size: 24px; color: blue;"></i>
+                                        <i class="bi bi-save2" style="color: blue;"></i>
                                     </button>
                                     <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
-                                        <i class="bi bi-x-square" style="font-size: 24px; color: gray;"></i>
+                                        <i class="bi bi-x-square" style="color: gray;"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <a id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
-                                        <i class="bi bi-trash" style="font-size: 24px; color: red;"></i>
-                                    </a>
+                                    <button id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
+                                        <i class="bi bi-trash" style="color: red;"></i>
+                                    </button>
                                 </td>
                             </tr>
 
@@ -68,7 +68,7 @@
                             <td></td>
                             <td>
                                 <button name="add" class="btn btn-sm" href="#?">
-                                    <i class="bi bi-plus-square" style="font-size: 24px; color: green;"></i>
+                                    <i class="bi bi-plus-square" style="color: green;"></i>
                                 </button>
                             </td>
                         </form>
@@ -102,7 +102,7 @@
 </div>
 
 <script>
-    var defaultText;
+    var defaultText, t;
 
     window.onload = function() {
         var table = document.getElementById("table");
@@ -114,17 +114,26 @@
 
     };
 
+
     function edit(n) {
+        if (defaultText != null) {
+            document.getElementById("name" + t).contentEditable = false;
+            document.getElementById("update" + t).hidden = false;
+            document.getElementById("save" + t).hidden = true;
+            document.getElementById("cancel" + t).hidden = true;
+            document.getElementById("name" + t).style.outlineStyle = "";
+            document.getElementById("name" + t).style.outlineOffset = "";
+            document.getElementById("name" + t).innerText = defaultText;
+        }
         defaultText = document.getElementById("name" + n).innerText;
-        // document.getElementById("id" + n).contentEditable = true;
         document.getElementById("name" + n).contentEditable = true;
+        document.getElementById("name" + n).focus();
         document.getElementById("update" + n).hidden = true;
         document.getElementById("save" + n).hidden = false;
         document.getElementById("cancel" + n).hidden = false;
-        // document.getElementById("name" + n).style.border = "thick solid #007BFF";
         document.getElementById("name" + n).style.outlineStyle = "solid";
         document.getElementById("name" + n).style.outlineOffset = "-10px";
-        // document.getElementById("name" + n).style.paddingLeft = "25px"
+        t = n;
     }
 
     function cancel(n) {
@@ -159,13 +168,13 @@
             window.location = "" + url;
     }
 
-    $('.updateBtn').click(function() {
-        $('.updateBtn').not(this).prop('disabled', true);
-    })
+    // $('.updateBtn').click(function() {
+    //     $('.updateBtn').not(this).prop('disabled', true);
+    // })
 
-    $('.cancelBtn').click(function() {
-        $('.updateBtn').not(this).prop('disabled', false);
-    })
+    // $('.cancelBtn').click(function() {
+    //     $('.updateBtn').not(this).prop('disabled', false);
+    // })
 </script>
 
 <?php include '../../templates/footer.php' ?>

@@ -28,6 +28,11 @@ tr #btn {
     width      : 20%;
 }
 
+.table {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+
 .table tbody tr td {
     vertical-align: middle;
 }
@@ -49,4 +54,12 @@ tr #btn {
     -moz-border-radius   : 24px;
     -ms-border-radius    : 24px;
     -o-border-radius     : 24px;
+}
+
+td button i.bi {
+    font-size: 24px;
+}
+
+td button i.bi:hover {
+    opacity: 50%;
 }

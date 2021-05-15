@@ -4,8 +4,8 @@
 <div class="container p-5">
     <h2 style="text-align: center;">Author Wannabe</h2>
     <h2 style="text-align: center;">Login Page</h2>
-    <hr class="col-6">
-    <div class="col-6 offset-3 form-box border rounded mt-6" style="background-color:rgb(246, 246, 246) ;">
+    <hr>
+    <div class="col-xl-6 col-lg-6 col col-md-10 col-sm-12 form-box border rounded mt-6" style="margin:auto; background-color:rgb(246, 246, 246) ;">
         <form class="mt-3">
             <div class="form-group">
                 <label for="inputId"><b>ID</b></label>
@@ -23,7 +23,7 @@
                 <label class="form-check-label"><input type="radio" name="account_type" id="admin">
                     Admin</label><br>
             </div>
-            <button onclick="nextPage()" type="button" class="btn btn-primary" id="login">Login</button>
+            <button onclick="nextPage()" type="button" class="btn btn-primary btn-block" id="login">Login</button>
         </form>
         <br>
     </div>
