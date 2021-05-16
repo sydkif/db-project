@@ -28,6 +28,7 @@
                 $sql = "SELECT * FROM subject";
                 $result = $conn->query($sql);
                 $num = 0;
+                
                 if($result->num_rows >0){
                     //outputting data in table
                     while($row = $result->fetch_assoc()){
@@ -89,6 +90,7 @@
                     $name = $_POST['name'];
                     $sql = "INSERT INTO subject (id, name) VALUES ('$id', '$name')";
 
+                    var_dump($sql);    
                     if($conn->query($sql) === true)
                         echo "<meta http-equiv='refresh' content='0'>";
                     else   
