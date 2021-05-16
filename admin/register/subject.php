@@ -38,7 +38,7 @@
                         <td id="id<?= $num ?>"><?= $row['id']; ?> <b></td>
                         <td id="name<?= $num ?>" contentEditable="false"><?= $row['name']; ?></td>
                         <td id><?= $row['modiBy'] ?></td>
-                        <td id><?= $row['modiOn'] ?></td>
+                        <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                         <td>
                             <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                 <i class="bi bi-pencil-square" style="color: blue;"></i>
@@ -88,9 +88,10 @@
                 if(isset($_POST['add'])){
                     $id = $_POST['id'];
                     $name = $_POST['name'];
-                    $sql = "INSERT INTO subject (id, name) VALUES ('$id', '$name')";
-
-                    var_dump($sql);    
+                    $modiBy = "Super admin";
+                    $modiOn = date("Y-m-d H:i:s");
+                    $sql = "INSERT INTO subject (id, name, modiBy, modiOn) VALUES ('$id', '$name', '$modiBy', '$modiOn')";
+  
                     if($conn->query($sql) === true)
                         echo "<meta http-equiv='refresh' content='0'>";
                     else   

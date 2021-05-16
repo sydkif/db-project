@@ -38,7 +38,7 @@
                         <td id="name<?= $num ?>" contentEditable="false"><?= ucfirst($row['name']); ?></td>
                         <td><?= $row['email']; ?></td>
                         <td><?= $row['modiBy'] ?></td>
-                        <td><?= $row['modiOn'] ?></td>
+                        <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                         <td>
                             <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                 <i class="bi bi-pencil-square" style="color: blue;"></i>
@@ -90,7 +90,9 @@
                         $id = strtoupper($id);
                         $name = $_POST['name'];
                         $email = $id."@siswa.uthm.edu.my";
-                        $sql = "INSERT INTO student (id, name, email, password) VALUES('$id', '$name', '$email', '$id')";
+                        $modiBy = "Super admin";
+                        $modiOn = date("Y-m-d H:i:s");                
+                        $sql = "INSERT INTO student (id, name, email, password, modiBy, modiOn) VALUES('$id', '$name', '$email', '$id', '$modiBy', '$modiOn')";
 
                         if ($conn->query($sql) === true) {
                             // Success
