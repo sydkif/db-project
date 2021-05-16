@@ -98,7 +98,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             ++$num;
                                     ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                            <option style="text-transform: uppercase;" value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                                     <?php
                                         }
                                     } else {
@@ -111,7 +111,7 @@
                             </td>
                             <td>
                                 <select name="subject_id" class="custom-select">
-                                    <option selected>Please Choose</option>
+                                    <option style="text-transform: uppercase;" selected>Please Choose</option>
 
                                     <?php
                                     include "../DB.php";
@@ -124,7 +124,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             ++$num;
                                     ?>
-                                            <option value="<?= $row['id']  ?>"><?= $row['name'] ?></option>
+                                            <option style="text-transform: uppercase;" value="<?= $row['id']  ?>"><?= $row['name'] ?></option>
                                     <?php
                                         }
                                     } else {

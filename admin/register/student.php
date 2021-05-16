@@ -14,55 +14,55 @@
                         <th style="width: 11%;">Student ID</th>
                         <th style="width: auto;">Student Name</th>
                         <th style="width: 10%;">Student Email</th>
-                        <th style="width: 11%;">Modified By</th>
-                        <th style="width: 11%;">Modified On</th>
+                        <th style="width: 12%;">Modified By</th>
+                        <th style="width: 13%;">Modified On</th>
                         <th style="width: 11%;">Update</th>
                         <th style="width: 5%;">Delete</th>
                     </tr>
                 </thead>
                 <tbody id="table">
-                    <?php 
+                    <?php
                     include "../../DB.php";
 
                     $sql = "SELECT * FROM student";
                     $result = $conn->query($sql);
-                    $num=0;
+                    $num = 0;
 
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()){
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
                             ++$num;
-                        
+
                     ?>
-                        <tr>
-                        <td id="id<?= $num ?>"><?= $row['id']; ?> <b></td>
-                        <td id="name<?= $num ?>" contentEditable="false"><?= ucfirst($row['name']); ?></td>
-                        <td><?= $row['email']; ?></td>
-                        <td><?= $row['modiBy'] ?></td>
-                        <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
-                        <td>
-                            <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
-                                <i class="bi bi-pencil-square" style="color: blue;"></i>
-                            </button>
-                            <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class="btn btn-sm">
-                                <i class="bi bi-save2" style="color: blue;"></i>
-                            </button>
-                            <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
-                                <i class="bi bi-x-square" style="color: gray;"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
-                                <i class="bi bi-trash" style="color: red;"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <?php 
+                            <tr>
+                                <td id="id<?= $num ?>"><b><?= $row['id']; ?> <b></td>
+                                <td id="name<?= $num ?>" contentEditable="false" style="text-transform: uppercase;"><?= ucfirst($row['name']); ?></td>
+                                <td><?= $row['email']; ?></td>
+                                <td><?= $row['modiBy'] ?></td>
+                                <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
+                                <td>
+                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
+                                        <i class="bi bi-pencil-square" style="color: blue;"></i>
+                                    </button>
+                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class="btn btn-sm">
+                                        <i class="bi bi-save2" style="color: blue;"></i>
+                                    </button>
+                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
+                                        <i class="bi bi-x-square" style="color: gray;"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
+                                        <i class="bi bi-trash" style="color: red;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    <?php
                         }
-                    }else  
+                    } else
                         echo "0 results";
-                    
+
                     $conn->close();
-                            
+
                     ?>
                     <tr>
                         <form method="POST">
@@ -80,18 +80,18 @@
                             </td>
                         </form>
                     </tr>
-                    
-                    <?php 
-                    
+
+                    <?php
+
                     include "../../DB.php";
 
-                    if(isset($_POST['add'])){
+                    if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $id = strtoupper($id);
                         $name = $_POST['name'];
-                        $email = $id."@siswa.uthm.edu.my";
+                        $email = $id . "@siswa.uthm.edu.my";
                         $modiBy = "Super admin";
-                        $modiOn = date("Y-m-d H:i:s");                
+                        $modiOn = date("Y-m-d H:i:s");
                         $sql = "INSERT INTO student (id, name, email, password, modiBy, modiOn) VALUES('$id', '$name', '$email', '$id', '$modiBy', '$modiOn')";
 
                         if ($conn->query($sql) === true) {
@@ -104,7 +104,7 @@
                     }
 
                     $conn->close();
-                    
+
                     ?>
 
 
@@ -112,7 +112,7 @@
 
                 </tbody>
             </table>
-            
+
         </div>
     </div>
 </div>

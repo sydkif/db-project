@@ -17,6 +17,10 @@ body {
     background-color: rgb(236, 236, 236);
 }
 
+table {
+    font-size: 15px;
+}
+
 tr #id {
     white-space: nowrap;
     width      : 10%;
@@ -49,7 +53,7 @@ tr #btn {
 }
 
 td button i.bi {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 td button i.bi:hover {
