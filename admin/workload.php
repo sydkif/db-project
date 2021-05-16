@@ -64,7 +64,7 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <button name="delete" id="delete<?= $num ?>" class="btn btn-sm" onclick="remove()">
+                                        <button name="delete" id="delete<?= $num ?>" class="btn btn-sm" onclick="return confirm('Are you sure?');">
                                             <i class="bi bi-trash" style="color: red;"></i>
                                         </button>
                                     </td>
@@ -198,13 +198,6 @@
             document.getElementById("cancel" + x).hidden = true;
         }
     };
-
-    function remove() {
-        var msg = "Are you sure want to delete this record?";
-        var conf = confirm(msg);
-        if (!conf)
-            window.location = "" + url;
-    }
 </script>
 
 <?php include("../templates/footer.php") ?>

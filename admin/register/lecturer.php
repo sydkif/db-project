@@ -90,7 +90,7 @@
                     date_default_timezone_set("Asia/Kuala_Lumpur");
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
-                        $name = $_POST['name'];
+                        $name = strtoupper($_POST['name']);
                         $modiBy = "Super Admin"; // TODO Change to session_id later on
                         $modiOn = date("Y-m-d h:i:s");
                         $sql = "INSERT INTO lecturer (id, name, modiBy, modiOn) VALUES ('$id', '$name', '$modiBy', '$modiOn')";
