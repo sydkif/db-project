@@ -167,7 +167,7 @@
                         $lecturer = $_POST['lecturerId'];
                         $subject =  $_POST['subjectId'];
 
-                        $sql = "DELETE FROM workload WHERE lecturer_id = $lecturer AND subject_id= '" . $subject . "'";
+                        $sql = "DELETE FROM workload WHERE lecturer_id = $lecturer AND subject_id= '$subject'";
 
                         if ($conn->query($sql) === true) {
                             // Success

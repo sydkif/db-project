@@ -32,7 +32,6 @@
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
                             ++$num;
-                            $date = $row['modiOn'];
                             // date("Y-m-d h:i:sa", $d);
                             // date_format($date, "Y/m/d H:i:s")
                     ?>
@@ -41,7 +40,7 @@
                                 <td id="id<?= $num ?>"><b><?= $row["id"] ?><b></td>
                                 <td contentEditable=" false" id="name<?= $num ?>" style="text-transform: uppercase;"><?= $row["name"] ?></td>
                                 <td><?= $row["modiBy"] ?></td>
-                                <td><?= $date ?></td>
+                                <td><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                                 <td>
                                     <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
