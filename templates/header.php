@@ -24,7 +24,7 @@
     <!-- Header -->
     <nav class="navbar navbar-dark" style="background-color: #646464 ;">
         <a class="navbar-brand" href="/index.php">
-            <img src="/img/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="">
             Author Wannabe System
         </a>
     </nav>

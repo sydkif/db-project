@@ -37,8 +37,8 @@
                             <tr>
                                 <td id="id<?= $num ?>" style="text-transform: uppercase;"><b><?= $row['id']; ?> <b></td>
                                 <td id="name<?= $num ?>" contentEditable="false" style="text-transform: uppercase;"><?= $row['name']; ?></td>
-                                <td id><?= $row['modiBy'] ?></td>
-                                <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
+                                <td id="modi"><?= $row['modiBy'] ?></td>
+                                <td id="modi"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                                 <td>
                                     <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>

@@ -36,9 +36,9 @@
                             <tr>
                                 <td id="id<?= $num ?>"><b><?= $row['id']; ?> <b></td>
                                 <td id="name<?= $num ?>" contentEditable="false" style="text-transform: uppercase;"><?= ucfirst($row['name']); ?></td>
-                                <td><?= $row['email']; ?></td>
-                                <td><?= $row['modiBy'] ?></td>
-                                <td id><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
+                                <td id="modi"><?= $row['email']; ?></td>
+                                <td id="modi"><?= $row['modiBy'] ?></td>
+                                <td id="modi"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                                 <td>
                                     <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
@@ -84,7 +84,7 @@
                     <?php
 
                     include "../../DB.php";
-
+                    date_default_timezone_set("Asia/Kuala_Lumpur");
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $id = strtoupper($id);
@@ -180,7 +180,7 @@
         var id = document.getElementById("id" + n).innerText;
         var name = document.getElementById("name" + n).innerText;
         var url = ("../delete.php?table=student&id=" + id);
-        var msg = "Are you sure want to delete this record?\n\nAdmin ID :\n" + id + "\n\nNAME :\n" + name;
+        var msg = "Are you sure want to delete this record?\n\nStudent ID :\n" + id + "\n\nStudent Name :\n" + name;
         var conf = confirm(msg);
         if (conf)
             window.location = "" + url;

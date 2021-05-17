@@ -18,7 +18,11 @@ body {
 }
 
 table {
-    font-size: 15px;
+    font-size: 16px;
+}
+
+table #modi {
+    font-size: 14px;
 }
 
 tr #id {
