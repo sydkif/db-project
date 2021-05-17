@@ -3,8 +3,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <h3>Assign Workload Lecturer</h3>
+            <h3><a id="back" class="bi bi-caret-left-fill" href="/admin/dashboard.php"></a>Assign Workload Lecturer</h3>
             <hr>
+            <?php include('../../templates/alert_msg.php') ?>
         </div>
 
         <div class="table-responsive shadow rounded">
@@ -155,11 +156,12 @@
 
                         if ($conn->query($sql) === true) {
                             // Success
-                            echo "<meta http-equiv='refresh' content='0'>";
+                            $_SESSION['msg'] = "Record added successfully!";
                         } else {
                             // Failed
-                            echo "Error: " . $sql . "<br>" . $conn->error;
+                            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                         }
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
 
                     if (isset($_POST['delete'])) {
@@ -171,11 +173,12 @@
 
                         if ($conn->query($sql) === true) {
                             // Success
-                            echo "<meta http-equiv='refresh' content='0'>";
+                            $_SESSION['msg'] = "Record deleted successfully!";
                         } else {
                             // Failed
-                            echo "Error: " . $sql . "<br>" . $conn->error;
+                            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                         }
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
 
                     $conn->close();

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php session_start(); ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +19,13 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <title>Admin Registration</title>
+    <title>Author Wannabe System</title>
 </head>
 
 <body>
     <!-- Header -->
     <nav class="navbar navbar-dark" style="background-color: #646464 ;">
-        <a class="navbar-brand" href="/index.php">
+        <a class="navbar-brand" href="/">
             <img src="/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="">
             Author Wannabe System
         </a>

@@ -63,3 +63,27 @@ td button i.bi {
 td button i.bi:hover {
     opacity: 50%;
 }
+
+a#back:link {
+    color           : rgb(0, 0, 0);
+    background-color: transparent;
+    text-decoration : none;
+}
+
+a#back:visited {
+    color           : rgb(0, 0, 0);
+    background-color: transparent;
+    text-decoration : none;
+}
+
+a#back:hover {
+    color           : rgb(80, 80, 80);
+    background-color: transparent;
+    text-decoration : underline;
+}
+
+a#back:active {
+    color           : rgb(0, 0, 0);
+    background-color: transparent;
+    text-decoration : underline;
+}

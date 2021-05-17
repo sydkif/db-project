@@ -3,8 +3,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <h3>Register Subject</h3>
+            <h3><a id="back" class="bi bi-caret-left-fill" href="/admin/dashboard.php"></a>Register Subject</h3>
             <hr>
+            <?php include('../../templates/alert_msg.php') ?>
         </div>
 
         <div class="table-responsive shadow rounded">
@@ -92,10 +93,16 @@
                         $modiOn = date("Y-m-d H:i:s");
                         $sql = "INSERT INTO subject (id, name, modiBy, modiOn) VALUES ('$id', '$name', '$modiBy', '$modiOn')";
 
-                        if ($conn->query($sql) === true)
+                        if ($conn->query($sql) === true) {
+                            // Success
+                            $_SESSION['msg'] = "Record added successfully!";
+                            $_SESSION['status'] = "Success";
                             echo "<meta http-equiv='refresh' content='0'>";
-                        else
-                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        } else {
+                            // Failed
+                            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                            $_SESSION['status'] = "Fail";
+                        }
                     }
 
                     $conn->close();
