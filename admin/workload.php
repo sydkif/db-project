@@ -5,7 +5,7 @@
         <div class="col-12">
             <h3><a id="back" class="bi bi-caret-left-fill" href="/admin/dashboard.php"></a>Assign Workload Lecturer</h3>
             <hr>
-            <?php include('../../templates/alert_msg.php') ?>
+            <?php include('../templates/alert_msg.php') ?>
         </div>
 
         <div class="table-responsive shadow rounded">
@@ -157,9 +157,11 @@
                         if ($conn->query($sql) === true) {
                             // Success
                             $_SESSION['msg'] = "Record added successfully!";
+                            $_SESSION['status'] = "Success";
                         } else {
                             // Failed
                             $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                            $_SESSION['status'] = "Fail";
                         }
                         echo "<meta http-equiv='refresh' content='0'>";
                     }
@@ -174,9 +176,11 @@
                         if ($conn->query($sql) === true) {
                             // Success
                             $_SESSION['msg'] = "Record deleted successfully!";
+                            $_SESSION['status'] = "Success";
                         } else {
                             // Failed
                             $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                            $_SESSION['status'] = "Fail";
                         }
                         echo "<meta http-equiv='refresh' content='0'>";
                     }

@@ -18,7 +18,8 @@ if ($_SESSION['msg'] != NULL)
         </button>
     </div>
 <?php
-        $_SESSION['msg'] = NULL;
-        $_SESSION['status'] = NULL;
     }
+
+$_SESSION['msg'] = NULL;
+$_SESSION['status'] = NULL;
 ?>

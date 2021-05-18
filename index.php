@@ -1,4 +1,8 @@
-<?php include('templates/header.php') ?>
+<?php
+include('templates/header.php');
+$_SESSION['status'] = null;
+$_SESSION['msg'] = null;
+?>
 
 <!-- Login Form START -->
 <div class="container p-5">
