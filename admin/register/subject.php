@@ -97,12 +97,12 @@
                             // Success
                             $_SESSION['msg'] = "Record added successfully!";
                             $_SESSION['status'] = "Success";
-                            echo "<meta http-equiv='refresh' content='0'>";
                         } else {
                             // Failed
                             $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                             $_SESSION['status'] = "Fail";
                         }
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
 
                     $conn->close();

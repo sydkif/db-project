@@ -44,16 +44,15 @@ tr #btn {
 }
 
 .card {
-
     margin               : auto;
     margin-top           : 20px;
     border-width         : 0px;
     width                : 16rem;
-    border-radius        : 24px;
-    -webkit-border-radius: 24px;
-    -moz-border-radius   : 24px;
-    -ms-border-radius    : 24px;
-    -o-border-radius     : 24px;
+    border-radius        : 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius   : 20px;
+    -ms-border-radius    : 20px;
+    -o-border-radius     : 20px;
 }
 
 td button i.bi {
@@ -86,4 +85,13 @@ a#back:active {
     color           : rgb(0, 0, 0);
     background-color: transparent;
     text-decoration : underline;
+}
+
+#dashboard-lecturer tbody tr td button {
+    text-align: left;
+}
+
+.btn-block {
+    padding: auto;
+
 }
