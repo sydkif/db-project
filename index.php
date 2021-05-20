@@ -39,7 +39,7 @@ $_SESSION['msg'] = null;
         if (document.getElementById('student').checked)
             window.location.href = "admin/register/student.php";
         else if (document.getElementById('lecturer').checked)
-            window.location.href = "admin/register/lecturer.php";
+            window.location.href = "lecturer/dashboard.php";
         else if (document.getElementById('admin').checked)
             window.location.href = "admin/dashboard.php";
         else
