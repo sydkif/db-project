@@ -27,7 +27,7 @@ $_SESSION['msg'] = null;
                 <label class="form-check-label"><input type="radio" name="account_type" id="admin">
                     Admin</label><br>
             </div>
-            <button onclick="nextPage()" type="button" class="btn btn-primary btn-block" id="login">Login</button>
+            <button onclick="nextPage()" type="button" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
         </form>
         <br>
     </div>

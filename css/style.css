@@ -95,3 +95,35 @@ a#back:active {
     padding: auto;
 
 }
+
+.login-btn{
+    text-align: center;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.login-btn span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+#login span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: -5px;
+    right: -20px;
+    transition: 0.5s;
+    font-size: 20px;
+}
+
+#login:hover span{
+    padding-right: 15px;
+}
+
+#login:hover span:after{
+    opacity: 1;
+    right: 0;
+}
