@@ -1,7 +1,7 @@
 <?php
 include('templates/header.php');
-$_SESSION['status'] = null;
-$_SESSION['msg'] = null;
+$_SESSION['status'] = "";
+$_SESSION['msg'] = "";
 ?>
 
 <!-- Login Form START -->
@@ -37,7 +37,7 @@ $_SESSION['msg'] = null;
 <script>
     function nextPage() {
         if (document.getElementById('student').checked)
-            window.location.href = "admin/register/student.php";
+            window.location.href = "student/dashboard.php";
         else if (document.getElementById('lecturer').checked)
             window.location.href = "lecturer/dashboard.php";
         else if (document.getElementById('admin').checked)
