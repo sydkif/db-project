@@ -2,7 +2,7 @@
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>View True/False Results</h3>
+        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>View Objective Results</h3>
         <hr>
         <h5>BIC 21404 : DATABASE</h5>
         <div class="table-responsive shadow rounded">
@@ -12,7 +12,7 @@
                         <th style="text-align: center;">No</th>
                         <th style="text-align: center; width: 40%;">Student Name</th>
                         <th style="text-align: center;">Student ID</th>
-                        <th style="text-align: center;">Result Quiz True/False</th>
+                        <th style="text-align: center;">Result Quiz Objective</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +31,10 @@
                             'name' => 'Salama 3',
                             'id' => 'AI006900',
                             'result' => 6
+                        ], [
+                            'name' => 'Akif Mantul',
+                            'id' => 'CI190063',
+                            'result' => NULL
                         ]
                     ];
 
