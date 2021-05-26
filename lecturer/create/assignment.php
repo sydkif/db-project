@@ -2,7 +2,7 @@
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3>Create Assignment / Tutorial / Lab</h3>
+        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>Create Assignment / Tutorial / Lab</h3>
         <hr>
         <h5>BIC21404 : DATABASE</h5>
         <h5>Title : <input type="text" name="file" id="file"></h5>
@@ -41,7 +41,7 @@
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
                             'title' => 'Lab 3',
-                            'filename' => 'BIC21404_Labsheet2-2021.doc',
+                            'filename' => 'BIC21404_Labsheet3-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
@@ -50,13 +50,13 @@
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
-                            'title' => 'Lab 2',
-                            'filename' => 'BIC21404_Labsheet2-2021.doc',
+                            'title' => 'Individual Assignment 2',
+                            'filename' => 'BIC21404_Individual Assignment 2-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
-                            'title' => 'Lab 2',
-                            'filename' => 'BIC21404_Labsheet2-2021.doc',
+                            'title' => 'Individual Assignment 3',
+                            'filename' => 'BIC21404_Individual Assignment 3-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ]
@@ -78,7 +78,7 @@
                                 </button>
                             </td>
                             <td style="text-align: center;" title="View Submission">
-                                <button class="btn btn-sm">
+                                <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?title=<?= $list['title'] ?>'">
                                     <i class="bi bi-file-earmark-check" style="font-size: 28px; color:forestgreen;"></i>
                                 </button>
                             </td>
