@@ -24,12 +24,12 @@ $_SESSION['msg'] = null;
 
         </div>
         <div style="margin-left: 10px;">
-            <label class="form-check-label"><input type="radio" name="account_type" id="student">
-                Chinpira</label><br>
-            <label class="form-check-label"><input type="radio" name="account_type" id="lecturer">
-                Lycra Chromosome</label><br>
-            <label class="form-check-label"><input type="radio" name="account_type" id="admin">
-                Yadaran</label><br>
+            <label class="form-check-label"><input type="radio" name="account_type" id="student"required>
+                admin</label><br>
+            <label class="form-check-label"><input type="radio" name="account_type" id="lecturer"required>
+                lecturer</label><br>
+            <label class="form-check-label"><input type="radio" name="account_type" id="admin"required>
+                student</label><br>
         </div>
         <button href="admin/register/student.php" type="submit" class="btn btn-primary btn-block" id="login">Login</button>
         </form>
@@ -39,18 +39,7 @@ $_SESSION['msg'] = null;
 </div>
 
 <!-- Login Form END -->
-<script>
-    function nextPage() {
-        if (document.getElementById('student').checked)
-            window.location.href = "admin/register/student.php";
-        else if (document.getElementById('lecturer').checked)
-            window.location.href = "admin/register/lecturer.php";
-        else if (document.getElementById('admin').checked)
-            window.location.href = "admin/dashboard.php";
-        else
-            alert('Please select a user type');
-    }
-</script>
+
 
 
 <?php include('templates/footer.php') ?>
