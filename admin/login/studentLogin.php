@@ -7,12 +7,12 @@ $_SESSION['msg'] = null;
 
 <!-- Login Form START -->
 <div class="container p-5">
-    <h2 style="text-align: center;">Admin</h2>
+    <h2 style="text-align: center;">Lord Chin CHin</h2>
     <h2 style="text-align: center;">Login Page</h2>
     <hr>
     
     <div class="col-xl-6 col-lg-6 col col-md-10 col-sm-12 form-box border rounded mt-6 shadow" style="margin:auto; background-color:rgb(246, 246, 246) ;">
-    <form  action="admin/dashboard.php">
+    <form  action="admin/register/student.php">
         <div>
             <label for="inputId"><b>ID</b></label>
             <input type="text" class="form-control" name="inputId" placeholder="Please enter your ID" required >
@@ -24,7 +24,6 @@ $_SESSION['msg'] = null;
         <br>
         <button input type="submit" class="btn btn-primary btn-block" id="login">Login</button>
         </form>
-        <a class="text-align: center;" href ="admin/login/studentLogin.php">Student</a>
 
         <br>
     </div>
