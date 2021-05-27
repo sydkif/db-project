@@ -28,7 +28,8 @@
                         <td>MUNIRAH YUSOF</td>
                         <td>REQUIREMENT ENGINEERING</td>
                         <td style="display:flex; align-items:center; justify-content:center; ">
-                            <button class=" btn btn-sm " title="View Assignment & Tutorial"><i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
+                            <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
+                                <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
                         </td>
                         <td>
                             <div style="display:flex; align-items:center; justify-content:center;">
@@ -39,7 +40,6 @@
                         <td>
                             <div style="display:flex; align-items:center; justify-content:center;">
                                 <button class="btn btn-sm" title="View Objective Quiz"><i class=" bi bi-clipboard" style="font-size: 28px;"></i></button>
-
                             </div>
                         </td>
                         <td><i style="font-style:normal; ">4/15</i></td>
@@ -51,7 +51,8 @@
                         <td>CHUAH CHAI WEN</td>
                         <td>DATABASE</td>
                         <td style="display:flex; align-items:center; justify-content:center; ">
-                            <button class=" btn btn-sm " title="View Assignment & Tutorial"><i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
+                            <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
+                                <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
                         </td>
                         <td>
                             <div style="display:flex; align-items:center; justify-content:center;">
@@ -74,7 +75,8 @@
                         <td>NURHANIFAH MURLI</td>
                         <td>CRYPTOGRAPHY</td>
                         <td style="display:flex; align-items:center; justify-content:center; ">
-                            <button class=" btn btn-sm " title="View Assignment & Tutorial"><i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
+                            <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
+                                <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
                         </td>
                         <td>
                             <div style="display:flex; align-items:center; justify-content:center;">
