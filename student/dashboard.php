@@ -97,6 +97,20 @@
                 </tbody>
             </table>
         </div>
+        <hr>
+        <div class="container">
+            <h4>Register Subject</h4>
+            <select style=" width:50%; text-transform: uppercase;" name="subject_id" class="custom-select">
+                <option selected>Please Choose</option>
+                <option>Subject 1</option>
+                <option>Subject 2</option>
+                <option>Subject 3</option>
+                <option>Subject 4</option>
+            </select>
+            <button class="btn btn-sm" title="Register Subject">
+                <i class="bi bi-plus-square" style="font-size: 28px;"></i></button>
+            <hr>
+        </div>
 
     </div>
 
