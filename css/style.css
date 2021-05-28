@@ -55,11 +55,11 @@ tr #btn {
     -o-border-radius     : 20px;
 }
 
-td button i.bi {
+button i.bi {
     font-size: 20px;
 }
 
-td button i.bi:hover {
+button i.bi:hover {
     opacity: 50%;
 }
 

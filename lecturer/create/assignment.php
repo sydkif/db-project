@@ -1,13 +1,18 @@
-<?php include('../../templates/header.php'); ?>
+<?php include('../../templates/header.php');
+
+$code = $_GET['code'];
+$name = $_GET['name'];
+
+?>
 
 <div class="container mt-5 align-items-center">
     <div class="col">
         <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>Create Assignment / Tutorial / Lab</h3>
         <hr>
-        <h5>BIC21404 : DATABASE</h5>
-        <h5>Title : <input type="text" name="file" id="file"></h5>
-        <h5>File to upload : <button class="btn btn-sm btn-outline-dark">Choose File</button> No file chosen
-            <button class="btn btn-sm btn-outline-dark">Upload</button>
+        <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
+        <h5>Task Title : <input type="text" name="file" id="file">
+            <input type="file" name="assignment" id="assignment" style="width:260px;">
+            <button class="btn btn-sm"><i class="bi bi-upload" style="font-size: 28px;"></i></button>
         </h5>
 
         <div class="table-responsive shadow rounded">
@@ -31,32 +36,32 @@
                     $all_list = [
                         [
                             'title' => 'Lab 1',
-                            'filename' => 'BIC21404_Labsheet1-2021.doc',
+                            'filename' => $code . '_Labsheet1-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '16-05-2021 16:12:42'
                         ], [
                             'title' => 'Lab 2',
-                            'filename' => 'BIC21404_Labsheet2-2021.doc',
+                            'filename' => $code . '_Labsheet2-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
                             'title' => 'Lab 3',
-                            'filename' => 'BIC21404_Labsheet3-2021.doc',
+                            'filename' => $code . '_Labsheet3-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
                             'title' => 'Individual Assignment 1',
-                            'filename' => 'BIC21404-Individual Assignment 1-2021.doc',
+                            'filename' => $code . '-Individual Assignment 1-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
                             'title' => 'Individual Assignment 2',
-                            'filename' => 'BIC21404_Individual Assignment 2-2021.doc',
+                            'filename' => $code . '_Individual Assignment 2-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ], [
                             'title' => 'Individual Assignment 3',
-                            'filename' => 'BIC21404_Individual Assignment 3-2021.doc',
+                            'filename' => $code . '_Individual Assignment 3-2021.doc',
                             'modiBy' => 'CHUAH CHAI WEN',
                             'modiOn' => '20-05-2021 14:12:22'
                         ]
@@ -78,7 +83,7 @@
                                 </button>
                             </td>
                             <td style="text-align: center;" title="View Submission">
-                                <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?title=<?= $list['title'] ?>'">
+                                <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?code=<?= $code ?>&name=<?= $name ?>&title=<?= $list['title'] ?>'">
                                     <i class="bi bi-file-earmark-check" style="font-size: 28px; color:forestgreen;"></i>
                                 </button>
                             </td>

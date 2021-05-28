@@ -1,10 +1,15 @@
-<?php include('../../templates/header.php'); ?>
+<?php include('../../templates/header.php');
+
+$code = $_GET['code'];
+$name = $_GET['name'];
+
+?>
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/create/assignment.php"></a>Assignment / Tutorial / Lab Submission</h3>
+        <h3><a id="back" class="bi bi-caret-left-fill" href="javascript:history.back();"></a>Assignment / Tutorial / Lab Submission</h3>
         <hr>
-        <h5>BIC21404 : DATABASE</h5>
+        <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
         <h5>Title : <?= $_GET['title'] ?></h5>
 
         <div class="table-responsive shadow rounded">

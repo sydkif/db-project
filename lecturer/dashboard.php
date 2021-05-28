@@ -37,7 +37,7 @@
                                 <th scope="row"><?= $num ?></th>
                                 <td><?= $row['name'] ?></td>
                                 <td style="display:flex; align-items:center; justify-content:center; ">
-                                    <button class=" btn btn-sm " title="Add New Assignment & Tutorial" onclick="location.href = 'create/assignment.php';">
+                                    <button class=" btn btn-sm " title="Add New Assignment & Tutorial" onclick="location.href = 'create/assignment.php?code=<?= $row['id'] ?>&name=<?= $row['name'] ?>';">
                                         <i class="bi bi-file-earmark-plus" style="font-size: 28px; color:dodgerblue;"></i>
                                     </button>
                                 </td>
