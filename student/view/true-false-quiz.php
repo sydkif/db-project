@@ -49,6 +49,12 @@
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
-        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;" onclick="location.href = '/student/dashboard.php';">    
+        <input id="submitButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">    
     </div>
 </div>
+
+<script>
+    document.getElementById("submitButton").onclick = function(){
+        location.href = "/student/dashboard.php";
+    };
+</script>
