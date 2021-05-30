@@ -34,7 +34,7 @@
         
               
             if($table == "admin" && $count == 1){  
-                if($username == $password){header("Location: ../reset/reset.php?id=$username");} else{
+                if($username == $password){header("Location:resetpassword.php?id=$username");} else{
                 echo $username . $table . "login successful admin";
                 header("Location: admin/dashboard.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . "");
                 

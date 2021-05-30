@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../DB.php');
+    include('./database/DB.php');
 
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
