@@ -22,11 +22,11 @@ $_SESSION['msg'] = null;
                 <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
             </div>
             <div class="form-group" style="margin-left: 10px;">
-                <label class="form-check-label"><input type="radio" name="usertype" id="student">
+                <label class="form-check-label"><input type="radio" name="usertype" id="student" value="student">
                     Student</label><br>
-                <label class="form-check-label"><input type="radio" name="usertype" id="lecturer">
+                <label class="form-check-label"><input type="radio" name="usertype" id="lecturer" value="lecturer">
                     Lecturer</label><br>
-                <label class="form-check-label"><input type="radio" name="usertype" id="admin">
+                <label class="form-check-label"><input type="radio" name="usertype" id="admin" value="admin">
                     Admin</label><br>
             </div>
             <button type="submit" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
@@ -36,11 +36,11 @@ $_SESSION['msg'] = null;
         <br>
     </div>
 </div>
-<<<<<<< Updated upstream
+
 =======
 <!-- Login Form END -->
 
-<script>
+<!-- <script>
     function nextPage() {
         if (document.getElementById('student').checked)
             window.location.href = "student/dashboard.php";
@@ -51,7 +51,7 @@ $_SESSION['msg'] = null;
         else
             alert('Please select a user type');
     }
-</script>
+</script> -->
 <script>
          function validation()  
             {  

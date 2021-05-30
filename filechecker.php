@@ -14,7 +14,9 @@
         echo "Session variables are set.";
 
         
-         echo $table;
+         echo "\nusername;".$username;
+         echo "\npassword;".$password;
+         echo "\ntable;".$table;
           
             //to prevent from mysqli injection  
             
@@ -56,4 +58,4 @@
 			echo "<script>console.log('Username: ". $username . "');</script>" ; 
               
             
-    ?>   ?>
+    ?>  
