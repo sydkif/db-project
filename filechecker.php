@@ -1,5 +1,6 @@
-<?php session_start();      
-include('./database/DB.php');
+<?php
+ session_start();      
+    include('./database/DB.php');
         
         
         $username = $_POST['user'];  
@@ -13,7 +14,7 @@ include('./database/DB.php');
         echo "Session variables are set.";
 
         
-         
+         echo $table;
           
             //to prevent from mysqli injection  
             
