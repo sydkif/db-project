@@ -12,40 +12,26 @@ $_SESSION['msg'] = null;
     <hr>
     
     <div class="col-xl-6 col-lg-6 col col-md-10 col-sm-12 form-box border rounded mt-6 shadow" style="margin:auto; background-color:rgb(246, 246, 246) ;">
-<<<<<<< Updated upstream
-    <form  action="admin/dashboard.php">
-        <div>
-            <label for="inputId"><b>ID</b></label>
-            <input type="text" class="form-control" name="inputId" placeholder="Please enter your ID" required >
-        </div>
-        <div>
-            <label for="inputPassword"><b>Password</b></label>
-            <input type="password" class="form-control" name="txt_password" placeholder="Enter your password" required>
-        </div>
-        <br>
-        <button input type="submit" class="btn btn-primary btn-block" id="login">Login</button>
-=======
-        <form class="mt-3" name="login" action= "login.php" onsubmit = "return validation()" method = "POST" class="needs-validation" novalidate="" autocomplete="on">
+        <form class="mt-3" name="login" action= "filechecker.php" onsubmit = "return validation()" method = "POST" class="needs-validation" novalidate="" autocomplete="on">
             <div class="form-group">
                 <label for="inputId"><b>ID</b></label>
-                <input type="text" class="form-control" id="inputId" placeholder="Please enter your ID">
+                <input type="text" class="form-control" id="user" name="user" placeholder="Please enter your ID">
             </div>
             <div class="form-group">
                 <label for="inputPassword"><b>Password</b></label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
             </div>
             <div class="form-group" style="margin-left: 10px;">
-                <label class="form-check-label"><input type="radio" name="account_type" id="student">
+                <label class="form-check-label"><input type="radio" name="usertype" id="student">
                     Student</label><br>
-                <label class="form-check-label"><input type="radio" name="account_type" id="lecturer">
+                <label class="form-check-label"><input type="radio" name="usertype" id="lecturer">
                     Lecturer</label><br>
-                <label class="form-check-label"><input type="radio" name="account_type" id="admin">
+                <label class="form-check-label"><input type="radio" name="usertype" id="admin">
                     Admin</label><br>
             </div>
             <button type="submit" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
->>>>>>> Stashed changes
         </form>
-        <a class="text-align: center;" href ="admin/login/studentLogin.php">Student</a>
+        
 
         <br>
     </div>
@@ -90,5 +76,5 @@ $_SESSION['msg'] = null;
 	
 
 </script>
->>>>>>> Stashed changes
+
 <?php include('templates/footer.php') ?>
