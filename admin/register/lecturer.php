@@ -33,8 +33,7 @@
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
                             ++$num;
-                            // date("Y-m-d h:i:sa", $d);
-                            // date_format($date, "Y/m/d H:i:s")
+
                     ?>
 
                             <tr>
@@ -46,7 +45,7 @@
                                     <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
-                                    <button id="save<?= $num ?>" onclick="update(<?= $num ?>)" class="btn btn-sm">
+                                    <button id="save<?= $num ?>" onclick="update('lecturer',<?= $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-save2" style="color: blue;"></i>
                                     </button>
                                     <button id="cancel<?= $num ?>" onclick="cancel(<?= $num ?>)" class="btn btn-sm">
@@ -54,7 +53,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove(<?= $num ?>)">
+                                    <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('lecturer',<?= $num ?>)">
                                         <i class="bi bi-trash" style="color: red;"></i>
                                     </button>
                                 </td>
@@ -116,81 +115,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    var defaultText, t;
-
-    window.onload = function() {
-        var table = document.getElementById("table");
-        var rows = table.getElementsByTagName("tr");
-        for (var x = 1; x <= rows.length; x++) {
-            document.getElementById("save" + x).hidden = true;
-            document.getElementById("cancel" + x).hidden = true;
-        }
-
-    };
-
-
-    function edit(n) {
-        if (defaultText != null) {
-            document.getElementById("name" + t).contentEditable = false;
-            document.getElementById("update" + t).hidden = false;
-            document.getElementById("save" + t).hidden = true;
-            document.getElementById("cancel" + t).hidden = true;
-            document.getElementById("name" + t).style.outlineStyle = "";
-            document.getElementById("name" + t).style.outlineOffset = "";
-            document.getElementById("name" + t).innerText = defaultText;
-        }
-        defaultText = document.getElementById("name" + n).innerText;
-        document.getElementById("name" + n).contentEditable = true;
-        document.getElementById("name" + n).focus();
-        document.getElementById("update" + n).hidden = true;
-        document.getElementById("save" + n).hidden = false;
-        document.getElementById("cancel" + n).hidden = false;
-        document.getElementById("name" + n).style.outlineStyle = "solid";
-        document.getElementById("name" + n).style.outlineOffset = "-10px";
-        t = n;
-    }
-
-    function cancel(n) {
-        // document.getElementById("id" + n).contentEditable = false;
-        document.getElementById("name" + n).contentEditable = false;
-        document.getElementById("update" + n).hidden = false;
-        document.getElementById("save" + n).hidden = true;
-        document.getElementById("cancel" + n).hidden = true;
-        document.getElementById("name" + n).style.outlineStyle = "";
-        document.getElementById("name" + n).style.outlineOffset = "";
-        document.getElementById("name" + n).innerText = defaultText;
-        // location.reload();
-    }
-
-    function update(n) {
-        var id = document.getElementById("id" + n).innerText;
-        var name = document.getElementById("name" + n).innerText;
-        var url = ("../update.php?table=lecturer&id=" + id + "&name=" + name);
-        var msg = "Are you sure want to update this record?";
-        var conf = confirm(msg);
-        if (conf)
-            window.location = "" + url;
-    }
-
-    function remove(n) {
-        var id = document.getElementById("id" + n).innerText;
-        var name = document.getElementById("name" + n).innerText;
-        var url = ("../delete.php?table=lecturer&id=" + id);
-        var msg = "Are you sure want to delete this record?\n\nLecturer ID :\n" + id + "\n\nNAME :\n" + name;
-        var conf = confirm(msg);
-        if (conf)
-            window.location = "" + url;
-    }
-
-    // $('.updateBtn').click(function() {
-    //     $('.updateBtn').not(this).prop('disabled', true);
-    // })
-
-    // $('.cancelBtn').click(function() {
-    //     $('.updateBtn').not(this).prop('disabled', false);
-    // })
-</script>
 
 <?php include '../../templates/footer.php' ?>

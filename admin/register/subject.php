@@ -41,18 +41,18 @@
                                 <td id="modi"><?= $row['modiBy'] ?></td>
                                 <td id="modi"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
                                 <td>
-                                    <button id="update<?php echo $num ?>" onclick="edit(<?php echo $num ?>)" class="btn btn-sm updateBtn">
+                                    <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
-                                    <button id="save<?php echo $num ?>" onclick="update(<?php echo $num ?>)" class="btn btn-sm">
+                                    <button id="save<?= $num ?>" onclick="update('subject',<?= $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-save2" style="color: blue;"></i>
                                     </button>
-                                    <button id="cancel<?php echo $num ?>" onclick="cancel(<?php echo $num ?>)" class="btn btn-sm cancelBtn">
+                                    <button id="cancel<?= $num ?>" onclick="cancel(<?= $num ?>)" class="btn btn-sm cancelBtn">
                                         <i class="bi bi-x-square" style="color: gray;"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <button id="delete<?php echo $num ?>" class="btn btn-sm" onclick="remove(<?php echo $num ?>)">
+                                    <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('subject',<?= $num ?>)">
                                         <i class="bi bi-trash" style="color: red;"></i>
                                     </button>
                                 </td>
@@ -114,68 +114,3 @@
 </div>
 
 <?php include('../../templates/footer.php') ?>
-
-<script>
-    var defaultText, t;
-
-    window.onload = function() {
-        var table = document.getElementById("table");
-        var rows = table.getElementsByTagName("tr");
-        for (var x = 1; x <= rows.length; x++) {
-            document.getElementById("save" + x).hidden = true;
-            document.getElementById("cancel" + x).hidden = true;
-        }
-
-    };
-
-    function edit(n) {
-        if (defaultText != null) {
-            document.getElementById("name" + t).contentEditable = false;
-            document.getElementById("update" + t).hidden = false;
-            document.getElementById("save" + t).hidden = true;
-            document.getElementById("cancel" + t).hidden = true;
-            document.getElementById("name" + t).style.outlineStyle = "";
-            document.getElementById("name" + t).style.outlineOffset = "";
-            document.getElementById("name" + t).innerText = defaultText;
-        }
-        defaultText = document.getElementById("name" + n).innerText;
-        document.getElementById("name" + n).contentEditable = true;
-        document.getElementById("name" + n).focus();
-        document.getElementById("update" + n).hidden = true;
-        document.getElementById("save" + n).hidden = false;
-        document.getElementById("cancel" + n).hidden = false;
-        document.getElementById("name" + n).style.outlineStyle = "solid";
-        document.getElementById("name" + n).style.outlineOffset = "-10px";
-        t = n;
-    }
-
-    function cancel(n) {
-        document.getElementById("name" + n).contentEditable = false;
-        document.getElementById("update" + n).hidden = false;
-        document.getElementById("save" + n).hidden = true;
-        document.getElementById("cancel" + n).hidden = true;
-        document.getElementById("name" + n).style.outlineStyle = "";
-        document.getElementById("name" + n).style.outlineOffset = "";
-        document.getElementById("name" + n).innerText = defaultText;
-    }
-
-    function update(n) {
-        var id = document.getElementById("id" + n).innerText;
-        var name = document.getElementById("name" + n).innerText;
-        var url = ("../update.php?table=subject&id=" + id + "&name=" + name);
-        var msg = "Are you sure want to update this record?\n\nSubject ID :\n" + id + "\n\nSubject Name :\n" + name;
-        var conf = confirm(msg);
-        if (conf)
-            window.location = "" + url;
-    }
-
-    function remove(n) {
-        var id = document.getElementById("id" + n).innerText;
-        var name = document.getElementById("name" + n).innerText;
-        var url = ("../delete.php?table=subject&id=" + id);
-        var msg = "Are you sure want to delete this record?\n\nSubject ID :\n" + id + "\n\n Subject Name :\n" + name;
-        var conf = confirm(msg);
-        if (conf)
-            window.location = "" + url;
-    }
-</script>

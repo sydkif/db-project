@@ -196,15 +196,4 @@
     </div>
 </div>
 
-<script>
-    window.onload = function() {
-        var table = document.getElementById("table");
-        var rows = table.getElementsByTagName("tr");
-        for (var x = 1; x <= rows.length; x++) {
-            document.getElementById("save" + x).hidden = true;
-            document.getElementById("cancel" + x).hidden = true;
-        }
-    };
-</script>
-
 <?php include("../templates/footer.php") ?>
