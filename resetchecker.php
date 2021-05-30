@@ -10,7 +10,7 @@
         echo "<script>console.log('Table: ". $_SESSION['usertable']. "');</script>" ;
         echo "<script>console.log('pass: ". $password. "');</script>" ; 
         echo "<script>console.log('id: ". $_SESSION['userid']. "');</script>" ;
-        header("Location: ../admin-dashboard/index.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . ""); 
+        header("Location: admin/dashboard.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . "");
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
       }

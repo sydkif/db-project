@@ -37,7 +37,7 @@ $_SESSION['msg'] = null;
     </div>
 </div>
 
-=======
+
 <!-- Login Form END -->
 
 <!-- <script>
