@@ -35,7 +35,12 @@
                 <?php 
                 include '../DB.php';
 
-                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id;";
+                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.student_id AS student_id
+                        FROM SUBJECT S 
+                        JOIN workload wl ON s.id = wl.subject_id 
+                        JOIN lecturer l ON wl.lecturer_id = l.id
+                        JOIN student_subject ss ON s.id = ss.subject_id
+                        WHERE ss.student_id = '$userID';";
                 $result = $conn->query($sql);
                 $num = 0;
 
@@ -89,21 +94,25 @@
             <?php 
                 include '../DB.php';
 
-                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, s.id AS subject_id FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id;";
-                $result = $conn->query($sql);
-                $num = 0;                
+                $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id GROUP BY l.id, l.name;";
+                $result = $conn->query($sql);              
             ?>
-            <select name="subject_id" class="custom-select" style=" width:50%; text-transform: uppercase;">
+            <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
+                <option value="#">--SELECT LECTURER--</option>
                 <?php     
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
                 ?>
-                <option value="<?= $row['subject_id'] ?>"> <?= $row['lecturer_name'] . " - " . $row['subject_name'] ?></option>
+                <option value="<?= $row['lecturer_id'] ?>"> <?= $row['lecturer_name'] ?></option>
 
             <?php 
                     } //End Whileloop
                 }
+                $conn->close();
             ?>
+            </select>
+            <select id="subject_table" class="custom-select" style="width:45%;">
+                <option value="">--SELECT SUBJECT--</option>
             </select>
 
             <button name="add" class="btn btn-sm" title="Register Subject">
@@ -111,7 +120,7 @@
             <hr>
             </form>
         </div>
-
+        
         <?php 
         //Register Subjects for students
         include "../DB.php";
@@ -119,7 +128,8 @@
             $subjectId = $_POST['subject_id'];
             $studentId = $_SESSION['userId'];
 
-            $sql = "INSERT INTO student_subject (subject_code, student_id) VALUES ('$subjectId', '$studentId')";
+            $sql = "INSERT INTO student_subject (subject_id, student_id) VALUES ('$subjectId', '$studentId')";
+            var_dump($sql);
             
             if($conn->query($sql) === true){
                 // Success
@@ -137,6 +147,27 @@
 
         ?>
 
+        
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#lecturer_table').on("change", function(){
+                var lecturerID = $(this).val();
+                if(lecturerID){
+                    $.ajax({
+                        url: "dependent.php",
+                        type: "POST",
+                        cache: false,
+                        data: {lecturerID:lecturerID},
+                        success: function(data){
+                            $("#subject_table").html(data);
+                        }
+                    });
+                }else
+                    $('#subject_table').html('<option value="">--TEST--</option>');
+            })
+        });
+    </script>
 
     <?php include('../templates/footer.php'); ?>
