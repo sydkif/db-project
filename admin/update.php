@@ -5,8 +5,14 @@ include "../DB.php";
 $id = $_GET['id'];
 $table = $_GET['table'];
 $name = $_GET['name'];
+$currentUser = "Super Admin";
+date_default_timezone_set("Asia/Kuala_Lumpur");
+$currentTime = date("Y-m-d h:i:s");
 
-$sql = "UPDATE $table SET name='$name' WHERE id='$id'";
+if ($table == 'lecturer' || $table == 'student'  || $table == 'subject')
+    $sql = "UPDATE $table SET name='$name', modiBy='$currentUser', modiOn='$currentTime' WHERE id='$id'";
+else
+    $sql = "UPDATE $table SET name='$name' WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
     $_SESSION['msg'] = "Record updated successfully";
