@@ -2,7 +2,7 @@
 include('templates/header.php');
 $_SESSION['status'] = null;
 $_SESSION['msg'] = null;
-
+$_SESSION['loginErr']= "ok";
 
 if ($_SESSION['loginErr']==null){
     echo '<script language="javascript">';
