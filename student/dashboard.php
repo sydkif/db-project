@@ -1,5 +1,15 @@
 <?php include('../templates/header.php'); ?>
 
+<?php 
+    //Hardcode test
+
+    $_SESSION['userId'] = 'CI123';
+    $_SESSION['table'] = 'student';
+
+    $userID = $_SESSION['userId'];
+
+?>
+
 <div class="container mt-5 align-items-center">
     <div class="col">
         <h1>Student Dashboard</h1>
@@ -22,11 +32,25 @@
                 </thead>
                 <tbody>
 
+                <?php 
+                include '../DB.php';
+
+                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id;";
+                $result = $conn->query($sql);
+                $num = 0;
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        ++$num;
+                
+                ?>
+
 
                     <tr>
-                        <th scope="row">1</th>
-                        <td>MUNIRAH YUSOF</td>
-                        <td>REQUIREMENT ENGINEERING</td>
+                        <th scope="row"><?= $num; ?></th>
+                        <td><?= $row['lecturer_name']; ?></td>
+                        <td><?= $row['subject_name']; ?></td>
+                        <!-- TO DO LIST - ADD ASSIGNMENT, TRUE FALSE, OBJECTIVE -->
                         <td style="display:flex; align-items:center; justify-content:center; ">
                             <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
                                 <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
@@ -44,73 +68,74 @@
                         </td>
                         <td><i style="font-style:normal; ">4/15</i></td>
                     </tr>
+                <?php 
+                    }
+                }else{
+                    echo "No results found";
+                }
 
-
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>CHUAH CHAI WEN</td>
-                        <td>DATABASE</td>
-                        <td style="display:flex; align-items:center; justify-content:center; ">
-                            <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
-                                <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
-                        </td>
-                        <td>
-                            <div style="display:flex; align-items:center; justify-content:center;">
-                                <button class="btn btn-sm" title="View True False Quiz" onclick="location.href = 'view/true-false-quiz.php';"><i class="bi bi-clipboard" style="font-size: 28px; "></i></button>
-                            </div>
-                        </td>
-                        <td> <i style="font-style:normal; ">2/10</i></td>
-                        <td>
-                            <div style="display:flex; align-items:center; justify-content:center;">
-                                <button class="btn btn-sm" title="View Objective Quiz"><i class=" bi bi-clipboard" style="font-size: 28px;"></i></button>
-
-                            </div>
-                        </td>
-                        <td><i style="font-style:normal; ">9/15</i></td>
-                    </tr>
-
-
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>NURHANIFAH MURLI</td>
-                        <td>CRYPTOGRAPHY</td>
-                        <td style="display:flex; align-items:center; justify-content:center; ">
-                            <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
-                                <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
-                        </td>
-                        <td>
-                            <div style="display:flex; align-items:center; justify-content:center;">
-                                <button class="btn btn-sm" title="View True False Quiz" onclick="location.href = 'view/true-false-quiz.php';"><i class="bi bi-clipboard" style="font-size: 28px; "></i></button>
-                            </div>
-                        </td>
-                        <td> <i style="font-style:normal; ">3/5</i></td>
-                        <td>
-                            <div style="display:flex; align-items:center; justify-content:center;">
-                                <button class="btn btn-sm" title="View Objective Quiz"><i class=" bi bi-clipboard" style="font-size: 28px;"></i></button>
-
-                            </div>
-                        </td>
-                        <td><i style="font-style:normal; ">13/15</i></td>
-                    </tr>
+                $conn->close();
+                ?>
 
 
                 </tbody>
             </table>
         </div>
         <hr>
+
         <div class="container">
             <h4>Register Subject</h4>
-            <select style=" width:50%; text-transform: uppercase;" name="subject_id" class="custom-select">
-                <option selected>Please Choose</option>
-                <option>Subject 1</option>
-                <option>Subject 2</option>
-                <option>Subject 3</option>
-                <option>Subject 4</option>
+            <form method="POST">
+            <?php 
+                include '../DB.php';
+
+                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, s.id AS subject_id FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id;";
+                $result = $conn->query($sql);
+                $num = 0;                
+            ?>
+            <select name="subject_id" class="custom-select" style=" width:50%; text-transform: uppercase;">
+                <?php     
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                ?>
+                <option value="<?= $row['subject_id'] ?>"> <?= $row['lecturer_name'] . " - " . $row['subject_name'] ?></option>
+
+            <?php 
+                    } //End Whileloop
+                }
+            ?>
             </select>
-            <button class="btn btn-sm" title="Register Subject">
+
+            <button name="add" class="btn btn-sm" title="Register Subject">
                 <i class="bi bi-plus-square" style="font-size: 28px;"></i></button>
             <hr>
+            </form>
         </div>
+
+        <?php 
+        //Register Subjects for students
+        include "../DB.php";
+        if(isset($_POST['add'])){
+            $subjectId = $_POST['subject_id'];
+            $studentId = $_SESSION['userId'];
+
+            $sql = "INSERT INTO student_subject (subject_code, student_id) VALUES ('$subjectId', '$studentId')";
+            
+            if($conn->query($sql) === true){
+                // Success
+                $_SESSION['msg'] = "Subject added successfully!";
+                $_SESSION['status'] = "Success";
+            }else{
+                // Failed
+                $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                $_SESSION['status'] = "Fail";
+            }
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
+
+        $conn->close();
+
+        ?>
 
     </div>
 
