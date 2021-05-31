@@ -2,6 +2,15 @@
 include('templates/header.php');
 $_SESSION['status'] = null;
 $_SESSION['msg'] = null;
+
+
+if ($_SESSION['loginErr']!=null){
+    echo '<script language="javascript">';
+    echo 'alert("Error Login Credential")';
+    echo '</script>';
+    $_SESSION['loginErr']=null;
+}
+
 ?>
 
 
@@ -59,16 +68,16 @@ $_SESSION['msg'] = null;
                     return false;  
                     }  
                 }
-                if (document.getElementById('student').checked)
-                    window.location.href = "student/dashboard.php";
-                else if (document.getElementById('lecturer').checked)
-                     window.location.href = "lecturer/dashboard.php";
-                else if (document.getElementById('admin').checked)
-                     window.location.href = "admin/dashboard.php";
-                else{
-                    alert('Please select a user type');   
-                    window.location.href = "index.php";      
-                }
+                // if (document.getElementById('student').checked)
+                //     window.location.href = "student/dashboard.php";
+                // else if (document.getElementById('lecturer').checked)
+                //      window.location.href = "lecturer/dashboard.php";
+                // else if (document.getElementById('admin').checked)
+                //      window.location.href = "admin/dashboard.php";
+                // else{
+                //     alert('Please select a user type');   
+                //     window.location.href = "index.php";      
+                // }
                                                        
               }
 </script>

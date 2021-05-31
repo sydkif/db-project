@@ -42,16 +42,25 @@
 				}
 				
             }
-			else if($table == "lecturer" && $count == 1){  
-                echo $username . $table . "login successful lecturer";
+			else if($table == "lecturer" && $count == 1){ 
+                if($username == $password){header("Location:resetpassword.php?id=$username");} else{
+                    echo $username . $table . "login successful admin";
+                    header("Location: admin/register/lecturer.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . ""); 
+                    echo $username . $table . "login successful lecturer";
 				
             }
-            else if($table == "student" && $count == 1){  
-                echo $username . $table . "login successful student";
-				
+        }
+            else if($table == "student" && $count == 1){
+                if($username == $password){header("Location:resetpassword.php?id=$username");} else{
+                    echo $username . $table . "login successful admin";
+                    header("Location: admin/register/student.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . ""); 
+                    echo $username . $table . "login successful student";
+            }
             }
             else{  
-                echo "<h1> Login failed. Invalid username or password.</h1>";  
+               header("Location: index.php") ;
+               $_SESSION['loginErr'] = "Salah isi dah ";
+
             }
             
 			echo "<script>console.log('Table: ". $table. "');</script>" ; 
@@ -59,3 +68,4 @@
               
             
     ?>  
+ 
