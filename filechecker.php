@@ -59,7 +59,7 @@
             }
             else{  
                header("Location: index.php") ;
-               $_SESSION['loginErr'] = "Salah isi dah ";
+               $_SESSION['loginErr'] =null;
 
             }
             

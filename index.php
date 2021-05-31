@@ -4,11 +4,11 @@ $_SESSION['status'] = null;
 $_SESSION['msg'] = null;
 
 
-if ($_SESSION['loginErr']!=null){
+if ($_SESSION['loginErr']==null){
     echo '<script language="javascript">';
     echo 'alert("Error Login Credential")';
     echo '</script>';
-    $_SESSION['loginErr']=null;
+    $_SESSION['loginErr']="ok";
 }
 
 ?>
