@@ -1,8 +1,11 @@
 <?php
 include('templates/header.php');
+
 $_SESSION['status'] = null;
 $_SESSION['msg'] = null;
 $_SESSION['loginErr']= "ok";
+
+
 
 if ($_SESSION['loginErr']==null){
     echo '<script language="javascript">';
@@ -38,7 +41,9 @@ if ($_SESSION['loginErr']==null){
                 <label class="form-check-label"><input type="radio" name="usertype" id="admin" value="admin">
                     Admin</label><br>
             </div>
+
             <button type="submit" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
+
         </form>
         
 
@@ -49,6 +54,7 @@ if ($_SESSION['loginErr']==null){
 
 
 <script>
+
          function validation()  
             {  
                 var id=document.login.user.value;  
@@ -80,6 +86,7 @@ if ($_SESSION['loginErr']==null){
                 // }
                                                        
               }
+
 </script>
 
 <?php include('templates/footer.php') ?>

@@ -44,23 +44,22 @@ tr #btn {
 }
 
 .card {
-
     margin               : auto;
     margin-top           : 20px;
     border-width         : 0px;
     width                : 16rem;
-    border-radius        : 24px;
-    -webkit-border-radius: 24px;
-    -moz-border-radius   : 24px;
-    -ms-border-radius    : 24px;
-    -o-border-radius     : 24px;
+    border-radius        : 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius   : 20px;
+    -ms-border-radius    : 20px;
+    -o-border-radius     : 20px;
 }
 
-td button i.bi {
+button i.bi {
     font-size: 20px;
 }
 
-td button i.bi:hover {
+button i.bi:hover {
     opacity: 50%;
 }
 
@@ -86,4 +85,45 @@ a#back:active {
     color           : rgb(0, 0, 0);
     background-color: transparent;
     text-decoration : underline;
+}
+
+#dashboard-lecturer tbody tr td button {
+    text-align: left;
+}
+
+.btn-block {
+    padding: auto;
+
+}
+
+.login-btn {
+    text-align: center;
+    transition: all 0.5s;
+    cursor    : pointer;
+}
+
+.login-btn span {
+    cursor    : pointer;
+    display   : inline-block;
+    position  : relative;
+    transition: 0.5s;
+}
+
+#login span:after {
+    content   : '\00bb';
+    position  : absolute;
+    opacity   : 0;
+    top       : -5px;
+    right     : -20px;
+    transition: 0.5s;
+    font-size : 20px;
+}
+
+#login:hover span {
+    padding-right: 15px;
+}
+
+#login:hover span:after {
+    opacity: 1;
+    right  : 0;
 }
