@@ -18,14 +18,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <title>Author Wannabe System</title>
+    <title>Lord Chin Chin LOGIN</title>
 </head>
 
 <body>
     <!-- Header -->
     <nav class="navbar navbar-dark" style="background-color: #646464 ;">
         <a class="navbar-brand" href="/">
-            <img src="/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="">
-            Author Wannabe System
+            <img src="/img/logo.jpg" width="100" height="100" class="d-inline-block align-top" alt="">
+            Lord Chin Chin System
         </a>
     </nav>
