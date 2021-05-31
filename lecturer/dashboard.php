@@ -22,7 +22,7 @@
                 <tbody>
 
                     <?php
-                    include "../DB.php";
+                    include "../database/DB.php";
 
                     $sql = "SELECT id, name FROM subject";
                     $result = $conn->query($sql);

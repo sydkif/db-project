@@ -22,7 +22,7 @@
                 <tbody id="table">
 
                     <?php
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     $sql = "SELECT id, name FROM admin";
                     $result = $conn->query($sql);
@@ -77,12 +77,12 @@
 
                     <?php
 
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $name = $_POST['name'];
-                        $sql = "INSERT INTO admin (id, name) VALUES ('$id', '$name')";
+                        $sql = "INSERT INTO admin (id, name, password) VALUES ('$id', '$name', '$id')";
 
                         if ($conn->query($sql) === true) {
                             // Success

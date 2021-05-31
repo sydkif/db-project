@@ -23,7 +23,7 @@
                 <tbody id="table">
                     <?php
                     //connecting to database
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     //getting data from db
                     $sql = "SELECT * FROM subject";
@@ -83,7 +83,7 @@
 
                     <?php
 
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     //Adding data to database
                     if (isset($_POST['add'])) {

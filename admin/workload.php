@@ -22,7 +22,7 @@
                 <tbody>
 
                     <?php
-                    include "../DB.php";
+                    include "../database/DB.php";
 
                     $sql = "SELECT  l.id as lecturer_id, l.name AS lecturer_name, s.id AS subject_id, s.name AS subject_name 
                             FROM subject s
@@ -84,7 +84,7 @@
                                     <option selected>Please Choose</option>
 
                                     <?php
-                                    include "../DB.php";
+                                    include "../database/DB.php";
 
                                     $sql = "SELECT id, name FROM lecturer";
                                     $result = $conn->query($sql);
@@ -110,7 +110,7 @@
                                     <option style="text-transform: uppercase;" selected>Please Choose</option>
 
                                     <?php
-                                    include "../DB.php";
+                                    include "../database/DB.php";
 
                                     $sql = "SELECT id, name FROM subject";
                                     $result = $conn->query($sql);
@@ -142,7 +142,7 @@
 
                     <?php
 
-                    include "../DB.php";
+                    include "../database/DB.php";
                     if (isset($_POST['add'])) {
 
                         $lecturer = $_POST['lecturer_id'];

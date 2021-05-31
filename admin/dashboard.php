@@ -1,4 +1,4 @@
-<?php include('../templates/header.php') ?>
+<?php include('../templates/header.php'); ?>
 
 <div class="container mt-5 align-items-center">
     <div class="col text-center">

@@ -23,7 +23,7 @@
                 <tbody>
 
                     <?php
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     $sql = "SELECT * FROM lecturer";
                     $result = $conn->query($sql);
@@ -85,14 +85,14 @@
 
                     <?php
 
-                    include "../../DB.php";
+                    include "../../database/DB.php";
                     date_default_timezone_set("Asia/Kuala_Lumpur");
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $name = strtoupper($_POST['name']);
                         $modiBy = "Super Admin"; // TODO Change to session_id later on
                         $modiOn = date("Y-m-d h:i:s");
-                        $sql = "INSERT INTO lecturer (id, name, modiBy, modiOn) VALUES ('$id', '$name', '$modiBy', '$modiOn')";
+                        $sql = "INSERT INTO lecturer (id, name,password, modiBy, modiOn) VALUES ('$id', '$name', '$id', '$modiBy', '$modiOn')";
 
                         if ($conn->query($sql) === true) {
                             // Success
