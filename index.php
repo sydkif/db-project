@@ -19,7 +19,7 @@ $_SESSION['msg'] = null;
             </div>
             <div class="form-group">
                 <label for="inputPassword"><b>Password</b></label>
-                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" >
             </div>
             <div class="form-group" style="margin-left: 10px;">
                 <label class="form-check-label"><input type="radio" name="usertype" id="student" value="student">
@@ -38,26 +38,13 @@ $_SESSION['msg'] = null;
 </div>
 
 
-<!-- Login Form END -->
 
-<!-- <script>
-    function nextPage() {
-        if (document.getElementById('student').checked)
-            window.location.href = "student/dashboard.php";
-        else if (document.getElementById('lecturer').checked)
-            window.location.href = "lecturer/dashboard.php";
-        else if (document.getElementById('admin').checked)
-            window.location.href = "admin/dashboard.php";
-        else
-            alert('Please select a user type');
-    }
-</script> -->
 <script>
          function validation()  
             {  
                 var id=document.login.user.value;  
-                var ps=document.login.pass.value;  
-                if(id.length=="" && ps.length=="") {  
+                var pass=document.login.pass.value;  
+                if(id.length=="" && pass.length=="") {  
                     alert("User Name and Password fields are empty");  
                     return false;  
                 }  
@@ -67,14 +54,23 @@ $_SESSION['msg'] = null;
                         alert("User Name is empty");  
                         return false;  
                     }   
-                    if (ps.length=="") {  
+                    if (pass.length=="") {  
                     alert("Password field is empty");  
                     return false;  
                     }  
-                }                             
-            }  
-	
-
+                }
+                if (document.getElementById('student').checked)
+                    window.location.href = "student/dashboard.php";
+                else if (document.getElementById('lecturer').checked)
+                     window.location.href = "lecturer/dashboard.php";
+                else if (document.getElementById('admin').checked)
+                     window.location.href = "admin/dashboard.php";
+                else{
+                    alert('Please select a user type');   
+                    window.location.href = "index.php";      
+                }
+                                                       
+              }
 </script>
 
 <?php include('templates/footer.php') ?>

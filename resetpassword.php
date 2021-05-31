@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="author" content="man">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="description" content="This is a login page based on Bootstrap 5">
-	<title>Bootstrap 5 Login Page</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
+<?php include('templates/header.php') ?>
 
 <body>
 	<section class="h-100">
-		<div class="container h-100">
-			<div class="row justify-content-sm-center h-100">
+		<div class="container h-500">
+			<div class="row justify-content-sm-center h-500">
 				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
 					<div class="text-center my-5">
-					<img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="logo" width="100">
+				
 					</div>
 					<div class="card shadow-sm">
-						<div class="card-body p-5">
+						<div class="card-body p-8">
 							<h1 class="fs-4 card-title fw-bold mb-4">Reset Password</h1>
 							<form method="POST" class="needs-validation" action="resetchecker.php" novalidate="" autocomplete="off">
 								<div class="mb-3">
@@ -38,10 +29,7 @@
 								</div>
 
 								<div class="d-flex align-items-center">
-									<div class="form-check">
-										<input type="checkbox" name="logout_devices" id="logout" class="form-check-input">
-										<label for="logout" class="form-check-label">Logout all devices</label>
-									</div>
+									
 									<button type="submit" class="btn btn-primary ms-auto">
 										Reset Password	
 									</button>
@@ -49,14 +37,13 @@
 							</form>
 						</div>
 					</div>
-					<div class="text-center mt-5 text-muted">
-						Copyright &copy; 2017-2021 &mdash; Your Company 
-					</div>
+					
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<script src="js/login.js"></script>
+	
 </body>
-</html>
+
+<?php include('templates/footer.php') ?>
