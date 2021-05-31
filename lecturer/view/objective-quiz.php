@@ -1,5 +1,7 @@
 <?php include('../../templates/header.php'); ?>
 
+<?= session_id();?>
+
 <div class="container mt-5 align-items-center">
     <div class="col">
         <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>View Objective Results</h3>

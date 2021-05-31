@@ -1,10 +1,19 @@
 <?php include('../templates/header.php'); ?>
 
+<?php 
+    $_SESSION['userId'] = '1001';
+    $_SESSION['name'] = 'Akif';
+    $_SESSION['table'] = 'lecturer';
+
+    $userID = $_SESSION['userId'];
+    $userName = $_SESSION['name'];
+?>
+
 <div class="container mt-5 align-items-center">
     <div class="col">
         <h1>Lecturer Dashboard</h1>
         <hr>
-        <h2>Your Subject List</h2>
+        <h2>Your Subject List - <?= $userName; ?></h2>
         <div class="table-responsive shadow rounded">
             <table id="dashboard-lecturer" class="table">
                 <thead class="thead-dark">
@@ -24,7 +33,7 @@
                     <?php
                     include "../DB.php";
 
-                    $sql = "SELECT id, name FROM subject";
+                    $sql = "SELECT s.name AS subject_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
                     $result = $conn->query($sql);
                     $num = 0;
                     if ($result->num_rows > 0) {
@@ -35,7 +44,7 @@
 
                             <tr>
                                 <th scope="row"><?= $num ?></th>
-                                <td><?= $row['name'] ?></td>
+                                <td><?= $row['subject_name'] ?></td>
                                 <td style="display:flex; align-items:center; justify-content:center; ">
                                     <button class=" btn btn-sm " title="Add New Assignment & Tutorial" onclick="location.href = 'create/assignment.php?code=<?= $row['id'] ?>&name=<?= $row['name'] ?>';">
                                         <i class="bi bi-file-earmark-plus" style="font-size: 28px; color:dodgerblue;"></i>
