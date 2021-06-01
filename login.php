@@ -17,6 +17,7 @@ if (isset($_SESSION['loginErr']) == "error") {
 
 ?>
 
+<link rel="stylesheet" href="/css/login.css">
 
 <!-- Login Form START -->
 <div class="container p-5">
@@ -34,13 +35,27 @@ if (isset($_SESSION['loginErr']) == "error") {
                 <label for="inputPassword"><b>Password</b></label>
                 <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
             </div>
-            <div class="form-group" style="margin-left: 10px;">
-                <label class="form-check-label"><input type="radio" name="usertype" id="student" value="student">
-                    Student</label><br>
-                <label class="form-check-label"><input type="radio" name="usertype" id="lecturer" value="lecturer">
-                    Lecturer</label><br>
-                <label class="form-check-label"><input type="radio" name="usertype" id="admin" value="admin">
-                    Admin</label><br>
+            <div class="form-group wrapper">
+
+                <input type="radio" name="usertype" id="option-1" value="student">
+                <input type="radio" name="usertype" id="option-2" value="lecturer">
+                <input type="radio" name="usertype" id="option-3" value="admin">
+
+                <label for="option-1" class="option option-1">
+                    <div class="dot"></div>
+                    <span>Student</span>
+                </label>
+
+                <label for="option-2" class="option option-2">
+                    <div class="dot"></div>
+                    <span>Lecturer</span>
+                </label>
+
+                <label for="option-3" class="option option-3">
+                    <div class="dot"></div>
+                    <span>Admin</span>
+                </label>
+
             </div>
 
             <button type="submit" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
