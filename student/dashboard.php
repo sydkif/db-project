@@ -94,14 +94,18 @@
             <?php 
                 include '../DB.php';
 
-                $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id GROUP BY l.id, l.name;";
+                $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name 
+                        FROM SUBJECT S 
+                        JOIN workload wl ON s.id = wl.subject_id 
+                        JOIN lecturer l ON wl.lecturer_id = l.id 
+                        GROUP BY l.id, l.name;";
                 $result = $conn->query($sql);              
             ?>
             <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
                 <option value="#">--SELECT LECTURER--</option>
                 <?php     
                 if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
+                    while($row = $result->fetch_assoc()){ //Whileloop starts here
                 ?>
                 <option value="<?= $row['lecturer_id'] ?>"> <?= $row['lecturer_name'] ?></option>
 
@@ -140,7 +144,8 @@
                 $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                 $_SESSION['status'] = "Fail";
             }
-            echo "<meta http-equiv='refresh' content='0'>";
+            echo '<script>alert()</script>';
+            //echo "<meta http-equiv='refresh' content='0'>";
         }
 
         $conn->close();
@@ -164,9 +169,10 @@
                             $("#subject_table").html(data);
                         }
                     });
-                }else
-                    $('#subject_table').html('<option value="">--TEST--</option>');
+                }
             })
+            var test = document.getElementById("subject_table");
+            console.log(test.value);
         });
     </script>
 
