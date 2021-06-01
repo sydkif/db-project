@@ -17,7 +17,7 @@ $userID = strtoupper($_SESSION['userid']);
         <hr>
         <h2>Subject List</h2>
         <div class="table-responsive shadow rounded">
-            <table id="dashboard-student" class="table">
+            <table class="table" id="dashboard-student">
                 <thead class="thead-dark">
                     <tr>
                         <th rowspan="2" style="text-align: center; vertical-align: middle;">No</th>
@@ -37,10 +37,10 @@ $userID = strtoupper($_SESSION['userid']);
                     include '../database/DB.php';
 
                     $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.subject_id AS subject_id
-                        FROM student_subject ss
-                        JOIN lecturer l ON ss.lecturer_id = l.id
-                        JOIN subject s ON ss.subject_id = s.id
-                        WHERE ss.student_id = '$userID';";
+                            FROM student_subject ss
+                            JOIN lecturer l ON ss.lecturer_id = l.id
+                            JOIN subject s ON ss.subject_id = s.id
+                            WHERE ss.student_id = '$userID';";
                     $result = $conn->query($sql);
                     $num = 0;
 

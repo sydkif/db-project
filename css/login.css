@@ -36,7 +36,7 @@ form {
     padding-bottom       : 25px;
     text-align           : center;
     border               : 0px;
-    background-color     : rgba(255, 255, 255, 0.3);
+    background-color     : rgba(255, 255, 255, .3);
     border-radius        : 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius   : 20px;
@@ -145,9 +145,10 @@ input[type="radio"] {
 #option-1:checked:checked~.option-1,
 #option-2:checked:checked~.option-2,
 #option-3:checked:checked~.option-3,
-button.btn-custom {
+button.btn-custom,
+body {
 
-    background     : linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background     : linear-gradient(-45deg, #cffff3, #ffd8c5, #fea889, #c5fff9);
     background-size: 400% 400%;
     animation      : gradient 15s ease infinite;
 

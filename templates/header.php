@@ -20,14 +20,16 @@
 <body>
     <!-- Header -->
     <nav class="navbar navbar-dark shadow-sm" style="background-color: rgba(255,255,255, .7) ;">
-        <a class="navbar-brand" href="/index.php">
-            <img src="/img/logo.png" alt="">
-        </a>
+        <div class="container">
+            <a class="navbar-brand" href="/index.php">
+                <img src="/img/logo.png" alt="">
+            </a>
 
-        <?php
-        if (isset($_SESSION['userid']) != null) {
-            echo '<a style="color:red;" href="/logout.php">LOGOUT</a>';
-        }
-        ?>
 
+            <?php
+            if (isset($_SESSION['userid']) != null) {
+                echo '<a style="color:red;" href="/logout.php"><b>LOGOUT</b></a>';
+            }
+            ?>
+        </div>
     </nav>
