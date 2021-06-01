@@ -35,11 +35,10 @@
                 <?php 
                 include '../DB.php';
 
-                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.student_id AS student_id
-                        FROM SUBJECT S 
-                        JOIN workload wl ON s.id = wl.subject_id 
-                        JOIN lecturer l ON wl.lecturer_id = l.id
-                        JOIN student_subject ss ON s.id = ss.subject_id
+                $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.subject_id AS subject_id
+                        FROM student_subject ss
+                        JOIN lecturer l ON ss.lecturer_id = l.id
+                        JOIN subject s ON ss.subject_id = s.id
                         WHERE ss.student_id = '$userID';";
                 $result = $conn->query($sql);
                 $num = 0;
@@ -54,7 +53,7 @@
                     <tr>
                         <th scope="row"><?= $num; ?></th>
                         <td><?= $row['lecturer_name']; ?></td>
-                        <td><?= $row['subject_name']; ?></td>
+                        <td><?= $row['subject_id'] . " - " . $row['subject_name']; ?></td>
                         <!-- TO DO LIST - ADD ASSIGNMENT, TRUE FALSE, OBJECTIVE -->
                         <td style="display:flex; align-items:center; justify-content:center; ">
                             <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
@@ -115,7 +114,7 @@
                 $conn->close();
             ?>
             </select>
-            <select id="subject_table" class="custom-select" style="width:45%;">
+            <select id="subject_table" name="subject_table" class="custom-select" style="width:45%;">
                 <option value="">--SELECT SUBJECT--</option>
             </select>
 
@@ -129,11 +128,11 @@
         //Register Subjects for students
         include "../DB.php";
         if(isset($_POST['add'])){
-            $subjectId = $_POST['subject_id'];
+            $lecturerId = $_POST['lecturer_name'];
+            $subjectId = $_POST['subject_table'];
             $studentId = $_SESSION['userId'];
 
-            $sql = "INSERT INTO student_subject (subject_id, student_id) VALUES ('$subjectId', '$studentId')";
-            var_dump($sql);
+            $sql = "INSERT INTO student_subject (subject_id, student_id, lecturer_id) VALUES ('$subjectId', '$studentId', '$lecturerId')";
             
             if($conn->query($sql) === true){
                 // Success
@@ -144,8 +143,7 @@
                 $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                 $_SESSION['status'] = "Fail";
             }
-            echo '<script>alert()</script>';
-            //echo "<meta http-equiv='refresh' content='0'>";
+            echo "<meta http-equiv='refresh' content='0'>";
         }
 
         $conn->close();
@@ -171,8 +169,6 @@
                     });
                 }
             })
-            var test = document.getElementById("subject_table");
-            console.log(test.value);
         });
     </script>
 
