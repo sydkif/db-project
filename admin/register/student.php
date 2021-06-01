@@ -23,7 +23,7 @@
                 </thead>
                 <tbody id="table">
                     <?php
-                    include "../../DB.php";
+                    include "../../database/DB.php";
 
                     $sql = "SELECT * FROM student";
                     $result = $conn->query($sql);
@@ -84,7 +84,7 @@
 
                     <?php
 
-                    include "../../DB.php";
+                    include "../../database/DB.php";
                     date_default_timezone_set("Asia/Kuala_Lumpur");
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
