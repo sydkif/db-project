@@ -1,5 +1,6 @@
-<html lang="en">
 <?php session_start(); ?>
+
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,10 +19,9 @@
 
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-dark" style="background-color: #646464 ;">
+    <nav class="navbar navbar-dark shadow-sm" style="background-color: rgba(255,255,255, .7) ;">
         <a class="navbar-brand" href="/index.php">
-            <img src="/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="">
-            Author Wannabe System
+            <img src="/img/logo.png" alt="">
         </a>
 
         <?php

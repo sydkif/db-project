@@ -1,41 +1,101 @@
+body,
+html {
+
+    width  : 100%;
+    height : 100%;
+    margin : 0;
+    padding: 0;
+    display: table;
+}
+
+body {
+    display       : table-cell;
+    vertical-align: middle;
+}
+
+form {
+    /* shrinks to fit conntent */
+    margin: auto;
+}
+
+#loginCard {
+    padding-top          : 30px;
+    padding-left         : 3%;
+    padding-right        : 3%;
+    font-size            : 16px;
+    background-color     : rgba(255, 255, 255, .7);
+    border-radius        : 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius   : 20px;
+    -ms-border-radius    : 20px;
+    -o-border-radius     : 20px;
+}
+
+#loginCard input {
+    padding-top          : 25px;
+    padding-bottom       : 25px;
+    text-align           : center;
+    border               : 0px;
+    background-color     : rgba(255, 255, 255, 0.3);
+    border-radius        : 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius   : 20px;
+    -ms-border-radius    : 20px;
+    -o-border-radius     : 20px;
+}
+
+#loginCard button {
+    margin-top           : 10px;
+    padding-block        : 12px;
+    border-radius        : 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius   : 10px;
+    -ms-border-radius    : 10px;
+    -o-border-radius     : 10px;
+}
+
+
 .wrapper {
-    display           : inline-flex;
-    /* background     : #fff; */
-    height            : 100px;
-    width             : 100%;
-    align-items       : center;
-    justify-content   : space-evenly;
-    border-radius     : 5px;
-    padding           : 20px 15px;
-    /* box-shadow     : 5px 5px 30px rgba(0, 0, 0, 0.2); */
+    display              : inline-flex;
+    width                : 100%;
+    align-items          : center;
+    justify-content      : space-evenly;
+    border-radius        : 3px;
+    padding              : 20px 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius   : 3px;
+    -ms-border-radius    : 3px;
+    -o-border-radius     : 3px;
 }
 
 .wrapper .option {
-    background           : #fff;
-    height               : 100%;
-    width                : 100%;
-    display              : flex;
-    align-items          : center;
-    justify-content      : space-evenly;
-    margin               : 1px;
-    border-radius        : 5px;
-    cursor               : pointer;
-    padding              : 0 10px;
-    border               : 1px solid lightgrey;
+    background     : rgba(255, 255, 255, 0.3);
+    height         : 40px;
+    width          : 100%;
+    display        : flex;
+    align-items    : center;
+    justify-content: space-evenly;
+    margin         : 1px;
+    cursor         : pointer;
+
     transition           : all 0.3s ease;
-    -webkit-border-radius: 5px;
-    -moz-border-radius   : 5px;
-    -ms-border-radius    : 5px;
-    -o-border-radius     : 5px;
+    border-radius        : 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius   : 15px;
+    -ms-border-radius    : 15px;
+    -o-border-radius     : 15px;
 }
 
 .wrapper .option .dot {
-    height       : 20px;
-    width        : 20px;
-    opacity      : 0;
-    background   : #d9d9d9;
-    border-radius: 50%;
-    position     : fixed;
+    height               : 20px;
+    width                : 20px;
+    opacity              : 0;
+    border-radius        : 50%;
+    position             : fixed;
+    -webkit-border-radius: 50%;
+    -moz-border-radius   : 50%;
+    -ms-border-radius    : 50%;
+    -o-border-radius     : 50%;
 }
 
 .wrapper .option .dot::before {
@@ -56,13 +116,6 @@ input[type="radio"] {
     display: none;
 }
 
-#option-1:checked:checked~.option-1,
-#option-2:checked:checked~.option-2,
-#option-3:checked:checked~.option-3 {
-    border-color: #0069d9;
-    background  : #0069d9;
-}
-
 #option-1:checked:checked~.option-1 .dot,
 #option-2:checked:checked~.option-2 .dot,
 #option-3:checked:checked~.option-3 .dot {
@@ -79,13 +132,37 @@ input[type="radio"] {
 }
 
 .wrapper .option span {
-    font-size: 20px;
+    font-size: 16px;
     color    : #808080;
 }
 
 #option-1:checked:checked~.option-1 span,
 #option-2:checked:checked~.option-2 span,
 #option-3:checked:checked~.option-3 span {
-
     color: #fff;
+}
+
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2,
+#option-3:checked:checked~.option-3,
+button.btn-custom {
+
+    background     : linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation      : gradient 15s ease infinite;
+
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 }

@@ -2,13 +2,10 @@
 session_start();
 include('./database/DB.php');
 
-
 $username = $_POST['user'];
 $password = $_POST['pass'];
 $table = $_POST['usertype'];
-
 //to prevent from mysqli injection  
-
 $sql = "select * from $table where id = '$username' and password = '$password'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -18,9 +15,6 @@ $query = "SELECT name FROM $table WHERE id='$username'";
 $results = mysqli_query($conn, $query);
 $row = mysqli_fetch_array($results);
 $_SESSION['usersname'] = $row['name'];
-
-
-
 
 if ($table == "admin" && $count == 1) {
 
@@ -60,5 +54,3 @@ if ($table == "admin" && $count == 1) {
     header("Location: index.php");
 }
 
-echo "<script>console.log('Table: " . $table . "');</script>";
-echo "<script>console.log('Username: " . $username . "');</script>";

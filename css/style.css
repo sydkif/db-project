@@ -4,6 +4,14 @@ body {
     font-family: 'Roboto', sans-serif !important;
 }
 
+
+nav.navbar {
+    background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+
+
 .navbar img {
     border-radius        : 16%;
     object-fit           : cover;
@@ -12,6 +20,8 @@ body {
     -ms-border-radius    : 16%;
     -o-border-radius     : 16%;
 }
+
+
 
 body {
     background     : linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
