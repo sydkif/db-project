@@ -74,3 +74,6 @@
         location.href = "/student/dashboard.php";
     };
 </script>
+
+
+<?php include("../../templates/footer.php") ?>

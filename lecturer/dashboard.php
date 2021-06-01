@@ -31,7 +31,7 @@
                 <tbody>
 
                     <?php
-                    include "../DB.php";
+                    include "../database/DB.php";
 
                     $sql = "SELECT s.name AS subject_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
                     $result = $conn->query($sql);

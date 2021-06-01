@@ -22,9 +22,12 @@
                 <tbody>
 
                     <?php
-                    include "../DB.php";
+                    include "../database/DB.php";
 
-                    $sql = "SELECT lecturer_id, subject_id FROM workload ORDER BY lecturer_id";
+                    $sql = "SELECT  l.id as lecturer_id, l.name AS lecturer_name, s.id AS subject_id, s.name AS subject_name 
+                            FROM subject s
+                            JOIN workload wl ON s.id = wl.subject_id
+                            JOIN lecturer l ON wl.lecturer_id = l.id;";
 
                     $result = $conn->query($sql);
                     $num = 0;
@@ -34,23 +37,15 @@
                             ++$num;
                             // $lecturer_name = $row['lecturer_id'];
 
-                            $sql2 = "SELECT name FROM lecturer WHERE id = " . $row['lecturer_id'];
-                            $result2 = $conn->query($sql2);
-                            $row2 = $result2->fetch_assoc();
-
-                            $subject_name = $row['subject_id'];
-                            $sql3 = "SELECT name FROM subject WHERE id = '" . $row['subject_id'] . "'";
-                            $result3 = $conn->query($sql3);
-                            $row3 = $result3->fetch_assoc();
                     ?>
 
                             <tr>
                                 <form method="post">
                                     <th><?= $num ?></th>
-                                    <td style="text-transform: uppercase;"><?= $row2['name'] ?>
+                                    <td style="text-transform: uppercase;"><?= $row['lecturer_name'] ?>
                                         <input type="hidden" name="lecturerId" value="<?= $row['lecturer_id'] ?>">
                                     </td>
-                                    <td style="text-transform: uppercase;"><?= $row3['name'] ?>
+                                    <td style="text-transform: uppercase;"><?= $row['subject_name'] ?>
                                         <input type="hidden" name="subjectId" value="<?= $row['subject_id'] ?>">
                                     </td>
                                     <td>
@@ -89,7 +84,7 @@
                                     <option selected>Please Choose</option>
 
                                     <?php
-                                    include "../DB.php";
+                                    include "../database/DB.php";
 
                                     $sql = "SELECT id, name FROM lecturer";
                                     $result = $conn->query($sql);
@@ -115,7 +110,7 @@
                                     <option style="text-transform: uppercase;" selected>Please Choose</option>
 
                                     <?php
-                                    include "../DB.php";
+                                    include "../database/DB.php";
 
                                     $sql = "SELECT id, name FROM subject";
                                     $result = $conn->query($sql);
@@ -147,7 +142,7 @@
 
                     <?php
 
-                    include "../DB.php";
+                    include "../database/DB.php";
                     if (isset($_POST['add'])) {
 
                         $lecturer = $_POST['lecturer_id'];
