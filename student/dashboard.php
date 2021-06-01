@@ -33,7 +33,7 @@
                 <tbody>
 
                 <?php 
-                include '../DB.php';
+                include '../database/DB.php';
 
                 $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.subject_id AS subject_id
                         FROM student_subject ss
@@ -93,7 +93,7 @@
             <h4>Register Subject</h4>
             <form method="POST">
             <?php 
-                include '../DB.php';
+                include '../database/DB.php';
 
                 $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name 
                         FROM SUBJECT S 
@@ -128,7 +128,7 @@
         
         <?php 
         //Register Subjects for students
-        include "../DB.php";
+        include "../database/DB.php";
         if(isset($_POST['add'])){
             $lecturerId = $_POST['lecturer_name'];
             $subjectId = $_POST['subject_table'];
