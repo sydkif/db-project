@@ -1,12 +1,11 @@
-<?php include('../templates/header.php'); ?>
+<?php include('../templates/header.php');
 
-<?php 
-    $_SESSION['userId'] = '1001';
-    $_SESSION['name'] = 'Akif';
-    $_SESSION['table'] = 'lecturer';
+// User type verification
+if ($_SESSION['usertable'] != 'lecturer')
+    header("Location: /index.php");
 
-    $userID = $_SESSION['userId'];
-    $userName = $_SESSION['name'];
+$userID = $_SESSION['userid'];
+$userName = $_SESSION['usersname'];
 ?>
 
 <div class="container mt-5 align-items-center">
