@@ -41,12 +41,8 @@ if ($_SESSION['loginErr']==null){
                 <label class="form-check-label"><input type="radio" name="usertype" id="admin" value="admin">
                     Admin</label><br>
             </div>
-
             <button type="submit" class="btn btn-primary btn-block login-btn" id="login"><span>Login</span></button>
-
         </form>
-        
-
         <br>
     </div>
 </div>
