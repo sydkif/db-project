@@ -1,6 +1,6 @@
 <?php 
 
-include('../DB.php');
+include('../database/DB.php');
 
 $lecturerID = $_POST['lecturerID'];
 
@@ -19,4 +19,3 @@ if(!empty($lecturerID)){
     }else
         echo '<option value="">Subject Not Available</option>';
 }
-?>

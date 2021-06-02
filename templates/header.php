@@ -1,5 +1,6 @@
-<html lang="en">
 <?php session_start(); ?>
+
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,16 +19,17 @@
 
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-dark" style="background-color: #646464 ;">
-        <a class="navbar-brand" href="/index.php">
-            <img src="/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="">
-            Author Wannabe System
-        </a>
+    <nav class="navbar navbar-dark shadow-sm" style="background-color: rgba(255,255,255, .7) ;">
+        <div class="container">
+            <a class="navbar-brand" href="/index.php">
+                <img src="/img/logo.png" alt="">
+            </a>
 
-        <?php
-        if (isset($_SESSION['userid']) != null) {
-            echo '<a style="color:red;" href="/logout.php">LOGOUT</a>';
-        }
-        ?>
 
+            <?php
+            if (isset($_SESSION['userid']) != null) {
+                echo '<a style="color:red;" href="/logout.php"><b>LOGOUT</b></a>';
+            }
+            ?>
+        </div>
     </nav>

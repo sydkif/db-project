@@ -15,8 +15,8 @@
                     <tr>
                         <th style="width: 10%;">Admin ID</th>
                         <th style="width: auto;">Admin Name</th>
-                        <th style="width: 11%;">Update</th>
-                        <th style="width: 8%;">Delete</th>
+                        <th style="width: 11%; text-align: center;">Update</th>
+                        <th style="width: 11%; text-align: center;">Delete</th>
                     </tr>
                 </thead>
                 <tbody id="table">
@@ -36,7 +36,7 @@
                             <tr>
                                 <td id="id<?= $num ?>"><b><?php echo $row["id"] ?><b></td>
                                 <td contentEditable=" false" id="name<?= $num ?>" style="text-transform: uppercase;"><?php echo $row["name"] ?></td>
-                                <td>
+                                <td style="text-align: center;">
                                     <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
@@ -47,7 +47,7 @@
                                         <i class="bi bi-x-square" style="color: gray;"></i>
                                     </button>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('admin',<?= $num ?>)">
                                         <i class="bi bi-trash" style="color: red;"></i>
                                     </button>
@@ -67,7 +67,7 @@
                             <td><input style="width: 60px;" name="id" value="" type="text" pattern="\d*" required></td>
                             <td><input style="width: 360px;" name="name" value="" type="text" required></td>
                             <td></td>
-                            <td>
+                            <td style="text-align: center;">
                                 <button name="add" class="btn btn-sm" href="#?">
                                     <i class="bi bi-plus-square" style="color: green;"></i>
                                 </button>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../DB.php";
+include "../database/DB.php";
 
 $id = $_GET['id'];
 $table = $_GET['table'];

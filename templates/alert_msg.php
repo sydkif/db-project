@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['msg'] != NULL)
+if (isset($_SESSION['msg']))
     if (($_SESSION['status']) == "Success") {
 ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">

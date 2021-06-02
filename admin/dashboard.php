@@ -1,8 +1,15 @@
-<?php include('../templates/header.php'); ?>
+<?php include('../templates/header.php');
+
+// User type verification
+if ($_SESSION['usertable'] != 'admin')
+    header("Location: /index.php");
+
+?>
 
 <div class="container mt-5 align-items-center">
     <div class="col text-center">
         <h1>Admin Dashboard</h1>
+        <h2>Welcome, <?= $_SESSION['usersname'] ?> !</h2>
         <hr>
         <h2>Register</h2>
 
