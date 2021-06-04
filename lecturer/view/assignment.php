@@ -2,6 +2,8 @@
 
 $code = $_GET['code'];
 $name = $_GET['name'];
+$title = $_GET['title'];
+$userID = $_SESSION['userId'];
 
 ?>
 
@@ -10,7 +12,7 @@ $name = $_GET['name'];
         <h3><a id="back" class="bi bi-caret-left-fill" href="javascript:history.back();"></a>Assignment / Tutorial / Lab Submission</h3>
         <hr>
         <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
-        <h5>Title : <?= $_GET['title'] ?></h5>
+        <h5>Title : <?= $title ?></h5>
 
         <div class="table-responsive shadow rounded">
             <table id="dashboard-student" class="table table-striped">
@@ -26,33 +28,35 @@ $name = $_GET['name'];
                 <tbody>
 
                     <?php
+                    include('../../database/DB.php');
 
-                    $all_list = [
-                        [
-                            'name' => 'ARMISHA',
-                            'id' => 'AI190161',
-                            'file' => 'Answer ' . $_GET['title'] . ' - AI190161.docx'
-                        ], [
-                            'name' => 'ABDUL RAHMAN BIN AMZAL',
-                            'id' => 'AI160085',
-                            'file' => 'Answer ' . $_GET['title'] . ' - AI19085.docx'
-                        ]
-                    ];
+                    $sql = "SELECT stud.name, stud.id, assgn.file, assgn.file_name
+                            FROM assignment_student assgn
+                            JOIN student stud ON assgn.student_id = stud.id
+                            WHERE lecturer_id = '$userID'";
+                    $result = $conn->query($sql);  
+                    $num=0;                  
 
-                    foreach ($all_list as $num => $list) :
+                    if($result->num_rows > 0)
+                        while($row->$result->fetch_assoc()){
+                            ++$num;
                     ?>
                         <tr>
                             <th><?= $num + 1 ?></th>
-                            <td><?= $list['name'] ?></td>
-                            <td style="text-align: center;"><?= $list['id'] ?></td>
-                            <td style="text-align: center;"><?= $list['file'] ?></td>
+                            <td><?= $row['stud.name'] ?></td>
+                            <td style="text-align: center;"><?= $row['stud.id'] ?></td>
+                            <td style="text-align: center;"><?= $row['file_name'] ?></td>
                             <td style="text-align: center;">
                                 <button class="btn btn-sm" title="View Content">
                                     <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                 </button>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php 
+                        }
+                    }else   
+                        echo "0 result"
+                    ?>
 
                 </tbody>
             </table>

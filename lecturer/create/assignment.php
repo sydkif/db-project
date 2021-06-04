@@ -78,6 +78,7 @@ $user = $_SESSION['usersname'];
                 <tbody>
 
                     <?php
+                    //Displaying data in table
                     include('../../database/DB.php');
 
                     $sql = "SELECT title, file_name, modiBy, modiOn FROM assignment WHERE subject_id = '$code';";
@@ -102,7 +103,7 @@ $user = $_SESSION['usersname'];
                                     </button>
                                 </td>
                                 <td style="text-align: center;" title="View Submission">
-                                    <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?code=<?= $code ?>&name=<?= $name ?>&title=<?= $list['title'] ?>'">
+                                    <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?code=<?= $code ?>&name=<?= $name ?>&title=<?= $row['title'] ?>';">
                                         <i class="bi bi-file-earmark-check" style="font-size: 28px; color:forestgreen;"></i>
                                     </button>
                                 </td>
