@@ -21,72 +21,31 @@ $user = $_SESSION['usersname'];
         <?php
         include('../../database/DB.php');
 
-        
+        if(isset($_POST['uploadBtn'])){
+            $statusMsg = '';
 
-        //Uploading file function
-        if (isset($_POST['uploadBtn'])) {
-            if (isset($_FILES['assignment'])) {
+            //File upload path
+            $targetDir = __DIR__ . '\assignment_files\\';
+            $fileName = basename($_FILES['assignment']['name']);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            $title = $_POST['title'];
 
-                //receiving details of the uploaded files
-                $title = $_POST['title'];                
-                date_default_timezone_set("Asia/Kuala_Lumpur");
-                $modiOn = date('Y-m-d H:i:s');
-                $data = $_FILES['assignment']['tmp_name'];
-                $fileName = $_FILES['assignment']['name'];
-                $fileType = $_FILES['assignment']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
+            if(isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])){
+                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt');
+                if(in_array($fileType, $allowTypes)){
+                    if(move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)){
+                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$user', NOW())";
+                        $insert = $conn->query($sql);
 
-                $allowedFileExtensions = array('doc', 'xls', 'txt', 'jpg', 'png', 'pdf', 'docx');
-                $otherFileExtension = array('doc', 'docx', 'pdf', 'png', 'txt');
-
-                if (in_array($fileExtension, $allowedFileExtensions)) {
-
-                    //Directory of uploaded file
-                    $uploadFileDir = __DIR__ . '\assignment_files\\';
-                    $dest_path = $uploadFileDir . $fileName;
-                    if(in_array($fileExtension, $otherFileExtension)){
-                        if($doc_blob = fopen($data, "rb")){
-                            try {
-                                $dbh = new PDO("mysql:host=localhost;dbname=dbprojekt", "root", "");
-                                // set the PDO error mode to exception
-                                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                echo "Connected successfully";
-                              } catch(PDOException $e) {
-                                echo "Connection failed: " . $e->getMessage();
-                              }
-                            $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES (':code', ':title', ':fileName', ':doc_blob', ':user', ':modiOn')";
-                            $stmt = $dbh->prepare($sql);
-                            $stmt->bindParam(':code', $code);
-                            $stmt->bindParam(':title', $title);
-                            $stmt->bindParam(':fileName', $fileName);
-                            $stmt->bindParam(':doc_blob', $doc_blob);
-                            $stmt->bindParam(':user', $user);                                                        
-                            $stmt->bindParam(':modiOn', $modiOn);
-                            
-
-                            if ($stmt->execute() === FALSE) {
-                                echo 'Could not save information to the database';
-                            } else {
-                                echo 'Information saved';
-                            }
-                        }else{
-                            echo 'Could not open the attached pdf file';
-                        }
-                    }else{                    
-                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '$data', '$user', '$modiOn')";
-                    }
-
-                    if ($conn->query($sql) === true) {
-                        // Success
-                        $_SESSION['msg'] = "Record added successfully!";
-                        $_SESSION['status'] = "Success";
-                    } else {
-                        $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
-                        $_SESSION['status'] = "Fail";
-                    }
-                } else
-                    $message = 'Error: File Extension is not allowed';
+                        if($insert){
+                            $statusMsg = "The file " . $fileName . " has been uploaded succesfully.";            
+                        }else
+                            $statusMsg = "File failed to upload";
+                    }else
+                        $statusMsg = "There was error upload";
+                }else
+                    $statusMsg = "Sorry only pdf doc docx";
             }
         }
 
