@@ -32,7 +32,7 @@ $userName = $_SESSION['usersname'];
                     <?php
                     include "../database/DB.php";
 
-                    $sql = "SELECT s.name AS subject_name FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
+                    $sql = "SELECT s.name AS subject_name, s.id AS subject_id FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
                     $result = $conn->query($sql);
                     $num = 0;
                     if ($result->num_rows > 0) {
@@ -45,7 +45,7 @@ $userName = $_SESSION['usersname'];
                                 <th scope="row"><?= $num ?></th>
                                 <td><?= $row['subject_name'] ?></td>
                                 <td style="display:flex; align-items:center; justify-content:center; ">
-                                    <button class=" btn btn-sm " title="Add New Assignment & Tutorial" onclick="location.href = 'create/assignment.php?code=<?= $row['id'] ?>&name=<?= $row['name'] ?>';">
+                                    <button class=" btn btn-sm " title="Add New Assignment & Tutorial" onclick="location.href = 'create/assignment.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                         <i class="bi bi-file-earmark-plus" style="font-size: 28px; color:dodgerblue;"></i>
                                     </button>
                                 </td>

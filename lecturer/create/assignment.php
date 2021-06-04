@@ -1,7 +1,7 @@
 <?php include('../../templates/header.php');
 
-$code = 'BIE20203';
-$name = 'Software Design';
+$code = $_GET['code'];
+$name = $_GET['name'];
 $user = $_SESSION['usersname'];
 
 ?>
@@ -28,7 +28,7 @@ $user = $_SESSION['usersname'];
 
                 //receiving details of the uploaded files
                 $title = $_POST['title'];
-                $modiOn = date("Y-m-d h:i:s");            
+                $modiOn = date("Y-m-d h:i:s");
                 $data = file_get_contents($_FILES['assignment']['tmp_name']);
                 $fileName = $_FILES['assignment']['name'];
                 $fileType = $_FILES['assignment']['type'];
@@ -38,17 +38,17 @@ $user = $_SESSION['usersname'];
                 $allowedFileExtensions = array('doc', 'xls', 'txt', 'jpg', 'png');
 
                 if (in_array($fileExtension, $allowedFileExtensions)) {
-                    
+
                     //Directory of uploaded file
                     $uploadFileDir = __DIR__ . '\assignment_files\\';
                     $dest_path = $uploadFileDir . $fileName;
                     $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '$data', '$user', '$modiOn')";
 
-                    if ($conn->query($sql) === true) {                
+                    if ($conn->query($sql) === true) {
                         // Success
                         $_SESSION['msg'] = "Record added successfully!";
                         $_SESSION['status'] = "Success";
-                    } else{
+                    } else {
                         $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
                         $_SESSION['status'] = "Fail";
                     }
@@ -127,6 +127,7 @@ $user = $_SESSION['usersname'];
         </div>
 
     </div>
+</div>
 
-    <script src="../../js/script.js"></script>
-    <?php include('../../templates/footer.php'); ?>
+<script src="../../js/script.js"></script>
+<?php include('../../templates/footer.php'); ?>
