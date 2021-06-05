@@ -1,6 +1,6 @@
 <?php include('../../templates/header.php');
 
-$code = $_GET['code'];
+$code = strtoupper($_GET['code']);
 $name = $_GET['name'];
 $user = $_SESSION['usersname'];
 
@@ -20,45 +20,48 @@ $user = $_SESSION['usersname'];
 
         <?php
         include('../../database/DB.php');
-        date_default_timezone_set("Asia/Kuala_Lumpur");
+        
+        //Uploading file to database
+        if(isset($_POST['uploadBtn'])){
+            $statusMsg = '';
 
-        //Uploading file function
-        if (isset($_POST['uploadBtn'])) {
-            if (isset($_FILES['assignment'])) {
+            //File upload path
+            $targetDir = __DIR__ . '\assignment_files\\';
+            $fileName = basename($_FILES['assignment']['name']);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            $fileType = strtolower($fileType);
+            $title = $_POST['title'];
 
-                //receiving details of the uploaded files
-                $title = $_POST['title'];
-                $modiOn = date("Y-m-d h:i:s");
-                $data = file_get_contents($_FILES['assignment']['tmp_name']);
-                $fileName = $_FILES['assignment']['name'];
-                $fileType = $_FILES['assignment']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
+            //Checking if button is pressed and file exists
+            if(isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])){
+                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt'); 
+                if(in_array($fileType, $allowTypes)){
+                    if(move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)){
+                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$user', NOW())";
+                        $insert = $conn->query($sql);
 
-                $allowedFileExtensions = array('doc', 'xls', 'txt', 'jpg', 'png');
-
-                if (in_array($fileExtension, $allowedFileExtensions)) {
-
-                    //Directory of uploaded file
-                    $uploadFileDir = __DIR__ . '\assignment_files\\';
-                    $dest_path = $uploadFileDir . $fileName;
-                    $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '$data', '$user', '$modiOn')";
-
-                    if ($conn->query($sql) === true) {
-                        // Success
-                        $_SESSION['msg'] = "Record added successfully!";
-                        $_SESSION['status'] = "Success";
-                    } else {
-                        $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
-                        $_SESSION['status'] = "Fail";
+                        if($insert){
+                            $_SESSION['msg'] = "The file " . $fileName . " has been uploaded succesfully.";
+                            $_SESSION['status']  = "Success";     
+                        }else{
+                            $_SESSION['msg'] = "File failed to upload";
+                            $_SESSION['status']  = "Fail"; 
+                        }
+                    }else{
+                        $_SESSION['msg'] = "There was error upload";
+                        $_SESSION['status']  = "Fail"; 
                     }
-                } else
-                    $message = 'Error: File Extension is not allowed';
+                }else{
+                    $_SESSION['msg'] = "Sorry only pdf doc docx";
+                    $_SESSION['status']  = "Fail"; 
+                }
             }
         }
 
         $conn->close();
-
+        //Alert message display
+        include('../../templates/alert_msg.php');
         ?>
 
         <div class="table-responsive shadow rounded">
@@ -81,7 +84,7 @@ $user = $_SESSION['usersname'];
                     //Displaying data in table
                     include('../../database/DB.php');
 
-                    $sql = "SELECT title, file_name, modiBy, modiOn FROM assignment WHERE subject_id = '$code';";
+                    $sql = "SELECT id, title, file_name, modiBy, modiOn, file FROM assignment WHERE subject_id = '$code';";
                     $result = $conn->querY($sql);
                     $num = 0;
 
@@ -92,13 +95,13 @@ $user = $_SESSION['usersname'];
 
                             <tr>
                                 <th><?= $num ?></th>
-                                <td id="id <?= $num ?>" style="display:none"><?= $row['id']; ?></td>
+                                <td id="id" style="display:none"><?= $row['id']; ?></td>
                                 <td><?= $row['title'] ?></td>
                                 <td><?= $row['file_name'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiOn'] ?></td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-sm" title="View Content">
+                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file']?>')">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                     </button>
                                 </td>
@@ -108,7 +111,7 @@ $user = $_SESSION['usersname'];
                                     </button>
                                 </td>
                                 <td style="text-align: center;" title="Delete">
-                                    <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('assignment, <?= $num ?>')">
+                                    <button id="delete" name="delete" class="btn btn-sm" del_id="<?= $row['id'] ?>">
                                         <i class="bi bi-trash" style="font-size: 28px; color:red;"></i>
                                     </button>
                                 </td>
@@ -130,5 +133,20 @@ $user = $_SESSION['usersname'];
     </div>
 </div>
 
-<script src="../../js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    //Deleting function
+    $(document).on('click', '#delete', function(){
+        var del_id = $(this).attr('del_id');
+        var $ele = $(this).parent().parent();
+        $.ajax({
+            type: "POST",
+            url: "../../database/delete.php",
+            data: {del_id: del_id},
+            success: function(data){
+                $ele.fadeOut().remove();
+            }
+        });
+    });
+</script>
 <?php include('../../templates/footer.php'); ?>
