@@ -84,7 +84,7 @@ $user = $_SESSION['usersname'];
                     //Displaying data in table
                     include('../../database/DB.php');
 
-                    $sql = "SELECT title, file_name, modiBy, modiOn, file FROM assignment WHERE subject_id = '$code';";
+                    $sql = "SELECT id, title, file_name, modiBy, modiOn, file FROM assignment WHERE subject_id = '$code';";
                     $result = $conn->querY($sql);
                     $num = 0;
 
@@ -95,7 +95,7 @@ $user = $_SESSION['usersname'];
 
                             <tr>
                                 <th><?= $num ?></th>
-                                <td id="id <?= $num ?>" style="display:none"><?= $row['id']; ?></td>
+                                <td id="id" style="display:none"><?= $row['id']; ?></td>
                                 <td><?= $row['title'] ?></td>
                                 <td><?= $row['file_name'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
@@ -111,7 +111,7 @@ $user = $_SESSION['usersname'];
                                     </button>
                                 </td>
                                 <td style="text-align: center;" title="Delete">
-                                    <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('assignment, <?= $num ?>')">
+                                    <button id="delete" name="delete" class="btn btn-sm" del_id="<?= $row['id'] ?>">
                                         <i class="bi bi-trash" style="font-size: 28px; color:red;"></i>
                                     </button>
                                 </td>
@@ -133,5 +133,20 @@ $user = $_SESSION['usersname'];
     </div>
 </div>
 
-<script src="../../js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    //Deleting function
+    $(document).on('click', '#delete', function(){
+        var del_id = $(this).attr('del_id');
+        var $ele = $(this).parent().parent();
+        $.ajax({
+            type: "POST",
+            url: "../../database/delete.php",
+            data: {del_id: del_id},
+            success: function(data){
+                $ele.fadeOut().remove();
+            }
+        });
+    });
+</script>
 <?php include('../../templates/footer.php'); ?>
