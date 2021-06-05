@@ -20,7 +20,8 @@ $user = $_SESSION['usersname'];
 
         <?php
         include('../../database/DB.php');
-
+        
+        //Uploading file to database
         if(isset($_POST['uploadBtn'])){
             $statusMsg = '';
 
@@ -29,28 +30,38 @@ $user = $_SESSION['usersname'];
             $fileName = basename($_FILES['assignment']['name']);
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            $fileType = strtolower($fileType);
             $title = $_POST['title'];
 
+            //Checking if button is pressed and file exists
             if(isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])){
-                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt');
+                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt'); 
                 if(in_array($fileType, $allowTypes)){
                     if(move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)){
                         $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$user', NOW())";
                         $insert = $conn->query($sql);
 
                         if($insert){
-                            $statusMsg = "The file " . $fileName . " has been uploaded succesfully.";            
-                        }else
-                            $statusMsg = "File failed to upload";
-                    }else
-                        $statusMsg = "There was error upload";
-                }else
-                    $statusMsg = "Sorry only pdf doc docx";
+                            $_SESSION['msg'] = "The file " . $fileName . " has been uploaded succesfully.";
+                            $_SESSION['status']  = "Success";     
+                        }else{
+                            $_SESSION['msg'] = "File failed to upload";
+                            $_SESSION['status']  = "Fail"; 
+                        }
+                    }else{
+                        $_SESSION['msg'] = "There was error upload";
+                        $_SESSION['status']  = "Fail"; 
+                    }
+                }else{
+                    $_SESSION['msg'] = "Sorry only pdf doc docx";
+                    $_SESSION['status']  = "Fail"; 
+                }
             }
         }
 
         $conn->close();
-
+        //Alert message display
+        include('../../templates/alert_msg.php');
         ?>
 
         <div class="table-responsive shadow rounded">
@@ -73,7 +84,7 @@ $user = $_SESSION['usersname'];
                     //Displaying data in table
                     include('../../database/DB.php');
 
-                    $sql = "SELECT title, file_name, modiBy, modiOn FROM assignment WHERE subject_id = '$code';";
+                    $sql = "SELECT title, file_name, modiBy, modiOn, file FROM assignment WHERE subject_id = '$code';";
                     $result = $conn->querY($sql);
                     $num = 0;
 
@@ -90,7 +101,7 @@ $user = $_SESSION['usersname'];
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiOn'] ?></td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-sm" title="View Content">
+                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file']?>')">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                     </button>
                                 </td>
