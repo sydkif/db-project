@@ -44,7 +44,7 @@
             }
 			else if($table == "lecturer" && $count == 1){ 
                 if($username == $password){header("Location:resetpassword.php?id=$username");} else{
-                    echo $username . $table . "login successful admin";
+                    
                     header("Location: lecturer/dashboard.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . ""); 
                     echo $username . $table . "login successful lecturer";
 				
@@ -52,7 +52,7 @@
         }
             else if($table == "student" && $count == 1){
                 if($username == $password){header("Location:resetpassword.php?id=$username");} else{
-                    echo $username . $table . "login successful admin";
+                    
                     header("Location: student/dashboard.php?id=".$_SESSION['userid']."&name=". $_SESSION['usersname'] . ""); 
                     echo $username . $table . "login successful student";
             }
