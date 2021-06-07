@@ -50,7 +50,9 @@ if ($table == "admin" && $count == 1) {
         header("Location: index.php");
     }
 } else {
-    $_SESSION['loginErr'] = "error";
+    // $_SESSION['loginErr'] = "error";
+    $_SESSION['status'] = "Fail";
+    $_SESSION['msg'] = "Invalid User ID or Password";
     header("Location: index.php");
 }
 

@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html lang="en">
 
 <head>
@@ -17,38 +19,20 @@
 
 <body>
 
-    <?php
-
-    $_SESSION['status'] = "";
-    $_SESSION['msg'] = "";
-
-
-    if (isset($_SESSION['loginErr']) == "error") {
-        echo '<script language="javascript">';
-        echo 'alert("Error Login Credential")';
-        echo '</script>';
-        $_SESSION['loginErr'] = "ok";
-    }
-
-    // var_dump($_SESSION['userid']);
-    // die();
-
-    ?>
-
     <link rel="stylesheet" href="/css/login.css">
 
     <!-- Login Form START -->
     <div class="container">
 
         <div id="loginCard" class="col col-sm-5 col-xl-4 form-box shadow" style="margin: auto; text-align:center;">
-        <img src="/img/logo.png" alt="">
-        <hr>
-            <form name="login" action="filechecker.php" onsubmit="return validation()" method="POST" class="needs-validation" novalidate="" autocomplete="on">
+            <img src="/img/logo.png" alt="">
+            <hr>
+            <form name="login" action="filechecker.php" method="POST" autocomplete="on">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="user" name="user" placeholder="User ID">
+                    <input type="text" class="form-control" id="user" name="user" placeholder="User ID" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
                 </div>
                 <div class="form-group wrapper" style="margin:auto;">
 
@@ -71,43 +55,19 @@
                         <span>Admin</span>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-custom btn-block login-btn" id="login"><span>Login</span></button>
+                <button type="submit" class="btn btn-custom btn-block login-btn" id="login" disabled><span>Login</span></button>
             </form>
-
             <br>
+
         </div>
+        <div class="col col-sm-5 col-xl-4 mt-3" style="margin: auto; text-align:center;"><?php include('templates/alert_msg.php'); ?></div>
+
     </div>
 
-
-
     <script>
-        function validation() {
-
-            var id = document.login.user.value;
-            var pass = document.login.pass.value;
-            var radio = document.login.usertype.value;
-
-            if (id.length == "" && pass.length == "" && radio.length == "") {
-                alert("All fields are empty");
-                return false;
-
-            } else {
-                if (id.length == "") {
-                    alert("User Name is empty");
-                    return false;
-                }
-
-                if (pass.length == "") {
-                    alert("Password field is empty");
-                    return false;
-                }
-
-                if (radio.length == "") {
-                    alert("User type is not selected");
-                    return false;
-                }
-            }
-        }
+        $("input[type='radio']").click(function() {
+            $("#login").attr("disabled", !this.checked);
+        });
     </script>
 
 </body>

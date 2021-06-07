@@ -145,6 +145,9 @@ input[type="radio"] {
 #option-1:checked:checked~.option-1,
 #option-2:checked:checked~.option-2,
 #option-3:checked:checked~.option-3,
+#option-1:hover~.option-1,
+#option-2:hover~.option-2,
+#option-3:hover~.option-3,
 button.btn-custom,
 body {
 
@@ -166,4 +169,42 @@ body {
             background-position: 0% 50%;
         }
     }
+}
+
+
+.login-btn {
+    text-align: center;
+    transition: all 0.5s;
+    cursor    : pointer;
+}
+
+
+.login-btn span {
+    cursor    : pointer;
+    display   : inline-block;
+    position  : relative;
+    transition: 0.5s;
+}
+
+#login:enabled span:after {
+    content   : '\00bb';
+    position  : absolute;
+    opacity   : 0;
+    top       : -5px;
+    right     : -20px;
+    transition: 0.5s;
+    font-size : 20px;
+}
+
+#login:enabled:hover span {
+    padding-right: 15px;
+}
+
+#login:enabled:hover span:after {
+    opacity: 1;
+    right  : 0;
+}
+
+#login:disabled{
+    opacity: 0.5;
 }
