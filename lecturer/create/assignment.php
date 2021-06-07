@@ -29,7 +29,8 @@ $user = $_SESSION['usersname'];
             $targetDir = __DIR__ . '\assignment_files\\';
             $fileName = basename($_FILES['assignment']['name']);
             $targetFilePath = $targetDir . $fileName;
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            $fileType = substr(strrchr($fileName, '.'), 1);
             $fileType = strtolower($fileType);
             $title = $_POST['title'];
 
@@ -38,7 +39,7 @@ $user = $_SESSION['usersname'];
                 $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt'); 
                 if(in_array($fileType, $allowTypes)){
                     if(move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)){
-                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$user', NOW())";
+                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, type, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$fileType', '$user', NOW())";
                         $insert = $conn->query($sql);
 
                         if($insert){
@@ -106,7 +107,7 @@ $user = $_SESSION['usersname'];
                                     </button>
                                 </td>
                                 <td style="text-align: center;" title="View Submission">
-                                    <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?code=<?= $code ?>&name=<?= $name ?>&title=<?= $row['title'] ?>';">
+                                    <button class="btn btn-sm" onclick="location.href = '../view/assignment.php?code=<?= $code ?>&name=<?= $name ?>&id=<?= $row['id'] ?>';">
                                         <i class="bi bi-file-earmark-check" style="font-size: 28px; color:forestgreen;"></i>
                                     </button>
                                 </td>

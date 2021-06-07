@@ -2,8 +2,8 @@
 
 $code = $_GET['code'];
 $name = $_GET['name'];
-$title = $_GET['title'];
-$userID = $_SESSION['userId'];
+$id = $_GET['id'];
+$userID = $_SESSION['userid'];
 
 ?>
 
@@ -12,7 +12,7 @@ $userID = $_SESSION['userId'];
         <h3><a id="back" class="bi bi-caret-left-fill" href="javascript:history.back();"></a>Assignment / Tutorial / Lab Submission</h3>
         <hr>
         <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
-        <h5>Title : <?= $title ?></h5>
+        <h5>Title : <?= $id ?></h5>
 
         <div class="table-responsive shadow rounded">
             <table id="dashboard-student" class="table table-striped">
@@ -30,24 +30,33 @@ $userID = $_SESSION['userId'];
                     <?php
                     include('../../database/DB.php');
 
-                    $sql = "SELECT stud.name, stud.id, assgn.file, assgn.file_name
+                    //Displaying data
+                    $sql = "SELECT stud.name AS student_name, stud.id AS student_id, assgn.file AS file, assgn.file_name AS file_name, assgn.file AS file, assgn.type AS type
                             FROM assignment_student assgn
                             JOIN student stud ON assgn.student_id = stud.id
-                            WHERE lecturer_id = '$userID'";
+                            WHERE lecturer_id = '$userID' AND assgn.assignment_id = '$id'";
                     $result = $conn->query($sql);  
-                    $num=0;                  
+                    $num=0;
+                    
+                    // $targetFilePath = $targetDir . $fileName;
+                    // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-                    if($result->num_rows > 0)
-                        while($row->$result->fetch_assoc()){
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+
+                            // $targetFilePath = '../../student_assignment/' . $row['file_name'];
+                            // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                            //$ext = end(explode('.', $row['file_name']));
+                            $ext = substr(strrchr($row['file_name'], '.'), 1);
                             ++$num;
                     ?>
                         <tr>
-                            <th><?= $num + 1 ?></th>
-                            <td><?= $row['stud.name'] ?></td>
-                            <td style="text-align: center;"><?= $row['stud.id'] ?></td>
+                            <th><?= $num ?></th>
+                            <td><?= $row['student_name'] ?></td>
+                            <td style="text-align: center;"><?= $row['student_id'] ?></td>
                             <td style="text-align: center;"><?= $row['file_name'] ?></td>
                             <td style="text-align: center;">
-                                <button class="btn btn-sm" title="View Content">
+                                <button id="view" class="btn btn-sm" title="View Content" onclick="window.open('../../../student_assignment/<?= $row['file'] . '.' . $row['type']?>')">
                                     <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                 </button>
                             </td>
@@ -62,7 +71,7 @@ $userID = $_SESSION['userId'];
             </table>
         </div>
     </div>
-
+</div>
 
 
     <?php include('../../templates/footer.php'); ?>
