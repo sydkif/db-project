@@ -20,9 +20,9 @@ $user = $_SESSION['usersname'];
 
         <?php
         include('../../database/DB.php');
-        
+
         //Uploading file to database
-        if(isset($_POST['uploadBtn'])){
+        if (isset($_POST['uploadBtn'])) {
             $statusMsg = '';
 
             //File upload path
@@ -35,27 +35,29 @@ $user = $_SESSION['usersname'];
             $title = $_POST['title'];
 
             //Checking if button is pressed and file exists
-            if(isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])){
-                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt'); 
-                if(in_array($fileType, $allowTypes)){
-                    if(move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)){
-                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, type, modiBy, modiOn) VALUES ('$code', '$title', '$fileName', '".$fileName."', '$fileType', '$user', NOW())";
+            if (isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])) {
+                $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt');
+                if (in_array($fileType, $allowTypes)) {
+                    if (move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)) {
+                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, type, modiBy, modiOn) 
+                                VALUES ('$code', '$title', '$fileName', '" . $fileName . "', '$fileType', '$user', NOW())";
+
                         $insert = $conn->query($sql);
 
-                        if($insert){
+                        if ($insert) {
                             $_SESSION['msg'] = "The file " . $fileName . " has been uploaded succesfully.";
-                            $_SESSION['status']  = "Success";     
-                        }else{
+                            $_SESSION['status']  = "Success";
+                        } else {
                             $_SESSION['msg'] = "File failed to upload";
-                            $_SESSION['status']  = "Fail"; 
+                            $_SESSION['status']  = "Fail";
                         }
-                    }else{
+                    } else {
                         $_SESSION['msg'] = "There was error upload";
-                        $_SESSION['status']  = "Fail"; 
+                        $_SESSION['status']  = "Fail";
                     }
-                }else{
+                } else {
                     $_SESSION['msg'] = "Sorry only pdf doc docx";
-                    $_SESSION['status']  = "Fail"; 
+                    $_SESSION['status']  = "Fail";
                 }
             }
         }
@@ -102,7 +104,7 @@ $user = $_SESSION['usersname'];
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiOn'] ?></td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file']?>')">
+                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file'] ?>')">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                     </button>
                                 </td>
@@ -137,17 +139,24 @@ $user = $_SESSION['usersname'];
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     //Deleting function
-    $(document).on('click', '#delete', function(){
-        var del_id = $(this).attr('del_id');
-        var $ele = $(this).parent().parent();
-        $.ajax({
-            type: "POST",
-            url: "../../database/delete.php",
-            data: {del_id: del_id},
-            success: function(data){
-                $ele.fadeOut().remove();
-            }
-        });
+    $(document).on('click', '#delete', function() {
+        var msg = "Are you sure want to delete this task?";
+        var conf = confirm(msg);
+        if (conf) {
+            var del_id = $(this).attr('del_id');
+            var $ele = $(this).parent().parent();
+            $.ajax({
+                type: "POST",
+                url: "../../database/delete.php",
+                data: {
+                    del_id: del_id
+                },
+                success: function(data) {
+                    $ele.fadeOut().remove();
+                }
+            });
+            location.reload();
+        }
     });
 </script>
 <?php include('../../templates/footer.php'); ?>
