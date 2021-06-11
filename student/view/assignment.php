@@ -28,7 +28,7 @@ $userId = $_SESSION['userid'];
 
                     <?php
                     include "../../database/DB.php";
-
+                    
                     //Retrieving all available assignment from table
                     $sql2 = "INSERT INTO assignment_student (assignment_id, student_id, lecturer_id, file_name, file, TYPE) 
                             (SELECT id, '$userId', '$lecturerId', '', '', '' FROM assignment WHERE subject_id = '$code') 
@@ -37,6 +37,7 @@ $userId = $_SESSION['userid'];
                     $conn->query($sql2);
                     
                     //Retrieving assignments for display
+
                     $sql = "SELECT assgn.title AS title, assgn.file_name AS lecturerFile, assgn.file AS file, assgn.type AS type, assgnStud.file_name AS studentFile 
                             FROM assignment_student assgnStud
                             JOIN assignment assgn ON assgnStud.assignment_id = assgn.id
