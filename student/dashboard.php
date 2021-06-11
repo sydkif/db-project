@@ -36,7 +36,7 @@ $userID = strtoupper($_SESSION['userid']);
                     <?php
                     include '../database/DB.php';
 
-                    $sql = "SELECT l.name AS lecturer_name, s.name AS subject_name, ss.subject_id AS subject_id
+                    $sql = "SELECT l.name AS lecturer_name, l.id AS lecturer_id, s.name AS subject_name, ss.subject_id AS subject_id
                             FROM student_subject ss
                             JOIN lecturer l ON ss.lecturer_id = l.id
                             JOIN subject s ON ss.subject_id = s.id
@@ -57,7 +57,7 @@ $userID = strtoupper($_SESSION['userid']);
                                 <td><?= $row['subject_id'] . " - " . $row['subject_name']; ?></td>
                                 <!-- TO DO LIST - ADD ASSIGNMENT, TRUE FALSE, OBJECTIVE -->
                                 <td style="display:flex; align-items:center; justify-content:center; ">
-                                    <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php';">
+                                    <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>&lid=<?= $row['lecturer_id'] ?>';">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
                                 </td>
                                 <td>
@@ -137,7 +137,8 @@ $userID = strtoupper($_SESSION['userid']);
             $studentId = $userID;
 
             $sql = "INSERT INTO student_subject (subject_id, student_id, lecturer_id) VALUES ('$subjectId', '$studentId', '$lecturerId')";
-
+            
+            //
             if ($conn->query($sql) === true) {
                 // Success
                 $_SESSION['msg'] = "Subject added successfully!";
