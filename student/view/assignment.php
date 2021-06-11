@@ -29,7 +29,7 @@ $userId = $_SESSION['userid'];
                     <?php
                     include "../../database/DB.php";
                     
-                    //Retrieving all available assignment from table
+                    //Retrieving all available assignment from assignment table
                     $sql2 = "INSERT INTO assignment_student (assignment_id, student_id, lecturer_id, file_name, file, TYPE) 
                             (SELECT id, '$userId', '$lecturerId', '', '', '' FROM assignment WHERE subject_id = '$code') 
                             ON DUPLICATE KEY UPDATE assignment_id = assignment_id";
@@ -56,7 +56,7 @@ $userId = $_SESSION['userid'];
                             <td><?= $row['title'] ?></td>
                             <td style="text-align: center;"><?= $row['studentFile'] ?></td>
                             <td style="text-align: center;">
-                                <button class="btn btn-sm" title="Download Task">
+                                <button class="btn btn-sm" title="Download Task" onclick="window.open('../../lecturer/create/assignment_files/<?= $row['file']?>')">
                                     <i class="bi bi-file-earmark-arrow-down" style="font-size: 28px; color:dimgray;"></i>
                                 </button>
                             </td>
