@@ -13,8 +13,8 @@ $userId = $_SESSION['userid'];
         <h3><a id="back" class="bi bi-caret-left-fill" href="/student/dashboard.php"></a>View Assignment / Tutorial / Lab</h3>
         <hr>
         <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
+        <?php include('../../templates/alert_msg.php'); ?>
         <div class="table-responsive shadow rounded">
-            <?php include('../../templates/alert_msg.php'); ?>
             <table id="dashboard-student" class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -62,13 +62,13 @@ $userId = $_SESSION['userid'];
                                     </button>
                                 </td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-sm" title="Submit Task" data-toggle="modal" data-target="#ModalSubmitForm">
+                                    <button class="btn btn-sm" title="Submit Task" data-toggle="modal" data-target="#ModalSubmitForm<?= $num ?>">
                                         <i class="bi bi-file-earmark-arrow-up" style="font-size: 28px; color:darkgoldenrod;"></i>
                                     </button>
                                 </td>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="ModalSubmitForm" tabindex="-1" aria-labelledby="ModalSubmitForm" aria-hidden="true">
+                                <div class="modal fade" id="ModalSubmitForm<?= $num ?>" tabindex="-1" aria-labelledby="ModalSubmitForm" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -147,7 +147,7 @@ $userId = $_SESSION['userid'];
                                 $_SESSION['status']  = "Fail";
                             }
                         }
-                        
+
                         echo "<meta http-equiv='refresh' content='0'>";
                     }
 
