@@ -25,22 +25,34 @@ $user = $_SESSION['usersname'];
         if (isset($_POST['uploadBtn'])) {
             $statusMsg = '';
 
-            //File upload path
+            // File upload path
             $targetDir = __DIR__ . '\assignment_files\\';
             $fileName = basename($_FILES['assignment']['name']);
+            $fileName = addslashes($fileName); // To ensure names with special characters are accepted
             $targetFilePath = $targetDir . $fileName;
-            // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            $filetmp = $_FILES['assignment']['tmp_name'];
+            $fileSize = $_FILES['assignment']['size'];
+
+            // Opening file for read
+            $fp = fopen($filetmp, 'r');
+            $content = fread ($fp, filesize($filetmp));
+            $content = addslashes($content);
+            fclose($fp);        
+            // Getting file type
             $fileType = substr(strrchr($fileName, '.'), 1);
             $fileType = strtolower($fileType);
+
+            // Title from task title
             $title = $_POST['title'];
 
             //Checking if button is pressed and file exists
             if (isset($_POST['uploadBtn']) && !empty($_FILES['assignment']['name'])) {
+                // List of all allowed file type
                 $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'txt');
                 if (in_array($fileType, $allowTypes)) {
                     if (move_uploaded_file($_FILES['assignment']['tmp_name'], $targetFilePath)) {
-                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, type, modiBy, modiOn) 
-                                VALUES ('$code', '$title', '$fileName', '" . $fileName . "', '$fileType', '$user', NOW())";
+                        $sql = "INSERT INTO assignment (subject_id, title, file_name, file, size, type, modiBy, modiOn) 
+                                VALUES ('$code', '$title', '$fileName', '$content', '$fileSize', '$fileType', '$user', NOW())";
 
                         $insert = $conn->query($sql);
 
@@ -104,7 +116,7 @@ $user = $_SESSION['usersname'];
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
                                 <td style="text-align: center; font-size:12px;"><?= $row['modiOn'] ?></td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file'] ?>')">
+                                    <button class="btn btn-sm" title="View Content" onclick="window.open('assignment_files/<?= $row['file_name'] ?>')">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                     </button>
                                 </td>
