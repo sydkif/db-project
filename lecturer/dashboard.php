@@ -51,7 +51,7 @@ $userName = $_SESSION['usersname'];
                                 </td>
                                 <td>
                                     <div style="display:flex; align-items:center; justify-content:center;">
-                                        <button class="btn btn-sm" title="Add New True False Quiz" style="margin-right: 10px;" onclick="location.href = 'create/true-false-quiz.php';">
+                                        <button class="btn btn-sm" title="Add New True False Quiz" style="margin-right: 10px;" onclick="location.href = 'create/true-false-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class=" bi bi-clipboard-plus" style="font-size: 28px; color:forestgreen;"></i>
                                         </button>
                                         <button class="btn btn-sm" title="View True False Result" onclick="location.href = 'view/true-false-quiz.php';">
@@ -60,7 +60,7 @@ $userName = $_SESSION['usersname'];
                                 </td>
                                 <td>
                                     <div style="display:flex; align-items:center; justify-content:center;">
-                                        <button class="btn btn-sm" title="Add New Objective Quiz" style="margin-right: 10px;" onclick="location.href = 'create/objective-quiz.php';">
+                                        <button class="btn btn-sm" title="Add New Objective Quiz" style="margin-right: 10px;" onclick="location.href = 'create/objective-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class=" bi bi-clipboard-plus" style="font-size: 28px; color:forestgreen;"></i>
                                         </button>
                                         <button class="btn btn-sm" title="View Objective Result" onclick="location.href = 'view/objective-quiz.php';">
