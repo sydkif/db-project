@@ -56,7 +56,7 @@ $userID = $_SESSION['userid'];
                             <td style="text-align: center;"><?= $row['student_id'] ?></td>
                             <td style="text-align: center;"><?= $row['file_name'] ?></td>
                             <td style="text-align: center;">
-                                <button id="view" class="btn btn-sm" title="View Content" onclick="window.open('../../../student_assignment/<?= $row['file'] . '.' . $row['type']?>')">
+                                <button id="view" class="btn btn-sm" title="View Content" onclick="window.open('../../../student_assignment/<?= $row['file_name']?>')" >
                                     <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
                                 </button>
                             </td>
