@@ -1,68 +1,61 @@
-<?php include("../../templates/header.php");  ?>
+<?php include("../../templates/header.php");
 
-<!-- <link rel="stylesheet/less" type="text/css" href="/css/quiz.less" />
-<script src="//cdn.jsdelivr.net/npm/less@3.13"></script> -->
+$code = strtoupper($_GET['code']);
+$name = $_GET['name'];
+$userId = $_SESSION['userid'];
+
+?>
 
 <link rel="stylesheet" href="/css/quiz.css">
 
 <div class="container mt-5 align-items-center">
-    <h3><a id="back" class="bi bi-caret-left-fill" href="/student/dashboard.php"></a>View Assignment / Tutorial / Lab</h3>
+    <h3><a id="back" class="bi bi-caret-left-fill" href="/student/dashboard.php"></a>Quiz (True / False)</h3>
     <hr>
-    <h5>BIC20303 : Database</h5>
+    <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
     <div class="col">
 
         <?php
 
-        $q_list = [
-            [
-                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                           Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                           cum officia, voluptatem quia! Error!'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsum ipsa voluptate omnis, adipisci quos.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                            cum officia, voluptatem quia! Error!'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, distinctio.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                            cum officia, voluptatem quia! Error!'
-            ]
-        ];
+        //Displaying data in table
+        include('../../database/DB.php');
 
-        foreach ($q_list as $num => $q) : ?>
+        $sql = "SELECT question FROM tf_quiz WHERE subject_id = '$code'";
+        $result = $conn->querY($sql);
+        $num = 0;
 
-            <div class="row">
-                <div class="card w-100 shadow-sm">
-                    <div class="card-body">
-                        <p>Question <?= $num + 1 ?> of <?= sizeof($q_list) ?></p>
-                        <h5><?= $q['question'] ?></h5>
-                        <hr>
-                        <form id="answer">
-                            <input id="true<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="true<?= $num + 1 ?>">True</label>
-                            <br>
-                            <input id="false<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="false<?= $num + 1 ?>">False</label>
-                        </form>
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $num++;
+
+
+        ?>
+
+                <div class="row">
+                    <div class="card w-100 shadow-sm">
+                        <div class="card-body">
+                            <p>Question <?= $num ?></p>
+                            <h5><?= $row['question'] ?></h5>
+                            <hr>
+                            <form id="answer">
+                                <input id="true<?= $num ?>" name="answer_q<?= $num ?>" value="1" type="radio" />
+                                <label for="true<?= $num ?>">True</label>
+                                <br>
+                                <input id="false<?= $num ?>" name="answer_q<?= $num ?>" value="0" type="radio" />
+                                <label for="false<?= $num ?>">False</label>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        <?php endforeach; ?>
+        <?php
+
+            }
+        } else {
+            echo "0 results";
+        }
+        $conn->close();
+
+        ?>
 
         <div class="row" style="margin-top: 20px;">
             <input id="submitButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">

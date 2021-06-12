@@ -1,83 +1,74 @@
-<?php include("../../templates/header.php");  ?>
+<?php include("../../templates/header.php");
+
+$code = strtoupper($_GET['code']);
+$name = $_GET['name'];
+$userId = $_SESSION['userid'];
+
+?>
 
 <link rel="stylesheet" href="/css/quiz.css">
 
 <div class="container mt-5 align-items-center">
-    <h3><a id="back" class="bi bi-caret-left-fill" href="/student/dashboard.php"></a>View Assignment / Tutorial / Lab</h3>
+    <h3><a id="back" class="bi bi-caret-left-fill" href="/student/dashboard.php"></a>Quiz (Multiple Choice)</h3>
     <hr>
-    <h5>BIC20303 : Database</h5>
+    <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
     <div class="col">
+        <form method="POST">
+            <?php
 
-        <?php
+            //Displaying data in table
+            include('../../database/DB.php');
 
-        $q_list = [
-            [
-                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                    cum officia, voluptatem quia! Error!'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsum ipsa voluptate omnis, adipisci quos.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                        cum officia, voluptatem quia! Error!'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, distinctio.'
-            ],
-            [
-                'question' =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Maiores exercitationem alias numquam. Molestiae amet reiciendis 
-                        cum officia, voluptatem quia! Error!'
-            ]
-        ];
+            $sql = "SELECT question, option_a, option_b, option_c, option_d FROM mc_quiz WHERE subject_id = '$code'";
+            $result = $conn->querY($sql);
+            $num = 0;
 
-        foreach ($q_list as $num => $q) : ?>
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $num++;
 
-            <div class="row">
-                <div class="card w-100 shadow-sm">
-                    <div class="card-body">
-                        <p>Question <?= $num + 1 ?> of <?= sizeof($q_list) ?></p>
-                        <h5><?= $q['question'] ?></h5>
-                        <hr>
-                        <form id="answer">
-                            <input id="ans_a<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="ans_a<?= $num + 1 ?>">Answer Choice A</label>
-                            <br>
-                            <input id="ans_b<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="ans_b<?= $num + 1 ?>">Answer Choice B</label>
-                            <br>
-                            <input id="ans_c<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="ans_c<?= $num + 1 ?>">Answer Choice C</label>
-                            <br>
-                            <input id="ans_d<?= $num + 1 ?>" name="q<?= $num + 1 ?>" type="radio" />
-                            <label for="ans_d<?= $num + 1 ?>">Answer Choice D</label>
-                        </form>
+            ?>
+
+                    <div class="row">
+                        <div class="card w-100 shadow-sm">
+                            <div class="card-body">
+                                <p>Question <?= $num ?></p>
+                                <h5><?= $row['question'] ?></h5>
+                                <hr>
+                                <!-- <form id="answer"> -->
+                                <input id="option_a<?= $num ?>" name="answer_q<?= $num ?>" value="A" type="radio" required />
+                                <label for="option_a<?= $num ?>"><?= $row['option_a'] ?></label>
+                                <br>
+                                <input id="option_b<?= $num ?>" name="answer_q<?= $num ?>" value="B" type="radio" />
+                                <label for="option_b<?= $num ?>"><?= $row['option_b'] ?></label>
+                                <br>
+                                <input id="option_c<?= $num ?>" name="answer_q<?= $num ?>" value="C" type="radio" />
+                                <label for="option_c<?= $num ?>"><?= $row['option_c'] ?></label>
+                                <br>
+                                <input id="option_d<?= $num ?>" name="answer_q<?= $num ?>" value="D" type="radio" />
+                                <label for="option_d<?= $num ?>"><?= $row['option_d'] ?></label>
+                                <!-- </form> -->
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+            <?php
+
+                }
+            } else {
+                echo "0 results";
+            }
+            $conn->close();
+
+            ?>
+
+
+
+            <div class="row" style="margin-top: 20px;">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">
             </div>
-
-        <?php endforeach; ?>
-
-
-        <div class="row" style="margin-top: 20px;">
-            <input id="submitButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">
-        </div>
+        </form>
     </div>
-
-    <script>
-        document.getElementById("submitButton").onclick = function() {
-            location.href = "/student/dashboard.php";
-        };
-    </script>
 
 
     <?php include("../../templates/footer.php") ?>
