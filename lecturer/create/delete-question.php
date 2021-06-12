@@ -7,7 +7,7 @@ $table = $_GET['table'];
 $sql = "DELETE FROM $table WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
-    $_SESSION['msg'] = "Record deleted successfully";
+    $_SESSION['msg'] = "Question deleted successfully";
     $_SESSION['status'] = "Success";
     $conn->close();
 } else {

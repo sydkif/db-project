@@ -11,6 +11,7 @@ $user = $_SESSION['usersname'];
         <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>Create True/False Quiz</h3>
         <hr>
         <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
+        <?php include('../../templates/alert_msg.php') ?>
         <div class="table-responsive shadow rounded">
             <table id="dashboard-student" class="table table-striped">
                 <thead class="thead-dark">
@@ -43,12 +44,9 @@ $user = $_SESSION['usersname'];
                             <tr>
                                 <th scope="row" style="text-align: center;"><?= $num ?></th>
                                 <td id="question<?= $num ?>" style="text-align: left;"><?= $row['question'] ?></td>
-                                <td style="text-align: center;">
-                                    <?php if ($row['answer']) echo "True";
-                                    else echo "False" ?>
-                                </td>
-                                <td id="modi" style="text-align: center;"><?= $row['modiBy'] ?></td>
-                                <td id="modi" style="text-align: center;"><?= $row['modiOn'] ?></td>
+                                <td style="text-align: center;"><span class="text-wrap btn-block badge badge-<?php echo ($row['answer']) ? 'success' : 'danger' ?>"><?php echo ($row['answer']) ? 'True' : 'False' ?></span></td>
+                                <td id="modi" style="text-align: center; font-size:12px;"><?= $row['modiBy'] ?></td>
+                                <td id="modi" style="text-align: center; font-size:12px;"><?= $row['modiOn'] ?></td>
                                 <td style="text-align: center;">
                                     <button id="update<?= $num ?>" class="btn btn-sm" data-toggle="modal" data-target="#staticBackdrop<?= $num ?>">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
