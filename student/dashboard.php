@@ -97,20 +97,26 @@ $userID = strtoupper($_SESSION['userid']);
                 <?php
                 include '../database/DB.php';
 
-                $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name 
-                        FROM SUBJECT S 
-                        JOIN workload wl ON s.id = wl.subject_id 
-                        JOIN lecturer l ON wl.lecturer_id = l.id 
-                        GROUP BY l.id, l.name;";
-                $result = $conn->query($sql);
+                // $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name 
+                //         FROM SUBJECT S 
+                //         JOIN workload wl ON s.id = wl.subject_id 
+                //         JOIN lecturer l ON wl.lecturer_id = l.id 
+                //         GROUP BY l.id, l.name;";
+                    $sql = "SELECT s.name AS subject_name, s.id AS subject_id 
+                    FROM subject s 
+                    JOIN workload wl ON s.id = wl.subject_id 
+                    JOIN lecturer l ON wl.lecturer_id = l.id
+                    GROUP BY s.id, s.name";
+                    $result = $conn->query($sql);
                 ?>
-                <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
-                    <option value="#">--SELECT LECTURER--</option>
+                <!-- <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;"> -->
+                <select name="subject_name" id="subject_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
+                    <option value="#">--SELECT SUBJECT--</option>
                     <?php
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) { //Whileloop starts here
                     ?>
-                            <option value="<?= $row['lecturer_id'] ?>"> <?= $row['lecturer_name'] ?></option>
+                            <option value="<?= $row['subject_id'] ?>"> <?= $row['subject_name'] ?></option>
 
                     <?php
                         } //End Whileloop
@@ -118,8 +124,8 @@ $userID = strtoupper($_SESSION['userid']);
                     $conn->close();
                     ?>
                 </select>
-                <select id="subject_table" name="subject_table" class="custom-select" style="width:45%;">
-                    <option value="">--SELECT SUBJECT--</option>
+                <select id="lecturer_table" name="lecturer_table" class="custom-select" style="width:45%;">
+                    <option value="">--SELECT LECTURER--</option>
                 </select>
 
                 <button name="add" class="btn btn-sm" title="Register Subject">
@@ -137,7 +143,7 @@ $userID = strtoupper($_SESSION['userid']);
             $studentId = $userID;
 
             $sql = "INSERT INTO student_subject (subject_id, student_id, lecturer_id) VALUES ('$subjectId', '$studentId', '$lecturerId')";
-            
+
             //
             if ($conn->query($sql) === true) {
                 // Success
@@ -160,18 +166,18 @@ $userID = strtoupper($_SESSION['userid']);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#lecturer_table').on("change", function() {
-                var lecturerID = $(this).val();
-                if (lecturerID) {
+            $('#subject_table').on("change", function() {
+                var subjectID = $(this).val();
+                if (subjectID) {
                     $.ajax({
                         url: "dependent.php",
                         type: "POST",
                         cache: false,
                         data: {
-                            lecturerID: lecturerID
+                            subjectID: subjectID
                         },
                         success: function(data) {
-                            $("#subject_table").html(data);
+                            $("#lecturer_table").html(data);
                         }
                     });
                 }
