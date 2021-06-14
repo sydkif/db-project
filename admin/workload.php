@@ -15,8 +15,8 @@
                         <th style="width: 5%;">No</th>
                         <th style="width: auto;">Lecturer</th>
                         <th style="width: auto;">Subject</th>
-                        <th style="width: 11%;">Update</th>
-                        <th style="width: 8%;">Delete</th>
+                        <th style="width: 11%; text-align:center;">Update</th>
+                        <th style="width: 8%; text-align:center;">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +48,7 @@
                                     <td style="text-transform: uppercase;"><?= $row['subject_name'] ?>
                                         <input type="hidden" name="subjectId" value="<?= $row['subject_id'] ?>">
                                     </td>
-                                    <td>
+                                    <td style="text-align:center;">
                                         <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm">
                                             <i class="bi bi-pencil-square" style="color: blue;"></i>
                                         </button>
@@ -59,7 +59,7 @@
                                             <i class="bi bi-x-square" style="color: gray;"></i>
                                         </button>
                                     </td>
-                                    <td>
+                                    <td style="text-align:center;">
                                         <button name="delete" id="delete<?= $num ?>" class="btn btn-sm" onclick="return confirm('Are you sure?');">
                                             <i class="bi bi-trash" style="color: red;"></i>
                                         </button>
@@ -132,7 +132,7 @@
                                 </select>
                             </td>
                             <td></td>
-                            <td>
+                            <td style="text-align:center;">
                                 <button name="add" class="btn btn-sm" href="#?">
                                     <i class="bi bi-plus-square" style="color: green;"></i>
                                 </button>

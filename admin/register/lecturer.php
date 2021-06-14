@@ -14,10 +14,10 @@
                     <tr>
                         <th style="width: 10%;">Lecturer ID</th>
                         <th style="width: auto;">Lecturer Name</th>
-                        <th style="width: 20%;">Modified By</th>
-                        <th style="width: 20%;">Modified On</th>
-                        <th style="width: 11%;">Update</th>
-                        <th style="width: 8%;">Delete</th>
+                        <th style="width: 20%; text-align: center;">Modified By</th>
+                        <th style="width: 20%; text-align: center;">Modified On</th>
+                        <th style="width: 11%; text-align: center;">Update</th>
+                        <th style="width: 8%; text-align: center;">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +39,9 @@
                             <tr>
                                 <td id="id<?= $num ?>"><b><?= $row["id"] ?><b></td>
                                 <td contentEditable=" false" id="name<?= $num ?>" style="text-transform: uppercase;"><?= $row["name"] ?></td>
-                                <td id="modi"><?= $row["modiBy"] ?></td>
-                                <td id="modi"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
-                                <td>
+                                <td id="modi" style="text-align: center;"><?= $row["modiBy"] ?></td>
+                                <td id="modi" style="text-align: center;"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
+                                <td style="text-align: center;">
                                     <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
@@ -52,7 +52,7 @@
                                         <i class="bi bi-x-square" style="color: gray;"></i>
                                     </button>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('lecturer',<?= $num ?>)">
                                         <i class="bi bi-trash" style="color: red;"></i>
                                     </button>
@@ -69,18 +69,51 @@
 
 
                     <tr>
-                        <form method="post">
-                            <td><input style="width: 60px;" name="id" value="" type="text" minlength="4" maxlength="4" pattern="\d*" required></td>
-                            <td><input style="width: 360px;" name="name" value="" type="text" required></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button name="add" class="btn btn-sm" href="#?">
-                                    <i class="bi bi-plus-square" style="color: green;"></i>
-                                </button>
-                            </td>
-                        </form>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#staticBackdrop">
+                                <i class="bi bi-plus-square" style="color: green;"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div style="text-align: left;">
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form method="POST">
+                                                <div class="modal-header">
+
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Register Admin</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label"><b>Lecturer ID</b></label>
+                                                        <input class="form-control" id="question" name="id" required>
+                                                        <label class="col-form-label"><b>Lecturer Name</b></label>
+                                                        <input class="form-control" id="question" name="name" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" name="add">Add</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
                     </tr>
 
                     <?php
@@ -90,7 +123,7 @@
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $name = strtoupper($_POST['name']);
-                        $modiBy = "Super Admin"; // TODO Change to session_id later on
+                        $modiBy = $_SESSION['usersname'];
                         $modiOn = date("Y-m-d h:i:s");
                         $sql = "INSERT INTO lecturer (id, name,password, modiBy, modiOn) VALUES ('$id', '$name', '$id', '$modiBy', '$modiOn')";
 

@@ -63,16 +63,48 @@
                     ?>
 
                     <tr>
-                        <form method="POST">
-                            <td><input style="width: 60px;" name="id" value="" type="text" pattern="\d*" required></td>
-                            <td><input style="width: 360px;" name="name" value="" type="text" required></td>
-                            <td></td>
-                            <td style="text-align: center;">
-                                <button name="add" class="btn btn-sm" href="#?">
-                                    <i class="bi bi-plus-square" style="color: green;"></i>
-                                </button>
-                            </td>
-                        </form>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#staticBackdrop">
+                                <i class="bi bi-plus-square" style="color: green;"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div style="text-align: left;">
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form method="POST">
+                                                <div class="modal-header">
+
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Register Admin</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label"><b>Admin ID</b></label>
+                                                        <input class="form-control" id="question" name="id" required>
+                                                        <label class="col-form-label"><b>Admin Name</b></label>
+                                                        <input class="form-control" id="question" name="name" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" name="add">Add</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
 
                     <?php
@@ -81,7 +113,7 @@
 
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
-                        $name = $_POST['name'];
+                        $name = strtoupper($_POST['name']);
                         $sql = "INSERT INTO admin (id, name, password) VALUES ('$id', '$name', '$id')";
 
                         if ($conn->query($sql) === true) {

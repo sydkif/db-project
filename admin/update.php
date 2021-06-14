@@ -5,7 +5,7 @@ include "../database/DB.php";
 $id = $_GET['id'];
 $table = $_GET['table'];
 $name = $_GET['name'];
-$currentUser = "Super Admin";
+$currentUser = $_SESSION['usersname'];
 date_default_timezone_set("Asia/Kuala_Lumpur");
 $currentTime = date("Y-m-d h:i:s");
 

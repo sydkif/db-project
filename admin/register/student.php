@@ -15,10 +15,10 @@
                         <th style="width: 11%;">Student ID</th>
                         <th style="width: auto;">Student Name</th>
                         <th style="width: 10%;">Student Email</th>
-                        <th style="width: 12%;">Modified By</th>
-                        <th style="width: 13%;">Modified On</th>
-                        <th style="width: 11%;">Update</th>
-                        <th style="width: 5%;">Delete</th>
+                        <th style="width: 12%; text-align: center;">Modified By</th>
+                        <th style="width: 13%; text-align: center;">Modified On</th>
+                        <th style="width: 11%; text-align: center;">Update</th>
+                        <th style="width: 5%; text-align: center;">Delete</th>
                     </tr>
                 </thead>
                 <tbody id="table">
@@ -37,10 +37,10 @@
                             <tr>
                                 <td id="id<?= $num ?>"><b><?= $row['id']; ?> <b></td>
                                 <td id="name<?= $num ?>" contentEditable="false" style="text-transform: uppercase;"><?= ucfirst($row['name']); ?></td>
-                                <td id="modi"><?= $row['email']; ?></td>
-                                <td id="modi"><?= $row['modiBy'] ?></td>
-                                <td id="modi"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
-                                <td>
+                                <td id="modi" style="text-align: center;"><?= $row['email']; ?></td>
+                                <td id="modi" style="text-align: center;"><?= $row['modiBy'] ?></td>
+                                <td id="modi" style="text-align: center;"><?= date('d-m-Y H:i:s', strtotime($row['modiOn'])); ?></td>
+                                <td style="text-align: center;">
                                     <button id="update<?= $num ?>" onclick="edit(<?= $num ?>)" class="btn btn-sm updateBtn">
                                         <i class="bi bi-pencil-square" style="color: blue;"></i>
                                     </button>
@@ -51,7 +51,7 @@
                                         <i class="bi bi-x-square" style="color: gray;"></i>
                                     </button>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <button id="delete<?= $num ?>" class="btn btn-sm" onclick="remove('student',<?= $num ?>)">
                                         <i class="bi bi-trash" style="color: red;"></i>
                                     </button>
@@ -66,22 +66,53 @@
 
                     ?>
                     <tr>
-                        <form method="POST">
-                            <td><input style="width: 60px;" name="id" value="" type="text" minlength="4" maxlength="8" required></td>
-                            <td><input style="width: 360px;" name="name" value="" type="text" required></td>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button name="add" class="btn btn-sm" href="#?">
-                                    <i class="bi bi-plus-square" style="color: green;"></i>
-                                </button>
-                            </td>
-                        </form>
-                    </tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#staticBackdrop">
+                                <i class="bi bi-plus-square" style="color: green;"></i>
+                            </button>
 
+                            <!-- Modal -->
+                            <div style="text-align: left;">
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form method="POST">
+                                                <div class="modal-header">
+
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Register Student</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label"><b>Student ID</b></label>
+                                                        <input class="form-control" id="question" name="id" required>
+                                                        <label class="col-form-label"><b>Student Name</b></label>
+                                                        <input class="form-control" id="question" name="name" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" name="add">Add</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
                     <?php
 
                     include "../../database/DB.php";
@@ -89,7 +120,7 @@
                     if (isset($_POST['add'])) {
                         $id = $_POST['id'];
                         $id = strtoupper($id);
-                        $name = $_POST['name'];
+                        $name = strtoupper($_POST['name']);
                         $email = $id . "@siswa.uthm.edu.my";
                         $modiBy = "Super admin";
                         $modiOn = date("Y-m-d H:i:s");
