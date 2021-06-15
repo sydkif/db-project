@@ -54,7 +54,7 @@ $userName = $_SESSION['usersname'];
                                         <button class="btn btn-sm" title="Add New True False Quiz" style="margin-right: 10px;" onclick="location.href = 'create/true-false-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class=" bi bi-clipboard-plus" style="font-size: 28px; color:forestgreen;"></i>
                                         </button>
-                                        <button class="btn btn-sm" title="View True False Result" onclick="location.href = 'view/true-false-quiz.php';">
+                                        <button class="btn btn-sm" title="View True False Result" onclick="location.href = 'view/true-false-result.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class="bi bi-clipboard-data" style="font-size: 28px; color:mediumseagreen;"></i></button>
                                     </div>
                                 </td>
@@ -63,7 +63,7 @@ $userName = $_SESSION['usersname'];
                                         <button class="btn btn-sm" title="Add New Objective Quiz" style="margin-right: 10px;" onclick="location.href = 'create/objective-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class=" bi bi-clipboard-plus" style="font-size: 28px; color:forestgreen;"></i>
                                         </button>
-                                        <button class="btn btn-sm" title="View Objective Result" onclick="location.href = 'view/objective-quiz.php';">
+                                        <button class="btn btn-sm" title="View Objective Result" onclick="location.href = 'view/objective-result.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';">
                                             <i class=" bi bi-clipboard-data" style="font-size: 28px; color:mediumseagreen;"></i>
                                         </button>
                                     </div>

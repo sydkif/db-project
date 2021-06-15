@@ -36,7 +36,8 @@ $userID = strtoupper($_SESSION['userid']);
                     <?php
                     include '../database/DB.php';
 
-                    $sql = "SELECT l.name AS lecturer_name, l.id AS lecturer_id, s.name AS subject_name, ss.subject_id AS subject_id
+                    $sql = "SELECT l.name AS lecturer_name, l.id AS lecturer_id, s.name AS subject_name, 
+                            ss.subject_id AS subject_id, ss.tf_marks AS tf_marks, ss.mc_marks AS mc_marks
                             FROM student_subject ss
                             JOIN lecturer l ON ss.lecturer_id = l.id
                             JOIN subject s ON ss.subject_id = s.id
@@ -49,31 +50,28 @@ $userID = strtoupper($_SESSION['userid']);
                             ++$num;
 
                     ?>
-
-
                             <tr>
                                 <th scope="row"><?= $num; ?></th>
                                 <td><?= $row['lecturer_name']; ?></td>
                                 <td><?= $row['subject_id'] . " - " . $row['subject_name']; ?></td>
-                                <!-- TO DO LIST - ADD ASSIGNMENT, TRUE FALSE, OBJECTIVE -->
                                 <td style="display:flex; align-items:center; justify-content:center; ">
                                     <button class=" btn btn-sm " title="View Assignment & Tutorial" onclick="location.href = 'view/assignment.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>&lid=<?= $row['lecturer_id'] ?>';">
                                         <i class="bi bi-file-earmark-text" style="font-size: 28px;"></i></button>
                                 </td>
                                 <td>
                                     <div style="display:flex; align-items:center; justify-content:center;">
-                                        <button class="btn btn-sm" title="View True False Quiz" onclick="location.href = 'view/true-false-quiz.php';"><i class="bi bi-clipboard" style="font-size: 28px; "></i></button>
+                                        <button class="btn btn-sm" title="View True False Quiz" onclick="location.href = 'view/true-false-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';" <?php if ($row['tf_marks'] > 0) echo 'disabled'  ?>>
+                                            <i class="bi bi-clipboard" style="font-size: 28px; "></i></button>
                                     </div>
                                 </td>
-                                <td> <i style="font-style:normal; ">9/10</i></td>
+                                <td><i style="font-style:normal;" class="badge badge-<?php echo ($row['tf_marks'] <= 0) ? 'danger' :  'success'; ?>"><?= $row['tf_marks'] ?></i></td>
                                 <td>
                                     <div style="display:flex; align-items:center; justify-content:center;">
-
-                                        <button class="btn btn-sm" title="View Objective Quiz" onclick="location.href = 'view/objective-quiz.php';"><i class=" bi bi-clipboard" style="font-size: 28px;"></i></button>
-
+                                        <button class="btn btn-sm" title="View Objective Quiz" onclick="location.href = 'view/objective-quiz.php?code=<?= $row['subject_id'] ?>&name=<?= $row['subject_name'] ?>';" <?php if ($row['mc_marks'] > 0) echo 'disabled'  ?>>
+                                            <i class=" bi bi-clipboard" style="font-size: 28px;"></i></button>
                                     </div>
                                 </td>
-                                <td><i style="font-style:normal; ">4/15</i></td>
+                                <td><i style="font-style:normal;" class="badge badge-<?php echo ($row['mc_marks'] <= 0) ? 'danger' :  'success'; ?>"><?= $row['mc_marks'] ?></i></td>
                             </tr>
                     <?php
                         }

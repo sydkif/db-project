@@ -107,7 +107,7 @@ $userId = $_SESSION['userid'];
                     //Student upload assignment
                     if (isset($_POST['uploadBtn'])) {
                         $assignmentId = $_POST['assignment_id'];
-                        $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/student_assignment/'; //Getting from root direcotry to student assignment folder
+                        $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/student/student_assignment/'; //Getting from root direcotry to student assignment folder
                         $fileName = basename($_FILES['assignment']['name']);
                         $targetFilePath = $targetDir . $fileName;
                         $filetmp = $_FILES['assignment']['tmp_name'];
