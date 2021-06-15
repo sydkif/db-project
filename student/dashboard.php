@@ -108,7 +108,7 @@ $userID = strtoupper($_SESSION['userid']);
                     $result = $conn->query($sql);
                 ?>
                 <!-- <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;"> -->
-                <select name="subject_name" id="subject_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
+                <select name="subject_id" id="subject_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
                     <option value="#">--SELECT SUBJECT--</option>
                     <?php
                     if ($result->num_rows > 0) {
@@ -122,7 +122,7 @@ $userID = strtoupper($_SESSION['userid']);
                     $conn->close();
                     ?>
                 </select>
-                <select id="lecturer_table" name="lecturer_table" class="custom-select" style="width:45%;">
+                <select id="lecturer_table" name="lecturer_id" class="custom-select" style="width:45%;">
                     <option value="">--SELECT LECTURER--</option>
                 </select>
 
@@ -136,9 +136,12 @@ $userID = strtoupper($_SESSION['userid']);
         //Register Subjects for students
         include "../database/DB.php";
         if (isset($_POST['add'])) {
-            $lecturerId = $_POST['lecturer_name'];
-            $subjectId = $_POST['subject_table'];
+            $lecturerId = $_POST['lecturer_id'];
+            $subjectId = $_POST['subject_id'];
             $studentId = $userID;
+
+            // var_dump($lecturerId);
+            // die();
 
             $sql = "INSERT INTO student_subject (subject_id, student_id, lecturer_id) VALUES ('$subjectId', '$studentId', '$lecturerId')";
 
