@@ -8,26 +8,25 @@ $userId = $_SESSION['userid'];
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>View True/False Results</h3>
+        <h3><a id="back" class="bi bi-caret-left-fill" href="/lecturer/dashboard.php"></a>View Objective Results</h3>
         <hr>
         <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
         <div class="table-responsive shadow rounded">
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th style="text-align: center; width: 5%;">No</th>
+                    <th style="text-align: center; width: 5%;">No</th>
                         <th style="width: 50%;">Student Name</th>
                         <th>Student ID</th>
                         <th style="text-align: center;">Marks</th>
                     </tr>
                 </thead>
                 <tbody>
-
                     <?php
                     //Displaying data in table
                     include('../../database/DB.php');
 
-                    $sql = "SELECT stud.name AS student_name, stud.id AS student_id, sub.tf_marks AS marks
+                    $sql = "SELECT stud.name AS student_name, stud.id AS student_id, sub.mc_marks AS marks
                             FROM student_subject sub
                             JOIN student stud ON sub.student_id = stud.id
                             WHERE sub.subject_id = '$code'";
