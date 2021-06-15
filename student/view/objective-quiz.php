@@ -13,14 +13,14 @@ $userId = $_SESSION['userid'];
     <hr>
     <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
     <div class="col">
-        <form method="POST">
+        <form action="../validate_quiz.php" method="POST">
             <?php
 
             //Displaying data in table
             include('../../database/DB.php');
 
             $sql = "SELECT question, option_a, option_b, option_c, option_d FROM mc_quiz WHERE subject_id = '$code'";
-            $result = $conn->querY($sql);
+            $result = $conn->query($sql);
             $num = 0;
 
             if ($result->num_rows > 0) {
@@ -58,6 +58,13 @@ $userId = $_SESSION['userid'];
             } else {
                 echo "0 results";
             }
+
+            // To redirect user if he/she already answered
+            $marks = $conn->query("SELECT mc_marks FROM student_subject WHERE (subject_id = '$code' && student_id = '$userId')")->fetch_object()->mc_marks;
+            if ($marks > 0) {
+                echo '<script> alert("Oi, you already answer la, go back."); window.location = "/index.php";</script>';
+            }
+
             $conn->close();
 
             ?>
@@ -67,6 +74,11 @@ $userId = $_SESSION['userid'];
             <div class="row" style="margin-top: 20px;">
                 <input class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">
             </div>
+            <input type="hidden" name="quiz" value="mc_quiz">
+            <input type="hidden" name="marks" value="mc_marks">
+            <input type="hidden" name="subject_code" value="<?= $code ?>">
+            <input type="hidden" name="student_id" value="<?= $userId ?>">
+            <input type="hidden" name="total_questions" value="<?= $num ?>">
         </form>
     </div>
 

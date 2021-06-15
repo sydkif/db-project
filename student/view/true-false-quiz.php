@@ -2,7 +2,7 @@
 
 $code = strtoupper($_GET['code']);
 $name = $_GET['name'];
-$userId = $_SESSION['userid'];
+$userId = strtoupper($_SESSION['userid']);
 
 ?>
 
@@ -13,60 +13,62 @@ $userId = $_SESSION['userid'];
     <hr>
     <h5><?= strtoupper($code) ?> : <?= $name  ?></h5>
     <div class="col">
+        <form action="../validate_quiz.php" method="post">
+            <?php
 
-        <?php
+            //Displaying data in table
+            include('../../database/DB.php');
 
-        //Displaying data in table
-        include('../../database/DB.php');
+            $sql = "SELECT question FROM tf_quiz WHERE subject_id = '$code'";
+            $result = $conn->querY($sql);
+            $num = 0;
 
-        $sql = "SELECT question FROM tf_quiz WHERE subject_id = '$code'";
-        $result = $conn->querY($sql);
-        $num = 0;
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $num++;
-
-
-        ?>
-
-                <div class="row">
-                    <div class="card w-100 shadow-sm">
-                        <div class="card-body">
-                            <p>Question <?= $num ?></p>
-                            <h5><?= $row['question'] ?></h5>
-                            <hr>
-                            <form id="answer">
-                                <input id="true<?= $num ?>" name="answer_q<?= $num ?>" value="1" type="radio" />
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $num++;
+            ?>
+                    <div class="row">
+                        <div class="card w-100 shadow-sm">
+                            <div class="card-body">
+                                <p>Question <?= $num ?></p>
+                                <h5><?= $row['question'] ?></h5>
+                                <hr>
+                                <input id="true<?= $num ?>" name="answer_q<?= $num ?>" value="1" type="radio" required />
                                 <label for="true<?= $num ?>">True</label>
                                 <br>
-                                <input id="false<?= $num ?>" name="answer_q<?= $num ?>" value="0" type="radio" />
+                                <input id="false<?= $num ?>" name="answer_q<?= $num ?>" value="0" type="radio" required />
                                 <label for="false<?= $num ?>">False</label>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <input type="hidden" name="total_questions" value="<?= $num ?>">
+            <?php
 
-        <?php
-
+                }
+            } else {
+                echo "0 results";
             }
-        } else {
-            echo "0 results";
-        }
-        $conn->close();
 
-        ?>
+            // To redirect user if he/she already answered
+            $marks = $conn->query("SELECT tf_marks FROM student_subject WHERE (subject_id = '$code' && student_id = '$userId')")->fetch_object()->tf_marks;
+            if ($marks > 0) {
+                echo '<script> alert("Oi, you already answer la, go back."); window.location = "/index.php";</script>';
+            }
 
-        <div class="row" style="margin-top: 20px;">
-            <input id="submitButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">
-        </div>
+            $conn->close();
+
+            ?>
+
+            <div class="row" style="margin-top: 20px;">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Finish Quiz" style="border-radius: 10px;">
+            </div>
+            <input type="hidden" name="quiz" value="tf_quiz">
+            <input type="hidden" name="marks" value="tf_marks">
+            <input type="hidden" name="subject_code" value="<?= $code ?>">
+            <input type="hidden" name="student_id" value="<?= $userId ?>">
+            <input type="hidden" name="total_questions" value="<?= $num ?>">
+        </form>
     </div>
 </div>
-
-<script>
-    document.getElementById("submitButton").onclick = function() {
-        location.href = "/student/dashboard.php";
-    };
-</script>
 
 <?php include('../../templates/footer.php'); ?>
