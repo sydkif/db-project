@@ -72,12 +72,16 @@ $userId = $_SESSION['userid'];
         </div>
 
         <br />
-        <div class="row justify-content-start">
-            <div class="alert alert-success col-2" style="margin-left: 14px; margin-right:10px;" role="alert">
-                Number of Pass: <?= $count_pass ?>
+        <div class="row row-cols-1 row-cols-md-4">
+            <div class="col mb-1">
+                <div class="alert alert-success" role="alert">
+                    Number of Pass: <?= $count_pass ?>
+                </div>
             </div>
-            <div class="alert alert-danger col-2" role="alert">
-                Number of Fails: <?= $count_fail ?>
+            <div class="col mb-1">
+                <div class="alert alert-danger" role="alert">
+                    Number of Fails: <?= $count_fail ?>
+                </div>
             </div>
         </div>
     </div>

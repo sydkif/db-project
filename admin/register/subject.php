@@ -12,7 +12,7 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th style="width: 5%;">Subject ID</th>
+                        <th style="width: 9%;">Subject ID</th>
                         <th style="width: auto;">Subject Name</th>
                         <th style="width: 12%; text-align: center;">Modified By</th>
                         <th style="width: 13%; text-align: center;">Modified On</th>

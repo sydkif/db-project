@@ -16,48 +16,43 @@ if ($_SESSION['usertable'] != 'admin')
 
 
             <div id="adminCard" class="row row-cols-1 row-cols-md-3">
-                <div class="col mb-5">
+                <div class="col mb-4">
                     <a class="card border-0" href="/admin/register/admin.php">
-                        <img src="/img/admin.svg" class="card-img-top" style="width: 70%; margin: auto;">
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title">Admin</h3>
-                        </div>
+                        <img src="/img/admin.svg" class="card-img-top" style="width: 50%; margin: auto;">
+                        <hr>
+                        <h3 class="card-title">Admin</h3>
                     </a>
                 </div>
 
                 <div class="col mb-4">
                     <a class="card border-0" href="/admin/register/lecturer.php">
-                        <img src="/img/lecturer.svg" class="card-img-top" style="width: 70%; margin: auto;">
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title">Lecturer</h3>
-                        </div>
+                        <img src="/img/lecturer.svg" class="card-img-top" style="width: 50%; margin: auto;">
+                        <hr>
+                        <h3 class="card-title">Lecturer</h3>
                     </a>
                 </div>
 
                 <div class="col mb-4">
                     <a class="card border-0" href="/admin/register/student.php">
-                        <img src="/img/student-card.svg" class="card-img-top" style="width: 70%; margin: auto;">
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title">Student</h3>
-                        </div>
+                        <img src="/img/student-card.svg" class="card-img-top" style="width: 50%; margin: auto;">
+                        <hr>
+                        <h3 class="card-title">Student</h3>
                     </a>
                 </div>
 
                 <div class="col mb-4">
                     <a class="card border-0" href="/admin/register/subject.php">
-                        <img src="/img/subject.svg" class="card-img-top" style="width: 70%; margin: auto; padding: 20px">
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title">Subject</h3>
-                        </div>
+                        <img src="/img/subject.svg" class="card-img-top" style="width: 50%; margin: auto; padding: 20px">
+                        <hr>
+                        <h3 class="card-title">Subject</h3>
                     </a>
                 </div>
 
                 <div class="col mb-4">
                     <a class="card border-0" href="/admin/workload.php">
-                        <img src="/img/workload.svg" class="card-img-top" style="width: 70%; margin: auto; padding: 20px">
-                        <div class="card-body" style="text-align: center;">
-                            <h3 class="card-title">Workload</h3>
-                        </div>
+                        <img src="/img/workload.svg" class="card-img-top" style="width: 50%; margin: auto; padding: 20px">
+                        <hr>
+                        <h3 class="card-title">Workload</h3>
                     </a>
                 </div>
             </div>

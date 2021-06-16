@@ -31,7 +31,7 @@ $userName = $_SESSION['usersname'];
                 <div id="subjectCard" class="row row-cols-1 row-cols-md-3">
                     <div class="col mb-4">
                         <div class="card">
-                            <img src="/img/task.svg" class="card-img-top pt-4" style="width: 60%; margin:auto">
+                            <img src="/img/task.svg" class="card-img-top pt-4" style="width: 50%; margin:auto">
                             <div class="card-body" style="text-align: center;">
                                 <hr>
                                 <h5 class="card-title">Assignment & Tutorial</h5>
@@ -47,7 +47,7 @@ $userName = $_SESSION['usersname'];
                     </div>
                     <div class="col mb-4">
                         <div class="card">
-                            <img src="/img/true-false.svg" class="card-img-top pt-4" style="width: 60%; margin:auto">
+                            <img src="/img/true-false.svg" class="card-img-top pt-4" style="width: 50%; margin:auto">
                             <div class="card-body" style="text-align: center;">
                                 <hr>
                                 <h5 class="card-title">True / False Quiz</h5>
@@ -68,7 +68,7 @@ $userName = $_SESSION['usersname'];
                     </div>
                     <div class="col mb-4">
                         <div class="card">
-                            <img src="/img/objective.svg" class="card-img-top pt-4" style="width: 60%; margin:auto">
+                            <img src="/img/objective.svg" class="card-img-top pt-4" style="width: 50%; margin:auto">
                             <div class="card-body" style="text-align: center;">
                                 <hr>
                                 <h5 class="card-title"> Objective Quiz</h5>
