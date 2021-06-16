@@ -27,7 +27,7 @@ $userId = strtoupper($_SESSION['userid']);
                 while ($row = $result->fetch_assoc()) {
                     $num++;
             ?>
-                    <div class="row">
+                    <div id="subjectCard" class="row mb-3">
                         <div class="card w-100 shadow-sm">
                             <div class="card-body">
                                 <p>Question <?= $num ?></p>

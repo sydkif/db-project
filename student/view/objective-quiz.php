@@ -29,7 +29,7 @@ $userId = $_SESSION['userid'];
 
             ?>
 
-                    <div class="row">
+                    <div id="subjectCard" class="row mb-3">
                         <div class="card w-100 shadow-sm">
                             <div class="card-body">
                                 <p>Question <?= $num ?></p>

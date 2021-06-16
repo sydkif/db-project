@@ -16,9 +16,9 @@ $userId = $_SESSION['userid'];
                 <thead class="thead-dark">
                     <tr>
                         <th style="text-align: center; width: 5%;">No</th>
-                        <th style="width: 50%;">Student Name</th>
+                        <th style="width: auto;">Student Name</th>
                         <th>Student ID</th>
-                        <th style="text-align: center;">Marks</th>
+                        <th style="text-align: center; width:10%;">Marks</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +48,10 @@ $userId = $_SESSION['userid'];
                                 <th scope="row" style="text-align: center;"><?= $num ?></th>
                                 <td><?= $row['student_name'] ?></td>
                                 <td><?= $row['student_id'] ?></td>
-                                <td style="text-align: center"><?= $row['marks'] ?></td>
+                                <td style="text-align: center">
+                                    <b class="btn-block badge badge-<?php echo ($row['marks'] > 0) ? 'success' : 'danger' ?> p-2"> <?= $row['marks'] ?>
+                                    </b>
+                                </td>
                             </tr>
 
                     <?php
@@ -70,7 +73,7 @@ $userId = $_SESSION['userid'];
 
         <br />
         <div class="row justify-content-start">
-            <div class="alert alert-success col-2" style="margin-left: 14px;" role="alert">
+            <div class="alert alert-success col-2" style="margin-left: 14px; margin-right:10px;" role="alert">
                 Number of Pass: <?= $count_pass ?>
             </div>
             <div class="alert alert-danger col-2" role="alert">
