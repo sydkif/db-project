@@ -95,9 +95,9 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label"><b>Admin ID</b></label>
-                                    <input class="form-control" id="question" name="id" required>
-                                    <label class="col-form-label"><b>Admin Name</b></label>
-                                    <input class="form-control" id="question" name="name" required>
+                                    <input class="form-control" name="id" maxlength="5" pattern="[a-zA-Z0-9-]+" required>
+                                    <label class="col-form-label"><b>Admin Name</b> (Alphabet Only)</label>
+                                    <input class="form-control" name="name" maxlength="50" pattern="[a-z A-Z]*" required>
                                 </div>
                             </div>
 
@@ -127,7 +127,10 @@
             $_SESSION['status'] = "Success";
         } else {
             // Failed
-            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+            if ($conn->errno == '1062')
+                $_SESSION['msg'] = "Admin ID (" . $id . ") already exists.";
+            else
+                $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
             $_SESSION['status'] = "Fail";
         }
         echo "<meta http-equiv='refresh' content='0'>";

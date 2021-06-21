@@ -1,11 +1,16 @@
+<?php
+session_start();
 
+if (isset($_SESSION['usertable'])) {
+    if ($_SESSION['usertable'] == "admin") {
+        header("Location:/admin/dashboard.php");
+    } elseif ($_SESSION['usertable'] == "student") {
+        header("Location:/student/dashboard.php");
+    } elseif ($_SESSION['usertable'] == "lecturer") {
+        header("Location:/lecturer/dashboard.php");
+    }
+}
 
-
-<?php 
-session_start(); 
- $_SESSION["userid"] = null;
- $_SESSION["userpassword"] = null;
- $_SESSION['usertable'] = null;
 ?>
 
 <html lang="en">

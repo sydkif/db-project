@@ -11,7 +11,15 @@ if ($conn->query($sql) === TRUE) {
     $_SESSION['status'] = "Success";
     $conn->close();
 } else {
-    $_SESSION['msg'] = "Error deleting record: " . $conn->error;
+    if ($conn->errno == '1451') {
+        if ($table == "subject")
+            $_SESSION['msg'] = "Subject ID (" . $id . ") currently assigned to a lecturer.";
+        if ($table == "lecturer")
+            $_SESSION['msg'] = "Lecturer ID (" . $id . ") currently assigned to a subject.";
+        if ($table == "student")
+            $_SESSION['msg'] = "Student ID (" . $id . ") currently assigned to a subject.";
+    } else
+        $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
     $_SESSION['status'] = "Fail";
 }
 

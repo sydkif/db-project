@@ -9,7 +9,7 @@ if ($_SESSION['usertable'] != 'admin')
 <div class="container mt-5 align-items-center">
     <div class="col text-center">
         <h1>Admin Dashboard</h1>
-        <h2>Welcome, <?= $_SESSION['usersname'] ?> !</h2>
+        <h2>Welcome, <?= ucwords(strtolower($_SESSION['usersname'])); ?> !</h2>
         <hr>
 
         <div class="container">

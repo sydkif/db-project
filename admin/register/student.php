@@ -98,10 +98,10 @@
                             <div class="modal-body">
 
                                 <div class="form-group">
-                                    <label class="col-form-label"><b>Student ID</b></label>
-                                    <input class="form-control" id="question" name="id" required>
-                                    <label class="col-form-label"><b>Student Name</b></label>
-                                    <input class="form-control" id="question" name="name" required>
+                                    <label class="col-form-label"><b>Student ID</b> (e.g. AA161244)</label>
+                                    <input class="form-control" name="id" maxlength="8" pattern="[a-zA-Z]{2}[0-9]{6}" required>
+                                    <label class="col-form-label"><b>Student Name</b> (Alphabet Only)</label>
+                                    <input class="form-control" name="name" maxlength="50" pattern="[a-z A-Z]*" required>
                                 </div>
                             </div>
 
@@ -135,7 +135,10 @@
             $_SESSION['status'] = "Success";
         } else {
             // Failed
-            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+            if ($conn->errno == '1062')
+                $_SESSION['msg'] = "Student ID (" . $id . ") already exists.";
+            else
+                $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
             $_SESSION['status'] = "Fail";
         }
         echo "<meta http-equiv='refresh' content='0'>";

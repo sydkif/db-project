@@ -72,9 +72,10 @@
     <br>
     <div style="text-align: right;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
-                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
             </svg>
             New Subject
         </button>
@@ -97,10 +98,10 @@
                             <div class="modal-body">
 
                                 <div class="form-group">
-                                    <label class="col-form-label"><b>Subject ID</b></label>
-                                    <input class="form-control" id="question" name="id" required>
-                                    <label class="col-form-label"><b>Subject Name</b></label>
-                                    <input class="form-control" id="question" name="name" required>
+                                    <label class="col-form-label"><b>Subject ID</b> (e.g. BIC21404) </label>
+                                    <input class="form-control" name="id" maxlength="8" pattern="[a-zA-Z]{3}[0-9]{5}" required>
+                                    <label class="col-form-label"><b>Subject Name</b> (Alphabet Only)</label>
+                                    <input class="form-control" name="name" pattern="[a-z A-Z]*" required>
                                 </div>
                             </div>
 
@@ -133,7 +134,10 @@
             $_SESSION['status'] = "Success";
         } else {
             // Failed
-            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+            if ($conn->errno == '1062')
+                $_SESSION['msg'] = "Subject ID (" . $id . ") already exists.";
+            else
+                $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
             $_SESSION['status'] = "Fail";
         }
         echo "<meta http-equiv='refresh' content='0'>";

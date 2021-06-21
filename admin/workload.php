@@ -142,7 +142,10 @@
                             $_SESSION['status'] = "Success";
                         } else {
                             // Failed
-                            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                            if ($conn->errno == '1062')
+                                $_SESSION['msg'] = "Lecturer ID (" . $lecturer . ") already assigned to Subject ID (" . $subject . ").";
+                            else
+                                $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
                             $_SESSION['status'] = "Fail";
                         }
                         echo "<meta http-equiv='refresh' content='0'>";
@@ -161,7 +164,7 @@
                             $_SESSION['status'] = "Success";
                         } else {
                             // Failed
-                            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+                            $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
                             $_SESSION['status'] = "Fail";
                         }
                         echo "<meta http-equiv='refresh' content='0'>";

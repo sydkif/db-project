@@ -19,7 +19,7 @@ if ($conn->query($sql) === TRUE) {
     $_SESSION['status'] = "Success";
     $conn->close();
 } else {
-    $_SESSION['msg'] = "Error updating record: " . $conn->error;
+    $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
     $_SESSION['status'] = "Fail";
 }
 
