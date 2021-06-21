@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+
+
+
+<?php 
+session_start(); 
+ $_SESSION["userid"] = null;
+ $_SESSION["userpassword"] = null;
+ $_SESSION['usertable'] = null;
+?>
 
 <html lang="en">
 
