@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 
 body {
-    font-family: 'Roboto', sans-serif !important;
+    font-family     : 'Roboto', sans-serif !important;
+    background-image: url('/img/bg.jpg');
+    background-size : cover;
 }
 
 
@@ -22,15 +24,6 @@ nav.navbar {
     -moz-border-radius   : 16%;
     -ms-border-radius    : 16%;
     -o-border-radius     : 16%;
-}
-
-
-
-body {
-    background       : linear-gradient(-45deg, #7AD7F0, #92DFF3, #B7E9F7, #DBF3FA, #F5FCFF);
-    background-size  : 400% 400%;
-    animation        : gradient 15s ease infinite;
-    -webkit-animation: gradient 15s ease infinite;
 }
 
 @keyframes gradient {

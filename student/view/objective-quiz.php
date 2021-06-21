@@ -35,7 +35,6 @@ $userId = $_SESSION['userid'];
                                 <p>Question <?= $num ?></p>
                                 <h5><?= $row['question'] ?></h5>
                                 <hr>
-                                <!-- <form id="answer"> -->
                                 <input id="option_a<?= $num ?>" name="answer_q<?= $num ?>" value="A" type="radio" required />
                                 <label for="option_a<?= $num ?>"><?= $row['option_a'] ?></label>
                                 <br>
@@ -47,7 +46,6 @@ $userId = $_SESSION['userid'];
                                 <br>
                                 <input id="option_d<?= $num ?>" name="answer_q<?= $num ?>" value="D" type="radio" />
                                 <label for="option_d<?= $num ?>"><?= $row['option_d'] ?></label>
-                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
@@ -56,7 +54,12 @@ $userId = $_SESSION['userid'];
 
                 }
             } else {
-                echo "0 results";
+                echo "<br>";
+                $_SESSION['msg'] = "Quiz is not available yet.";
+                $_SESSION['status'] = "Fail";
+                include('../../templates/alert_msg.php');
+                include('../../templates/footer.php');
+                die();
             }
 
             // To redirect user if he/she already answered

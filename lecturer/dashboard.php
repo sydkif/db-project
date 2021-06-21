@@ -10,14 +10,16 @@ $userName = $_SESSION['usersname'];
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3>Welcome, <?= $_SESSION['usersname'] ?></h3>
+        <h3>Welcome, <?= ucwords(strtolower($_SESSION['usersname'])); ?> !</h3>
         <hr>
 
 
         <?php
         include "../database/DB.php";
 
-        $sql = "SELECT s.name AS subject_name, s.id AS subject_id FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
+        $sql = "SELECT s.name AS subject_name, s.id AS subject_id FROM SUBJECT S JOIN workload wl ON s.id = wl.subject_id 
+                JOIN lecturer l ON wl.lecturer_id = l.id WHERE l.id = '$userID';";
+
         $result = $conn->query($sql);
         $num = 0;
         if ($result->num_rows > 0) {
@@ -25,7 +27,6 @@ $userName = $_SESSION['usersname'];
             while ($row = $result->fetch_assoc()) {
                 ++$num;
         ?>
-
                 <h5><?= $row['subject_id'] . " : " . $row['subject_name'] ?></h5>
 
                 <div id="subjectCard" class="row row-cols-1 row-cols-md-3">

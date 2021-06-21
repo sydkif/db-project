@@ -12,7 +12,7 @@ $userID = strtoupper($_SESSION['userid']);
 
 <div class="container mt-5 align-items-center">
     <div class="col">
-        <h3>Welcome, <?= $userName ?> </h3>
+        <h3>Welcome, <?= ucwords(strtolower($_SESSION['usersname'])); ?> !</h3>
         <hr>
 
 
@@ -20,11 +20,12 @@ $userID = strtoupper($_SESSION['userid']);
         include '../database/DB.php';
 
         $sql = "SELECT l.name AS lecturer_name, l.id AS lecturer_id, s.name AS subject_name, 
-                            ss.subject_id AS subject_id, ss.tf_marks AS tf_marks, ss.mc_marks AS mc_marks
-                            FROM student_subject ss
-                            JOIN lecturer l ON ss.lecturer_id = l.id
-                            JOIN subject s ON ss.subject_id = s.id
-                            WHERE ss.student_id = '$userID';";
+                ss.subject_id AS subject_id, ss.tf_marks AS tf_marks, ss.mc_marks AS mc_marks
+                FROM student_subject ss
+                JOIN lecturer l ON ss.lecturer_id = l.id
+                JOIN subject s ON ss.subject_id = s.id
+                WHERE ss.student_id = '$userID';";
+
         $result = $conn->query($sql);
         $num = 0;
 
@@ -34,7 +35,7 @@ $userID = strtoupper($_SESSION['userid']);
 
         ?>
 
-                <h5><?= $row['subject_id'] . " : " . $row['subject_name'] . " - " . $row['lecturer_name']  ?></h5>
+                <h5><?= $row['subject_id'] . " : " . $row['subject_name'] . " - " . ucwords(strtolower($row['lecturer_name']))  ?></h5>
 
                 <div id="subjectCard" class="row row-cols-1 row-cols-md-3">
                     <div class="col mb-4">
@@ -117,11 +118,6 @@ $userID = strtoupper($_SESSION['userid']);
             <?php
             include '../database/DB.php';
 
-            // $sql = "SELECT l.id AS lecturer_id, l.name AS lecturer_name 
-            //         FROM SUBJECT S 
-            //         JOIN workload wl ON s.id = wl.subject_id 
-            //         JOIN lecturer l ON wl.lecturer_id = l.id 
-            //         GROUP BY l.id, l.name;";
             $sql = "SELECT s.name AS subject_name, s.id AS subject_id 
                     FROM subject s 
                     JOIN workload wl ON s.id = wl.subject_id 
@@ -129,7 +125,7 @@ $userID = strtoupper($_SESSION['userid']);
                     GROUP BY s.id, s.name";
             $result = $conn->query($sql);
             ?>
-            <!-- <select name="lecturer_name" id="lecturer_table" class="custom-select" style=" width:45%; text-transform: uppercase;"> -->
+
             <select name="subject_id" id="subject_table" class="custom-select" style=" width:45%; text-transform: uppercase;">
                 <option value="#">--SELECT SUBJECT--</option>
                 <?php
@@ -162,8 +158,6 @@ $userID = strtoupper($_SESSION['userid']);
         $subjectId = $_POST['subject_id'];
         $studentId = $userID;
 
-        // var_dump($lecturerId);
-        // die();
 
         $sql = "INSERT INTO student_subject (subject_id, student_id, lecturer_id) VALUES ('$subjectId', '$studentId', '$lecturerId')";
 
@@ -174,7 +168,10 @@ $userID = strtoupper($_SESSION['userid']);
             $_SESSION['status'] = "Success";
         } else {
             // Failed
-            $_SESSION['msg'] = "Error: " . $sql . " | " . $conn->error;
+            if ($conn->errno == '1062')
+                $_SESSION['msg'] = "Subject ID (" . $subjectId . ") already registered.";
+            else
+                $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
             $_SESSION['status'] = "Fail";
         }
         echo "<meta http-equiv='refresh' content='0'>";

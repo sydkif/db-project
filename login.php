@@ -31,9 +31,7 @@ if (isset($_SESSION['usertable'])) {
 </head>
 
 <body>
-
     <link rel="stylesheet" href="/css/login.css">
-
     <!-- Login Form START -->
     <div class="container">
 
@@ -82,6 +80,8 @@ if (isset($_SESSION['usertable'])) {
             $("#login").attr("disabled", !this.checked);
         });
     </script>
+
+
 
 </body>
 

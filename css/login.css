@@ -45,7 +45,7 @@ form {
 }
 
 #loginCard input:hover {
-    background-color: #F5FCFF;
+    background-color: rgba(222, 222, 222, .3);
 }
 
 #loginCard button {
@@ -157,27 +157,9 @@ input[type="radio"] {
 #option-1:hover~.option-1,
 #option-2:hover~.option-2,
 #option-3:hover~.option-3,
-button.btn-custom,
-body {
+button.btn-custom {
 
-    background     : linear-gradient(-45deg, #7AD7F0, #92DFF3, #B7E9F7, #DBF3FA, #F5FCFF);
-    background-size: 400% 400%;
-    animation      : gradient 15s ease infinite;
-
-
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
+    background: rgba(111, 111, 111, .3);
 }
 
 

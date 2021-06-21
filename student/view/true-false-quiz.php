@@ -46,7 +46,12 @@ $userId = strtoupper($_SESSION['userid']);
 
                 }
             } else {
-                echo "0 results";
+                echo "<br>";
+                $_SESSION['msg'] = "Quiz is not available yet.";
+                $_SESSION['status'] = "Fail";
+                include('../../templates/alert_msg.php');
+                include('../../templates/footer.php');
+                die();
             }
 
             // To redirect user if he/she already answered
