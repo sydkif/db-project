@@ -6,8 +6,25 @@ $id = $_GET['id'];
 $table = $_GET['table'];
 $sql = "DELETE FROM $table WHERE id='$id'";
 
+// To check if has modified something or not, if yes then prevent from being deleted.
+if ($table == 'admin') {
+    $admin = $conn->query("SELECT name FROM $table WHERE id='$id'")->fetch_assoc();
+    $adminName = $admin['name'];
+
+    $lecturer = $conn->query("SELECT modiBy FROM lecturer WHERE modiBy = '$adminName'")->fetch_assoc();
+    $student = $conn->query("SELECT modiBy FROM student WHERE modiBy = '$adminName'")->fetch_assoc();
+    $subject = $conn->query("SELECT modiBy FROM subject WHERE modiBy = '$adminName'")->fetch_assoc();
+    if (($lecturer['modiBy'] != NULL) || ($student['modiBy'] != NULL) || ($subject['modiBy'] != NULL)) {
+        $conn->close();
+        $_SESSION['msg'] = "Selected Admin ('" . $adminName . "') is locked";
+        $_SESSION['status'] = "Fail";
+        header("location:register/admin.php");
+        die(); // Kalu dok mati, jadi nyusoh ke orang...
+    }
+}
+
 if ($conn->query($sql) === TRUE) {
-    $_SESSION['msg'] = "Record deleted successfully";
+    $_SESSION['msg'] = "Record ('" . $table . ", " . $id . "')  deleted successfully";
     $_SESSION['status'] = "Success";
     $conn->close();
 } else {

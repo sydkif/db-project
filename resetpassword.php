@@ -5,14 +5,12 @@
 	<section class="h-100">
 		<div class="container h-500">
 			<div class="row justify-content-sm-center h-500">
-				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-					<div class="text-center my-5">
+				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 mt-5"><br><br>
 
-					</div>
 					<div id="loginCard" class="card shadow-sm">
 						<div class="card-body p-8">
 							<h1 class="fs-4 card-title fw-bold mb-4">Reset Password</h1>
-							<form method="POST" class="needs-validation" action="resetchecker.php">
+							<form method="POST" class="needs-validation" action="resetchecker.php" onsubmit="return checkPassword()">
 								<div class="mb-3">
 									<label class="mb-2 text-muted" for="password">New Password</label>
 									<input id="password" type="password" class="form-control" name="password" value="" required autofocus>
@@ -31,7 +29,7 @@
 
 								<div class="d-flex align-items-center">
 
-									<button type="submit" class="btn btn-primary ms-auto btn-block">
+									<button id="submit-button" type="submit" class="btn btn-primary ms-auto btn-block">
 										Reset Password
 									</button>
 								</div>
@@ -48,3 +46,18 @@
 </body>
 
 <?php include('templates/footer.php') ?>
+
+<script>
+	var input1 = document.getElementById("password");
+	var input2 = document.getElementById("password-confirm");
+
+	function checkPassword() {
+		if (input1.value != input2.value) {
+			alert("Password did not match.");
+			return false;
+
+		} else {
+			return true;
+		}
+	}
+</script>
