@@ -31,6 +31,9 @@ $userID = strtoupper($_SESSION['userid']);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $subjectID = $row['subject_id'];
+                $tf_pass = mysqli_num_rows($conn->query("SELECT question FROM tf_quiz WHERE subject_id = '$subjectID'"));
+                $mc_pass = mysqli_num_rows($conn->query("SELECT question FROM mc_quiz WHERE subject_id = '$subjectID'"));
                 ++$num;
 
         ?>
@@ -67,7 +70,7 @@ $userID = strtoupper($_SESSION['userid']);
                                         </button>
                                     </div>
                                     <div class="col">
-                                        <div class="btn btn-<?php echo ($row['tf_marks'] > 0) ? 'success' : 'danger' ?> btn-block">
+                                        <div class="btn btn-<?php echo ($row['tf_marks'] >= $tf_pass) ? 'success' : 'danger' ?> btn-block">
                                             <?= $row['tf_marks'] ?>
                                         </div>
                                     </div>
@@ -88,7 +91,7 @@ $userID = strtoupper($_SESSION['userid']);
                                         </button>
                                     </div>
                                     <div class="col">
-                                        <div type="button" class="btn btn-<?php echo ($row['mc_marks']  > 0) ? 'success' : 'danger' ?> btn-block">
+                                        <div type="button" class="btn btn-<?php echo ($row['mc_marks']  >= $mc_pass) ? 'success' : 'danger' ?> btn-block">
                                             <?= $row['mc_marks'] ?>
                                         </div>
                                     </div>

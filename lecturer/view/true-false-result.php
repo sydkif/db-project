@@ -38,10 +38,9 @@ $userId = $_SESSION['userid'];
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+
+                            $tf_pass = mysqli_num_rows($conn->query("SELECT question FROM tf_quiz WHERE subject_id = '$code'"));
                             $num++;
-
-
-
                     ?>
 
                             <tr>
@@ -49,14 +48,14 @@ $userId = $_SESSION['userid'];
                                 <td><?= $row['student_name'] ?></td>
                                 <td><?= $row['student_id'] ?></td>
                                 <td style="text-align: center">
-                                    <b class="btn-block badge badge-<?php echo ($row['marks'] > 0) ? 'success' : 'danger' ?> p-2"> <?= $row['marks'] ?>
+                                    <b class="btn-block badge badge-<?php echo ($row['marks'] >= $tf_pass) ? 'success' : 'danger' ?> p-2"> <?= $row['marks'] ?>
                                     </b>
                                 </td>
                             </tr>
 
                     <?php
 
-                            if ($row['marks'] > 0)
+                            if ($row['marks'] >= $tf_pass)
                                 $count_pass++;
                             else
                                 $count_fail++;
