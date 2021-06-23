@@ -9,6 +9,14 @@ $currentUser = $_SESSION['usersname'];
 date_default_timezone_set("Asia/Kuala_Lumpur");
 $currentTime = date("Y-m-d h:i:s");
 
+if ($table == 'admin' && $id == '1') {
+    $conn->close();
+    $_SESSION['msg'] = "Bruh, you can't edit Super Admin la..";
+    $_SESSION['status'] = "Fail";
+    header("location:register/admin.php");
+    die();
+}
+
 if ($table == 'lecturer' || $table == 'student'  || $table == 'subject')
     $sql = "UPDATE $table SET name='$name', modiBy='$currentUser', modiOn='$currentTime' WHERE id='$id'";
 else

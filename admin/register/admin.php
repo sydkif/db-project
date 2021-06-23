@@ -94,10 +94,10 @@
                             <div class="modal-body">
 
                                 <div class="form-group">
-                                    <label class="col-form-label"><b>Admin ID</b></label>
+                                    <label class="col-form-label"><b>Admin ID</b> (Max 5 characters)</label>
                                     <input class="form-control" name="id" maxlength="5" pattern="[a-zA-Z0-9-]+" required>
-                                    <label class="col-form-label"><b>Admin Name</b> (Alphabet Only)</label>
-                                    <input class="form-control" name="name" maxlength="50" pattern="[a-z A-Z]*" required>
+                                    <label class="col-form-label"><b>Admin Name</b></label>
+                                    <input class="form-control" name="name" maxlength="50" pattern="[a-z A-Z 0-9]*" required>
                                 </div>
                             </div>
 

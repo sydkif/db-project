@@ -66,7 +66,7 @@ if (isset($_SESSION['usertable'])) {
                         <span>Admin</span>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-custom btn-block login-btn" id="login" disabled><span>Login</span></button>
+                <button type="submit" class="btn btn-custom btn-block login-btn" id="login"><span>Login</span></button>
             </form>
             <br>
 

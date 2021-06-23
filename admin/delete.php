@@ -14,29 +14,26 @@ if ($table == 'admin') {
     $lecturer = $conn->query("SELECT modiBy FROM lecturer WHERE modiBy = '$adminName'")->fetch_assoc();
     $student = $conn->query("SELECT modiBy FROM student WHERE modiBy = '$adminName'")->fetch_assoc();
     $subject = $conn->query("SELECT modiBy FROM subject WHERE modiBy = '$adminName'")->fetch_assoc();
-    if (($lecturer['modiBy'] != NULL) || ($student['modiBy'] != NULL) || ($subject['modiBy'] != NULL)) {
+    if (($lecturer['modiBy'] != NULL) || ($student['modiBy'] != NULL) || ($subject['modiBy'] != NULL) || ($id == '1')) {
         $conn->close();
-        $_SESSION['msg'] = "Selected Admin ('" . $adminName . "') is locked";
+        $_SESSION['msg'] = "Delete Unsuccessful <br> Admin ('$adminName') is being used at other tables";
+        if ($id == '1')
+            $_SESSION['msg'] = "Bruh, you can't delete Super Admin la..";
         $_SESSION['status'] = "Fail";
         header("location:register/admin.php");
-        die(); // Kalu dok mati, jadi nyusoh ke orang...
+        die(); 
     }
 }
 
 if ($conn->query($sql) === TRUE) {
-    $_SESSION['msg'] = "Record ('" . $table . ", " . $id . "')  deleted successfully";
+    $_SESSION['msg'] = "Record ('$table, $id')  deleted successfully";
     $_SESSION['status'] = "Success";
     $conn->close();
 } else {
     if ($conn->errno == '1451') {
-        if ($table == "subject")
-            $_SESSION['msg'] = "Subject ID (" . $id . ") currently assigned to a lecturer.";
-        if ($table == "lecturer")
-            $_SESSION['msg'] = "Lecturer ID (" . $id . ") currently assigned to a subject.";
-        if ($table == "student")
-            $_SESSION['msg'] = "Student ID (" . $id . ") currently assigned to a subject.";
+        $_SESSION['msg'] = ucfirst($table) . " ID ($id) is being used at other tables.";
     } else
-        $_SESSION['msg'] = $sql . "<br>" . $conn->error . "<br>" . $conn->errno;
+        $_SESSION['msg'] = "$sql  <br> $conn->error <br> $conn->errno";
     $_SESSION['status'] = "Fail";
 }
 
