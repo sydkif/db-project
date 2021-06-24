@@ -44,7 +44,7 @@
                                     <td style="text-transform: uppercase;"><?= $row['lecturer_name'] ?>
                                         <input type="hidden" name="lecturerId" value="<?= $row['lecturer_id'] ?>">
                                     </td>
-                                    <td style="text-transform: uppercase;"><?= $row['subject_name'] ?>
+                                    <td style="text-transform: uppercase;"><?= $row['subject_id'] . " : " . $row['subject_name'] ?>
                                         <input type="hidden" name="subjectId" value="<?= $row['subject_id'] ?>">
                                     </td>
                                     <td style="text-align:center;">
@@ -108,7 +108,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             ++$num;
                                     ?>
-                                            <option style="text-transform: uppercase;" value="<?= $row['id']  ?>"><?= $row['name'] ?></option>
+                                            <option style="text-transform: uppercase;" value="<?= $row['id']  ?>"><?php echo $row['id'] . " : " . $row['name'] ?></option>
                                     <?php
                                         }
                                     } else {

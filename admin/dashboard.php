@@ -10,6 +10,7 @@ if ($_SESSION['usertable'] != 'admin')
     <div class="col text-center">
         <h1>Admin Dashboard</h1>
         <h2>Welcome, <?= ucwords(strtolower($_SESSION['usersname'])); ?> !</h2>
+        <?php include('../templates/alert_msg.php'); ?>
         <hr>
 
         <div class="container">

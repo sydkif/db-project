@@ -100,8 +100,8 @@
                                 <div class="form-group">
                                     <label class="col-form-label"><b>Subject ID</b> (e.g. BIC21404) </label>
                                     <input class="form-control" name="id" maxlength="8" pattern="[a-zA-Z]{3}[0-9]{5}" required>
-                                    <label class="col-form-label"><b>Subject Name</b> (Alphabet Only)</label>
-                                    <input class="form-control" name="name" pattern="[a-z A-Z]*" required>
+                                    <label class="col-form-label"><b>Subject Name</b></label>
+                                    <input class="form-control" name="name" pattern="[a-z A-Z0-9]*" required>
                                 </div>
                             </div>
 

@@ -35,9 +35,9 @@ $user = $_SESSION['usersname'];
 
             // Opening file for read
             $fp = fopen($filetmp, 'r');
-            $content = fread ($fp, filesize($filetmp));
+            $content = fread($fp, filesize($filetmp));
             $content = addslashes($content);
-            fclose($fp);        
+            fclose($fp);
             // Getting file type
             $fileType = substr(strrchr($fileName, '.'), 1);
             $fileType = strtolower($fileType);
@@ -57,8 +57,10 @@ $user = $_SESSION['usersname'];
                         $insert = $conn->query($sql);
 
                         if ($insert) {
-                            $_SESSION['msg'] = "The file " . $fileName . " has been uploaded succesfully.";
+                            $_SESSION['msg'] = "The file " . $fileName . " has been uploaded successfully.";
                             $_SESSION['status']  = "Success";
+                            header("Location:/lecturer/create/assignment.php?code=" . $code . "&name=" . $name);
+                            die();
                         } else {
                             $_SESSION['msg'] = "File failed to upload";
                             $_SESSION['status']  = "Fail";

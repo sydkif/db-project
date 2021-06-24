@@ -35,14 +35,14 @@ $userID = $_SESSION['userid'];
                             FROM assignment_student assgn
                             JOIN student stud ON assgn.student_id = stud.id
                             WHERE lecturer_id = '$userID' AND assgn.assignment_id = '$id'";
-                    $result = $conn->query($sql);  
-                    $num=0;
-                    
+                    $result = $conn->query($sql);
+                    $num = 0;
+
                     // $targetFilePath = $targetDir . $fileName;
                     // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()){
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
 
                             // $targetFilePath = '../../student_assignment/' . $row['file_name'];
                             // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -50,21 +50,22 @@ $userID = $_SESSION['userid'];
                             $ext = substr(strrchr($row['file_name'], '.'), 1);
                             ++$num;
                     ?>
-                        <tr>
-                            <th><?= $num ?></th>
-                            <td><?= $row['student_name'] ?></td>
-                            <td style="text-align: center;"><?= $row['student_id'] ?></td>
-                            <td style="text-align: center;"><?= $row['file_name'] ?></td>
-                            <td style="text-align: center;">
-                                <button id="view" class="btn btn-sm" title="View Content" onclick="window.open('../../student/student_assignment/<?= $row['file_name']?>')" >
-                                    <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    <?php 
+                            <tr>
+                                <th><?= $num ?></th>
+                                <td><?= $row['student_name'] ?></td>
+                                <td style="text-align: center;"><?= $row['student_id'] ?></td>
+                                <td style="text-align: center;"><?= $row['file_name'] ?></td>
+                                <td style="text-align: center;">
+                                    <button id="view" class="btn btn-sm" title="View Content" onclick="window.open('../../student/student_assignment/<?= $row['file_name'] ?>')">
+                                        <i class="bi bi-file-earmark-text" style="font-size: 28px; color:blue;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    <?php
                         }
-                    }else   
-                        echo "0 result"
+                    } else
+                        echo "0 result";
+                    $conn->close();
                     ?>
 
                 </tbody>
@@ -74,4 +75,4 @@ $userID = $_SESSION['userid'];
 </div>
 
 
-    <?php include('../../templates/footer.php'); ?>
+<?php include('../../templates/footer.php'); ?>

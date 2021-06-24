@@ -135,7 +135,7 @@ $userID = strtoupper($_SESSION['userid']);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) { //Whileloop starts here
                 ?>
-                        <option value="<?= $row['subject_id'] ?>"> <?= $row['subject_name'] ?></option>
+                        <option value="<?= $row['subject_id'] ?>"> <?= $row['subject_id'] . " : " . $row['subject_name'] ?></option>
 
                 <?php
                     } //End Whileloop
