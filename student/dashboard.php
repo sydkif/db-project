@@ -71,7 +71,13 @@ $userID = strtoupper($_SESSION['userid']);
                                     </div>
                                     <div class="col">
                                         <div class="btn btn-<?php echo ($row['tf_marks'] >= $tf_pass) ? 'success' : 'danger' ?> btn-block">
-                                            <?= $row['tf_marks'] ?>
+
+                                            <?php
+                                            if ($row['tf_marks'] == NULL) echo 'N/A';
+                                            elseif ($row['tf_marks'] < 0) echo '0';
+                                            else echo $row['tf_marks'];
+                                            ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +98,13 @@ $userID = strtoupper($_SESSION['userid']);
                                     </div>
                                     <div class="col">
                                         <div type="button" class="btn btn-<?php echo ($row['mc_marks']  >= $mc_pass) ? 'success' : 'danger' ?> btn-block">
-                                            <?= $row['mc_marks'] ?>
+
+                                            <?php
+                                            if ($row['mc_marks'] == NULL) echo 'N/A';
+                                            elseif ($row['mc_marks'] < 0) echo '0';
+                                            else echo $row['mc_marks'];
+                                            ?>
+
                                         </div>
                                     </div>
                                 </div>

@@ -46,15 +46,22 @@ $userId = $_SESSION['userid'];
                                 <td><?= $row['student_name'] ?></td>
                                 <td><?= $row['student_id'] ?></td>
                                 <td style="text-align: center">
-                                    <b class="btn-block badge badge-<?php echo ($row['marks'] >= $mc_pass) ? 'success' : 'danger' ?> p-2"> <?= $row['marks'] ?></b>
+                                    <b class="btn-block badge badge-<?php echo ($row['marks'] >= $mc_pass) ? 'success' : 'danger' ?> p-2">
+                                        <?php
+                                        if ($row['marks'] == NULL) echo 'N/A';
+                                        elseif ($row['marks'] < 0) echo '0';
+                                        else echo $row['marks'];
+                                        ?>
+                                    </b>
                                 </td>
                             </tr>
                     <?php
 
-                            if ($row['marks'] >= $mc_pass)
-                                $count_pass++;
-                            else
-                                $count_fail++;
+                            if (($row['marks'] != NULL))
+                                if ($row['marks'] >= $mc_pass)
+                                    $count_pass++;
+                                else
+                                    $count_fail++;
                         }
                     } else {
                         echo "0 results";
